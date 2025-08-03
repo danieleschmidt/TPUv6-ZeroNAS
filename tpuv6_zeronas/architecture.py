@@ -1,0 +1,401 @@
+"""Neural architecture representation and search space definition."""
+
+import random
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Tuple, Any
+from enum import Enum
+
+import numpy as np
+
+
+class LayerType(Enum):
+    """Supported layer types for TPUv6 optimization."""
+    CONV2D = "conv2d"
+    DEPTHWISE_CONV = "depthwise_conv"
+    POINTWISE_CONV = "pointwise_conv"
+    LINEAR = "linear"
+    BATCH_NORM = "batch_norm"
+    LAYER_NORM = "layer_norm"
+    RELU = "relu"
+    GELU = "gelu"
+    SWISH = "swish"
+    ATTENTION = "attention"
+    RESIDUAL = "residual"
+    POOLING = "pooling"
+
+
+class ActivationType(Enum):
+    """Activation function types."""
+    RELU = "relu"
+    GELU = "gelu"
+    SWISH = "swish"
+    SIGMOID = "sigmoid"
+    TANH = "tanh"
+
+
+@dataclass
+class Layer:
+    """Individual layer specification."""
+    layer_type: LayerType
+    input_channels: int
+    output_channels: int
+    kernel_size: Optional[Tuple[int, int]] = None
+    stride: Optional[Tuple[int, int]] = None
+    padding: Optional[str] = None
+    activation: Optional[ActivationType] = None
+    use_bias: bool = True
+    
+    @property
+    def ops_count(self) -> int:
+        """Estimate operation count for this layer."""
+        if self.layer_type == LayerType.CONV2D:
+            if self.kernel_size:
+                return (self.input_channels * self.output_channels * 
+                       self.kernel_size[0] * self.kernel_size[1])
+            return self.input_channels * self.output_channels
+            
+        elif self.layer_type == LayerType.LINEAR:
+            return self.input_channels * self.output_channels
+            
+        elif self.layer_type == LayerType.ATTENTION:
+            return self.input_channels * self.output_channels * 4
+        
+        return self.input_channels
+    
+    @property
+    def params_count(self) -> int:
+        """Estimate parameter count for this layer."""
+        if self.layer_type in [LayerType.CONV2D, LayerType.DEPTHWISE_CONV]:
+            if self.kernel_size:
+                params = (self.input_channels * self.output_channels * 
+                         self.kernel_size[0] * self.kernel_size[1])
+            else:
+                params = self.input_channels * self.output_channels
+                
+            if self.use_bias:
+                params += self.output_channels
+            return params
+            
+        elif self.layer_type == LayerType.LINEAR:
+            params = self.input_channels * self.output_channels
+            if self.use_bias:
+                params += self.output_channels
+            return params
+            
+        elif self.layer_type in [LayerType.BATCH_NORM, LayerType.LAYER_NORM]:
+            return self.output_channels * 2
+        
+        return 0
+
+
+@dataclass
+class Architecture:
+    """Complete neural architecture specification."""
+    layers: List[Layer]
+    input_shape: Tuple[int, int, int]
+    num_classes: int
+    name: Optional[str] = None
+    
+    @property
+    def total_ops(self) -> int:
+        """Total operation count across all layers."""
+        return sum(layer.ops_count for layer in self.layers)
+    
+    @property
+    def total_params(self) -> int:
+        """Total parameter count across all layers."""
+        return sum(layer.params_count for layer in self.layers)
+    
+    @property 
+    def depth(self) -> int:
+        """Network depth (number of layers)."""
+        return len(self.layers)
+    
+    @property
+    def avg_width(self) -> float:
+        """Average layer width (channels)."""
+        if not self.layers:
+            return 0.0
+        return sum(layer.output_channels for layer in self.layers) / len(self.layers)
+    
+    @property
+    def memory_mb(self) -> float:
+        """Estimated memory footprint in MB."""
+        h, w, c = self.input_shape
+        current_size = h * w * c
+        total_memory = current_size
+        
+        for layer in self.layers:
+            if layer.layer_type == LayerType.CONV2D and layer.stride:
+                h = h // layer.stride[0]
+                w = w // layer.stride[1]
+            current_size = h * w * layer.output_channels
+            total_memory += current_size
+            
+        return (total_memory * 4) / (1024 * 1024)
+    
+    @property
+    def conv_ops(self) -> int:
+        """Convolution operation count."""
+        return sum(layer.ops_count for layer in self.layers 
+                  if layer.layer_type in [LayerType.CONV2D, LayerType.DEPTHWISE_CONV])
+    
+    @property
+    def linear_ops(self) -> int:
+        """Linear operation count."""
+        return sum(layer.ops_count for layer in self.layers 
+                  if layer.layer_type == LayerType.LINEAR)
+    
+    @property
+    def activation_ops(self) -> int:
+        """Activation operation count."""
+        return sum(layer.output_channels for layer in self.layers 
+                  if layer.activation is not None)
+    
+    @property
+    def norm_ops(self) -> int:
+        """Normalization operation count.""" 
+        return sum(layer.output_channels for layer in self.layers
+                  if layer.layer_type in [LayerType.BATCH_NORM, LayerType.LAYER_NORM])
+    
+    @property
+    def matrix_mult_ops(self) -> int:
+        """Matrix multiplication operation count."""
+        return self.conv_ops + self.linear_ops
+    
+    @property
+    def elementwise_ops(self) -> int:
+        """Element-wise operation count."""
+        return self.activation_ops + self.norm_ops
+    
+    @property
+    def reduction_ops(self) -> int:
+        """Reduction operation count."""
+        return sum(layer.ops_count for layer in self.layers
+                  if layer.layer_type == LayerType.POOLING)
+
+
+class ArchitectureSpace:
+    """Search space definition for neural architectures."""
+    
+    def __init__(
+        self,
+        input_shape: Tuple[int, int, int] = (224, 224, 3),
+        num_classes: int = 1000,
+        max_depth: int = 20,
+        channel_choices: List[int] = None,
+        kernel_choices: List[Tuple[int, int]] = None
+    ):
+        self.input_shape = input_shape
+        self.num_classes = num_classes
+        self.max_depth = max_depth
+        
+        self.channel_choices = channel_choices or [16, 32, 64, 128, 256, 512, 1024]
+        self.kernel_choices = kernel_choices or [(1, 1), (3, 3), (5, 5), (7, 7)]
+        
+        self.layer_types = [
+            LayerType.CONV2D,
+            LayerType.DEPTHWISE_CONV,
+            LayerType.LINEAR,
+            LayerType.BATCH_NORM,
+            LayerType.RELU,
+            LayerType.GELU,
+        ]
+        
+        self.activations = [
+            ActivationType.RELU,
+            ActivationType.GELU,
+            ActivationType.SWISH,
+        ]
+    
+    def sample_random(self) -> Architecture:
+        """Sample a random architecture from the search space."""
+        depth = random.randint(5, self.max_depth)
+        layers = []
+        
+        current_channels = self.input_shape[2]
+        
+        for i in range(depth):
+            layer_type = random.choice(self.layer_types)
+            
+            if layer_type == LayerType.CONV2D:
+                output_channels = random.choice(self.channel_choices)
+                kernel_size = random.choice(self.kernel_choices)
+                stride = (1, 1) if i == 0 else random.choice([(1, 1), (2, 2)])
+                activation = random.choice(self.activations)
+                
+                layer = Layer(
+                    layer_type=layer_type,
+                    input_channels=current_channels,
+                    output_channels=output_channels,
+                    kernel_size=kernel_size,
+                    stride=stride,
+                    padding="same",
+                    activation=activation
+                )
+                current_channels = output_channels
+                
+            elif layer_type == LayerType.LINEAR:
+                if i == depth - 1:
+                    output_channels = self.num_classes
+                else:
+                    output_channels = random.choice(self.channel_choices)
+                    
+                layer = Layer(
+                    layer_type=layer_type,
+                    input_channels=current_channels,
+                    output_channels=output_channels,
+                    activation=random.choice(self.activations) if i < depth - 1 else None
+                )
+                current_channels = output_channels
+                
+            else:
+                layer = Layer(
+                    layer_type=layer_type,
+                    input_channels=current_channels,
+                    output_channels=current_channels,
+                    activation=random.choice(self.activations) if layer_type in [LayerType.RELU, LayerType.GELU] else None
+                )
+            
+            layers.append(layer)
+        
+        return Architecture(
+            layers=layers,
+            input_shape=self.input_shape,
+            num_classes=self.num_classes,
+            name=f"random_arch_{random.randint(1000, 9999)}"
+        )
+    
+    def mutate(self, architecture: Architecture) -> Architecture:
+        """Mutate an existing architecture."""
+        new_layers = architecture.layers.copy()
+        
+        mutation_ops = [
+            self._mutate_channels,
+            self._mutate_kernel_size,
+            self._mutate_activation,
+            self._add_layer,
+            self._remove_layer,
+        ]
+        
+        mutation_op = random.choice(mutation_ops)
+        new_layers = mutation_op(new_layers)
+        
+        return Architecture(
+            layers=new_layers,
+            input_shape=architecture.input_shape,
+            num_classes=architecture.num_classes,
+            name=f"mutated_{architecture.name}"
+        )
+    
+    def crossover(self, parent1: Architecture, parent2: Architecture) -> Architecture:
+        """Crossover two parent architectures."""
+        crossover_point = random.randint(1, min(len(parent1.layers), len(parent2.layers)) - 1)
+        
+        new_layers = (parent1.layers[:crossover_point] + 
+                     parent2.layers[crossover_point:])
+        
+        self._fix_channel_compatibility(new_layers)
+        
+        return Architecture(
+            layers=new_layers,
+            input_shape=parent1.input_shape,
+            num_classes=parent1.num_classes,
+            name=f"crossover_{parent1.name}_{parent2.name}"
+        )
+    
+    def _mutate_channels(self, layers: List[Layer]) -> List[Layer]:
+        """Mutate channel counts in layers."""
+        if not layers:
+            return layers
+            
+        layer_idx = random.randint(0, len(layers) - 1)
+        layer = layers[layer_idx]
+        
+        if layer.layer_type in [LayerType.CONV2D, LayerType.LINEAR]:
+            new_channels = random.choice(self.channel_choices)
+            layer.output_channels = new_channels
+            
+            if layer_idx < len(layers) - 1:
+                layers[layer_idx + 1].input_channels = new_channels
+        
+        return layers
+    
+    def _mutate_kernel_size(self, layers: List[Layer]) -> List[Layer]:
+        """Mutate kernel sizes in conv layers."""
+        conv_layers = [i for i, layer in enumerate(layers) 
+                      if layer.layer_type == LayerType.CONV2D]
+        
+        if conv_layers:
+            layer_idx = random.choice(conv_layers)
+            layers[layer_idx].kernel_size = random.choice(self.kernel_choices)
+        
+        return layers
+    
+    def _mutate_activation(self, layers: List[Layer]) -> List[Layer]:
+        """Mutate activation functions."""
+        activatable_layers = [i for i, layer in enumerate(layers)
+                             if layer.activation is not None]
+        
+        if activatable_layers:
+            layer_idx = random.choice(activatable_layers)
+            layers[layer_idx].activation = random.choice(self.activations)
+        
+        return layers
+    
+    def _add_layer(self, layers: List[Layer]) -> List[Layer]:
+        """Add a new layer to the architecture."""
+        if len(layers) >= self.max_depth:
+            return layers
+        
+        insert_idx = random.randint(0, len(layers))
+        
+        if insert_idx == 0:
+            input_channels = self.input_shape[2]
+        else:
+            input_channels = layers[insert_idx - 1].output_channels
+        
+        output_channels = random.choice(self.channel_choices)
+        layer_type = random.choice([LayerType.CONV2D, LayerType.BATCH_NORM, LayerType.RELU])
+        
+        if layer_type == LayerType.CONV2D:
+            new_layer = Layer(
+                layer_type=layer_type,
+                input_channels=input_channels,
+                output_channels=output_channels,
+                kernel_size=random.choice(self.kernel_choices),
+                stride=(1, 1),
+                padding="same",
+                activation=random.choice(self.activations)
+            )
+        else:
+            new_layer = Layer(
+                layer_type=layer_type,
+                input_channels=input_channels,
+                output_channels=input_channels if layer_type != LayerType.CONV2D else output_channels
+            )
+        
+        layers.insert(insert_idx, new_layer)
+        
+        if insert_idx < len(layers) - 1:
+            layers[insert_idx + 1].input_channels = new_layer.output_channels
+        
+        return layers
+    
+    def _remove_layer(self, layers: List[Layer]) -> List[Layer]:
+        """Remove a layer from the architecture."""
+        if len(layers) <= 3:
+            return layers
+        
+        remove_idx = random.randint(0, len(layers) - 2)
+        removed_layer = layers.pop(remove_idx)
+        
+        if remove_idx < len(layers):
+            layers[remove_idx].input_channels = removed_layer.input_channels
+        
+        return layers
+    
+    def _fix_channel_compatibility(self, layers: List[Layer]) -> None:
+        """Fix channel compatibility after crossover."""
+        for i in range(1, len(layers)):
+            layers[i].input_channels = layers[i - 1].output_channels
