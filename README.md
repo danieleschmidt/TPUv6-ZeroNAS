@@ -21,7 +21,7 @@ Traditional NAS requires hardware access. TPUv6-ZeroNAS breaks this constraint b
 
 ```bash
 # Clone repository  
-git clone https://github.com/yourusername/tpuv6-zeronas.git
+git clone https://github.com/danieleschmidt/tpuv6-zeronas.git
 cd tpuv6-zeronas
 
 # Create environment
@@ -371,7 +371,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ```bibtex
 @inproceedings{tpuv6-zeronas2025,
   title={Zero-Shot Neural Architecture Search for Unreleased Hardware: The Case of Edge TPU v6},
-  author={Your Name and Collaborators},
+  author={Daniel Schmidt},
   booktitle={Conference TBD},
   year={2025}
 }
