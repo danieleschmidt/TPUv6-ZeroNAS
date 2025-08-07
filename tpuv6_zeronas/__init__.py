@@ -1,3 +1,4 @@
+```python
 """TPUv6-ZeroNAS: Neural Architecture Search for TPUv6 Hardware Optimization."""
 
 __version__ = "0.1.0"
@@ -13,6 +14,14 @@ from .validation import validate_input
 from .monitoring import SearchMonitor
 from .security import secure_load_file
 
+# Optional advanced modules (may have additional dependencies)
+try:
+    from .parallel import DistributedSearcher, ParallelSearchConfig
+    from .optimization import ProgressiveSearchOptimizer, MultiObjectiveOptimizer, OptimizationConfig
+    ADVANCED_AVAILABLE = True
+except ImportError:
+    ADVANCED_AVAILABLE = False
+
 __all__ = [
     "ZeroNASSearcher",
     "SearchConfig",
@@ -25,3 +34,13 @@ __all__ = [
     "SearchMonitor",
     "secure_load_file",
 ]
+
+if ADVANCED_AVAILABLE:
+    __all__.extend([
+        "DistributedSearcher",
+        "ParallelSearchConfig",
+        "ProgressiveSearchOptimizer",
+        "MultiObjectiveOptimizer",
+        "OptimizationConfig",
+    ])
+```

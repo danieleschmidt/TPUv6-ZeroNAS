@@ -2,7 +2,41 @@
 
 from dataclasses import dataclass
 from typing import Dict, List, Optional
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    # Mock numpy for basic operations
+    class MockNumPy:
+        @staticmethod
+        def clip(x, a, b):
+            return max(a, min(b, x))
+        @staticmethod
+        def mean(values):
+            return sum(values) / len(values) if values else 0
+        @staticmethod
+        def std(values):
+            if not values:
+                return 0
+            mean_val = sum(values) / len(values)
+            variance = sum((x - mean_val) ** 2 for x in values) / len(values)
+            return variance ** 0.5
+        @staticmethod
+        def min(values):
+            return min(values) if values else 0
+        @staticmethod
+        def max(values):
+            return max(values) if values else 0
+        @staticmethod
+        def median(values):
+            if not values:
+                return 0
+            sorted_values = sorted(values)
+            n = len(sorted_values)
+            if n % 2 == 0:
+                return (sorted_values[n//2-1] + sorted_values[n//2]) / 2
+            else:
+                return sorted_values[n//2]
+    np = MockNumPy()
 
 
 @dataclass

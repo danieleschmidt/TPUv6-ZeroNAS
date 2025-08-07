@@ -8,23 +8,23 @@ setup(
     author_email="daniel@terragonlabs.com",
     packages=find_packages(),
     install_requires=[
-        "numpy>=1.21.0",
-        "scipy>=1.7.0",
-        "scikit-learn>=1.0.0",
-        "torch>=1.12.0",
-        "tensorflow>=2.8.0",
-        "jax>=0.3.0",
-        "jaxlib>=0.3.0",
-        "optax>=0.1.0",
-        "flax>=0.6.0",
-        "pandas>=1.3.0",
-        "matplotlib>=3.5.0",
-        "seaborn>=0.11.0",
-        "tqdm>=4.62.0",
-        "pyyaml>=6.0",
-        "tensorboard>=2.8.0",
+        # Core functionality works with Python standard library only
     ],
     extras_require={
+        "full": [
+            "numpy>=1.21.0",
+            "scipy>=1.7.0",
+            "scikit-learn>=1.0.0",
+            "pandas>=1.3.0",
+            "matplotlib>=3.5.0",
+            "tqdm>=4.62.0",
+        ],
+        "ml": [
+            "torch>=1.12.0",
+            "tensorflow>=2.8.0",
+            "jax>=0.3.0",
+            "jaxlib>=0.3.0",
+        ],
         "dev": [
             "pytest>=6.2.0",
             "pytest-cov>=3.0.0",

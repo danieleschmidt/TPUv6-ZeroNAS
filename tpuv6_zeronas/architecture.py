@@ -5,7 +5,15 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple, Any
 from enum import Enum
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    # Mock numpy for basic operations
+    class MockNumPy:
+        @staticmethod
+        def clip(x, a, b):
+            return max(a, min(b, x))
+    np = MockNumPy()
 
 
 class LayerType(Enum):
@@ -210,99 +218,254 @@ class ArchitectureSpace:
     
     def sample_random(self) -> Architecture:
         """Sample a random architecture from the search space."""
-        depth = random.randint(5, self.max_depth)
-        layers = []
+        max_attempts = 10
         
-        current_channels = self.input_shape[2]
-        
-        for i in range(depth):
-            layer_type = random.choice(self.layer_types)
-            
-            if layer_type == LayerType.CONV2D:
-                output_channels = random.choice(self.channel_choices)
-                kernel_size = random.choice(self.kernel_choices)
-                stride = (1, 1) if i == 0 else random.choice([(1, 1), (2, 2)])
-                activation = random.choice(self.activations)
+        for attempt in range(max_attempts):
+            try:
+                depth = random.randint(3, self.max_depth)
+                layers = []
                 
-                layer = Layer(
-                    layer_type=layer_type,
-                    input_channels=current_channels,
-                    output_channels=output_channels,
-                    kernel_size=kernel_size,
-                    stride=stride,
-                    padding="same",
-                    activation=activation
-                )
-                current_channels = output_channels
+                current_channels = self.input_shape[2]
                 
-            elif layer_type == LayerType.LINEAR:
-                if i == depth - 1:
-                    output_channels = self.num_classes
-                else:
-                    output_channels = random.choice(self.channel_choices)
+                for i in range(depth):
+                    layer_type = random.choice(self.layer_types)
                     
-                layer = Layer(
-                    layer_type=layer_type,
-                    input_channels=current_channels,
-                    output_channels=output_channels,
-                    activation=random.choice(self.activations) if i < depth - 1 else None
-                )
-                current_channels = output_channels
+                    try:
+                        if layer_type == LayerType.CONV2D:
+                            output_channels = random.choice(self.channel_choices)
+                            kernel_size = random.choice(self.kernel_choices)
+                            stride = (1, 1) if i == 0 else random.choice([(1, 1), (2, 2)])
+                            activation = random.choice(self.activations)
+                            
+                            layer = Layer(
+                                layer_type=layer_type,
+                                input_channels=current_channels,
+                                output_channels=output_channels,
+                                kernel_size=kernel_size,
+                                stride=stride,
+                                padding="same",
+                                activation=activation
+                            )
+                            current_channels = output_channels
+                            
+                        elif layer_type == LayerType.LINEAR:
+                            if i == depth - 1:
+                                output_channels = self.num_classes
+                            else:
+                                output_channels = random.choice(self.channel_choices)
+                                
+                            layer = Layer(
+                                layer_type=layer_type,
+                                input_channels=current_channels,
+                                output_channels=output_channels,
+                                activation=random.choice(self.activations) if i < depth - 1 else None
+                            )
+                            current_channels = output_channels
+                            
+                        else:
+                            layer = Layer(
+                                layer_type=layer_type,
+                                input_channels=current_channels,
+                                output_channels=current_channels,
+                                activation=random.choice(self.activations) if layer_type in [LayerType.RELU, LayerType.GELU] else None
+                            )
+                        
+                        if self._validate_layer(layer):
+                            layers.append(layer)
+                        else:
+                            continue
+                            
+                    except Exception as e:
+                        continue  # Skip this layer and try again
                 
-            else:
-                layer = Layer(
-                    layer_type=layer_type,
-                    input_channels=current_channels,
-                    output_channels=current_channels,
-                    activation=random.choice(self.activations) if layer_type in [LayerType.RELU, LayerType.GELU] else None
-                )
+                if len(layers) >= 3:  # Minimum viable architecture
+                    arch = Architecture(
+                        layers=layers,
+                        input_shape=self.input_shape,
+                        num_classes=self.num_classes,
+                        name=f"random_arch_{random.randint(1000, 9999)}"
+                    )
+                    
+                    if self._validate_architecture(arch):
+                        return arch
+                        
+            except Exception as e:
+                continue  # Try again
+        
+        # Fallback: create minimal valid architecture
+        return self._create_minimal_architecture()
+    
+    def _validate_layer(self, layer: Layer) -> bool:
+        """Validate individual layer."""
+        try:
+            if layer.input_channels <= 0 or layer.output_channels <= 0:
+                return False
             
-            layers.append(layer)
+            if layer.input_channels > 2048 or layer.output_channels > 2048:
+                return False  # Reasonable bounds
+            
+            return True
+            
+        except:
+            return False
+    
+    def _validate_architecture(self, arch: Architecture) -> bool:
+        """Validate complete architecture."""
+        try:
+            if not arch.layers or len(arch.layers) < 3:
+                return False
+            
+            if arch.total_params <= 0 or arch.total_params > 1e9:  # Reasonable bounds
+                return False
+            
+            if arch.total_ops <= 0 or arch.total_ops > 1e15:  # Reasonable bounds
+                return False
+            
+            return True
+            
+        except:
+            return False
+    
+    def _create_minimal_architecture(self) -> Architecture:
+        """Create minimal valid architecture as fallback."""
+        layers = [
+            Layer(
+                layer_type=LayerType.CONV2D,
+                input_channels=self.input_shape[2],
+                output_channels=64,
+                kernel_size=(3, 3),
+                stride=(1, 1),
+                padding="same",
+                activation=ActivationType.RELU
+            ),
+            Layer(
+                layer_type=LayerType.CONV2D,
+                input_channels=64,
+                output_channels=128,
+                kernel_size=(3, 3),
+                stride=(2, 2),
+                padding="same",
+                activation=ActivationType.RELU
+            ),
+            Layer(
+                layer_type=LayerType.LINEAR,
+                input_channels=128,
+                output_channels=self.num_classes,
+                activation=None
+            )
+        ]
         
         return Architecture(
             layers=layers,
             input_shape=self.input_shape,
             num_classes=self.num_classes,
-            name=f"random_arch_{random.randint(1000, 9999)}"
+            name="minimal_fallback_arch"
         )
     
     def mutate(self, architecture: Architecture) -> Architecture:
         """Mutate an existing architecture."""
-        new_layers = architecture.layers.copy()
+        max_attempts = 5
         
-        mutation_ops = [
-            self._mutate_channels,
-            self._mutate_kernel_size,
-            self._mutate_activation,
-            self._add_layer,
-            self._remove_layer,
-        ]
+        for attempt in range(max_attempts):
+            try:
+                new_layers = architecture.layers.copy()
+                
+                mutation_ops = [
+                    self._mutate_channels,
+                    self._mutate_kernel_size,
+                    self._mutate_activation,
+                    self._add_layer,
+                    self._remove_layer,
+                ]
+                
+                # Try multiple mutations for more diversity
+                num_mutations = random.randint(1, min(3, len(mutation_ops)))
+                
+                for _ in range(num_mutations):
+                    mutation_op = random.choice(mutation_ops)
+                    try:
+                        new_layers = mutation_op(new_layers)
+                    except:
+                        continue  # Skip failed mutations
+                
+                if len(new_layers) < 3:  # Ensure minimum viable architecture
+                    continue
+                
+                mutated_arch = Architecture(
+                    layers=new_layers,
+                    input_shape=architecture.input_shape,
+                    num_classes=architecture.num_classes,
+                    name=f"mutated_{architecture.name}_{attempt}"
+                )
+                
+                if self._validate_architecture(mutated_arch):
+                    return mutated_arch
+                    
+            except Exception as e:
+                continue  # Try again
         
-        mutation_op = random.choice(mutation_ops)
-        new_layers = mutation_op(new_layers)
-        
+        # Fallback: return original architecture with name change
         return Architecture(
-            layers=new_layers,
+            layers=architecture.layers.copy(),
             input_shape=architecture.input_shape,
             num_classes=architecture.num_classes,
-            name=f"mutated_{architecture.name}"
+            name=f"mutated_{architecture.name}_fallback"
         )
     
     def crossover(self, parent1: Architecture, parent2: Architecture) -> Architecture:
         """Crossover two parent architectures."""
-        crossover_point = random.randint(1, min(len(parent1.layers), len(parent2.layers)) - 1)
+        max_attempts = 5
         
-        new_layers = (parent1.layers[:crossover_point] + 
-                     parent2.layers[crossover_point:])
+        for attempt in range(max_attempts):
+            try:
+                if not parent1.layers or not parent2.layers:
+                    break
+                
+                min_len = min(len(parent1.layers), len(parent2.layers))
+                if min_len < 2:
+                    break
+                
+                crossover_point = random.randint(1, min_len - 1)
+                
+                # Try different crossover strategies
+                if attempt % 2 == 0:
+                    # Standard crossover
+                    new_layers = (parent1.layers[:crossover_point] + 
+                                 parent2.layers[crossover_point:])
+                else:
+                    # Interleaved crossover
+                    new_layers = []
+                    max_len = max(len(parent1.layers), len(parent2.layers))
+                    for i in range(max_len):
+                        if i % 2 == 0 and i < len(parent1.layers):
+                            new_layers.append(parent1.layers[i])
+                        elif i < len(parent2.layers):
+                            new_layers.append(parent2.layers[i])
+                
+                if len(new_layers) < 3:
+                    continue
+                
+                try:
+                    self._fix_channel_compatibility(new_layers)
+                except:
+                    continue
+                
+                child_arch = Architecture(
+                    layers=new_layers,
+                    input_shape=parent1.input_shape,
+                    num_classes=parent1.num_classes,
+                    name=f"crossover_{parent1.name}_{parent2.name}_{attempt}"
+                )
+                
+                if self._validate_architecture(child_arch):
+                    return child_arch
+                    
+            except Exception as e:
+                continue
         
-        self._fix_channel_compatibility(new_layers)
-        
-        return Architecture(
-            layers=new_layers,
-            input_shape=parent1.input_shape,
-            num_classes=parent1.num_classes,
-            name=f"crossover_{parent1.name}_{parent2.name}"
-        )
+        # Fallback: return mutated version of better parent
+        better_parent = parent1 if len(parent1.layers) >= len(parent2.layers) else parent2
+        return self.mutate(better_parent)
     
     def _mutate_channels(self, layers: List[Layer]) -> List[Layer]:
         """Mutate channel counts in layers."""
