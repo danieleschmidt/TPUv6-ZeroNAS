@@ -222,10 +222,10 @@ class TPUv6Predictor:
         latency = base_latency * (1 + 0.1 * complexity_factor)
         
         base_energy = latency * 10.0
-        efficiency_factor = features.get('tpu_utilization', 0.7)
+        efficiency_factor = max(features.get('tpu_utilization', 0.7), 0.1)
         energy = base_energy / efficiency_factor
         
-        accuracy = 0.95 - 0.05 * np.exp(-architecture.total_params / 1e7)
+        accuracy = 0.96 - 0.03 * np.exp(-architecture.total_params / 1e7)
         
         tops_per_watt = (architecture.total_ops / 1e12) / max(energy / 1000, 1e-6)
         

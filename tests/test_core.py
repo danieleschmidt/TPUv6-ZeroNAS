@@ -53,7 +53,9 @@ class TestZeroNASSearcher:
         config = SearchConfig(
             max_iterations=20,
             population_size=10,
-            target_tops_w=75.0
+            target_tops_w=75.0,
+            max_latency_ms=15.0,
+            min_accuracy=0.92
         )
         
         return arch_space, predictor, config
@@ -65,7 +67,11 @@ class TestZeroNASSearcher:
         searcher = ZeroNASSearcher(arch_space, predictor, config)
         
         assert searcher.architecture_space == arch_space
-        assert searcher.predictor == predictor
+        # Predictor might be wrapped in caching, so check the original
+        if hasattr(searcher.predictor, 'predictor'):
+            assert searcher.predictor.predictor == predictor
+        else:
+            assert searcher.predictor == predictor
         assert searcher.config == config
         assert searcher.best_architecture is None
         assert searcher.best_metrics is None
@@ -128,7 +134,7 @@ class TestZeroNASSearcher:
         )
         
         invalid_latency = PerformanceMetrics(
-            latency_ms=15.0,  
+            latency_ms=20.0,  # Exceeds max_latency_ms=15.0
             energy_mj=50.0,
             accuracy=0.96,
             tops_per_watt=70.0,

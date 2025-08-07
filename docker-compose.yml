@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  tpuv6-zeronas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tpuv6-zeronas:latest
+    container_name: tpuv6-zeronas-app
+    restart: unless-stopped
+    
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TPUV6_CACHE_DIR=/app/.cache
+      - TPUV6_LOG_DIR=/app/logs
+      - TPUV6_PARALLEL_WORKERS=4
+      
+    volumes:
+      - tpuv6_cache:/app/.cache
+      - tpuv6_logs:/app/logs
+      - ./results:/app/results
+      
+    ports:
+      - "8080:8080"
+      
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+          
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import tpuv6_zeronas; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+      
+    networks:
+      - tpuv6-network
+
+  # Optional: Redis for distributed caching (future enhancement)
+  redis:
+    image: redis:7-alpine
+    container_name: tpuv6-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-defaultpassword}
+    
+    volumes:
+      - tpuv6_redis_data:/data
+      
+    ports:
+      - "6379:6379"
+      
+    networks:
+      - tpuv6-network
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+volumes:
+  tpuv6_cache:
+    driver: local
+  tpuv6_logs:
+    driver: local
+  tpuv6_redis_data:
+    driver: local
+
+networks:
+  tpuv6-network:
+    driver: bridge
