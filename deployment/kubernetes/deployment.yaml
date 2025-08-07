@@ -1,0 +1,156 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpuv6-zeronas
+  namespace: default
+  labels:
+    app: tpuv6-zeronas
+    version: v0.1.0
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: tpuv6-zeronas
+  template:
+    metadata:
+      labels:
+        app: tpuv6-zeronas
+        version: v0.1.0
+    spec:
+      containers:
+      - name: tpuv6-zeronas
+        image: tpuv6-zeronas:latest
+        imagePullPolicy: IfNotPresent
+        
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+          
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        - name: TPUV6_CACHE_DIR
+          value: "/app/.cache"
+        - name: TPUV6_LOG_DIR
+          value: "/app/logs"
+        - name: TPUV6_PARALLEL_WORKERS
+          value: "4"
+          
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
+            
+        volumeMounts:
+        - name: cache-storage
+          mountPath: /app/.cache
+        - name: log-storage
+          mountPath: /app/logs
+          
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import tpuv6_zeronas; print('OK')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "import tpuv6_zeronas; print('OK')"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          
+      volumes:
+      - name: cache-storage
+        emptyDir:
+          sizeLimit: 10Gi
+      - name: log-storage
+        emptyDir:
+          sizeLimit: 5Gi
+          
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      
+      # Node selection and affinity
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - tpuv6-zeronas
+              topologyKey: kubernetes.io/hostname
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tpuv6-zeronas-service
+  namespace: default
+  labels:
+    app: tpuv6-zeronas
+spec:
+  selector:
+    app: tpuv6-zeronas
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tpuv6-zeronas-config
+  namespace: default
+data:
+  config.yaml: |
+    search:
+      max_iterations: 1000
+      population_size: 50
+      target_tops_w: 75.0
+      max_latency_ms: 10.0
+      min_accuracy: 0.95
+      enable_parallel: true
+      enable_caching: true
+      enable_adaptive: true
+    
+    logging:
+      level: INFO
+      format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+      
+    cache:
+      max_size: 1000
+      max_memory_mb: 100
+      disk_cache_days: 7

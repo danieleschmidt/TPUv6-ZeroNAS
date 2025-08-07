@@ -28,8 +28,8 @@ def main():
         max_iterations=100,
         population_size=20,
         target_tops_w=75.0,
-        max_latency_ms=8.0,
-        min_accuracy=0.95
+        max_latency_ms=15.0,
+        min_accuracy=0.92
     )
     
     searcher = ZeroNASSearcher(arch_space, predictor, search_config)
