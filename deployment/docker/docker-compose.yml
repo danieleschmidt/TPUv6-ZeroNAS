@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # TPUv6-ZeroNAS development environment
+  tpuv6-zeronas-dev:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: development
+    image: tpuv6-zeronas:dev
+    container_name: tpuv6-zeronas-dev
+    volumes:
+      - ../../:/app
+      - tpuv6-data:/data
+    environment:
+      - PYTHONPATH=/app
+      - TPUV6_LOG_LEVEL=INFO
+    command: bash
+    stdin_open: true
+    tty: true
+    networks:
+      - tpuv6-network
+
+  # TPUv6-ZeroNAS production service
+  tpuv6-zeronas-prod:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: production
+    image: tpuv6-zeronas:prod
+    container_name: tpuv6-zeronas-prod
+    volumes:
+      - tpuv6-data:/data
+      - tpuv6-results:/results
+    environment:
+      - TPUV6_LOG_LEVEL=INFO
+      - TPUV6_OUTPUT_DIR=/results
+    command: >
+      python -m tpuv6_zeronas.cli search 
+      --max-iterations 100 
+      --population-size 20 
+      --output /results/search_results.json
+    networks:
+      - tpuv6-network
+    restart: unless-stopped
+
+  # Minimal TPUv6-ZeroNAS for testing
+  tpuv6-zeronas-minimal:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: minimal
+    image: tpuv6-zeronas:minimal
+    container_name: tpuv6-zeronas-minimal
+    environment:
+      - PYTHONPATH=/app
+    command: python -c "from tpuv6_zeronas import ArchitectureSpace; print('Minimal deployment successful')"
+    networks:
+      - tpuv6-network
+
+  # Jupyter notebook for experimentation
+  tpuv6-jupyter:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+      target: development
+    image: tpuv6-zeronas:dev
+    container_name: tpuv6-zeronas-jupyter
+    volumes:
+      - ../../:/app
+      - tpuv6-data:/data
+      - tpuv6-notebooks:/notebooks
+    environment:
+      - PYTHONPATH=/app
+      - JUPYTER_ENABLE_LAB=yes
+    command: >
+      bash -c "pip install jupyter jupyterlab && 
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root 
+               --notebook-dir=/notebooks"
+    ports:
+      - "8888:8888"
+    networks:
+      - tpuv6-network
+
+volumes:
+  tpuv6-data:
+    driver: local
+  tpuv6-results:
+    driver: local
+  tpuv6-notebooks:
+    driver: local
+
+networks:
+  tpuv6-network:
+    driver: bridge

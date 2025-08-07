@@ -19,97 +19,126 @@ Traditional NAS requires hardware access. TPUv6-ZeroNAS breaks this constraint b
 
 ## Installation
 
+### Minimal Installation (Zero Dependencies)
 ```bash
 # Clone repository  
 git clone https://github.com/danieleschmidt/tpuv6-zeronas.git
 cd tpuv6-zeronas
 
-# Create environment
+# Install core package
+pip install -e .
+
+# Test installation
+python scripts/quick_test_minimal.py
+```
+
+### Full Installation (With Scientific Libraries)
+```bash
+# Install with full dependencies
+pip install -e ".[full]"
+
+# Or install specific extras
+pip install -e ".[ml]"     # Machine learning libraries
+pip install -e ".[dev]"    # Development tools
+
+# Run comprehensive tests
+python scripts/simple_integration_test.py
+```
+
+### Development Installation
+```bash
+# Create conda environment (optional)
 conda create -n tpuv6nas python=3.9
 conda activate tpuv6nas
 
-# Install dependencies
-pip install -r requirements.txt
+# Install in development mode
+pip install -e ".[full,dev]"
 
-# Install Edge TPU runtime (for v5e profiling)
-echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-sudo apt update
-sudo apt install libedgetpu1-std
-
-# Download pre-trained performance predictor
-python scripts/download_models.py --model perf_predictor_v2
+# Run all tests
+make test
 ```
 
 ## Quick Start
 
+### Zero-Dependency Installation
+
+```bash
+# Clone and install with no external dependencies
+git clone https://github.com/danieleschmidt/tpuv6-zeronas.git
+cd tpuv6-zeronas
+pip install -e .
+
+# Test installation
+python scripts/quick_test_minimal.py
+
+# Run basic search
+python -m tpuv6_zeronas.cli search --max-iterations 50 --population-size 20
+```
+
 ### Basic Architecture Search
 
 ```python
-from tpuv6_zeronas import ZeroShotNAS, SearchSpace, EdgeTPUv6Predictor
+from tpuv6_zeronas import ZeroNASSearcher, TPUv6Predictor, ArchitectureSpace
+from tpuv6_zeronas.core import SearchConfig
 
 # Define search space
-search_space = SearchSpace(
-    input_resolution=(224, 224, 3),
-    stem_filters=[16, 24, 32],
-    block_types=['mbconv', 'fused_mbconv', 'residual'],
-    depth_range=(2, 5),
-    width_multiplier=[0.5, 0.75, 1.0, 1.25],
-    activation=['relu6', 'swish', 'hard_swish']
+arch_space = ArchitectureSpace(
+    input_shape=(224, 224, 3),
+    num_classes=1000,
+    max_depth=12
 )
 
-# Initialize zero-shot NAS with v6 predictor
-nas = ZeroShotNAS(
-    predictor=EdgeTPUv6Predictor.from_pretrained('v5e_to_v6_model'),
-    search_space=search_space,
-    target_hardware='edge_tpu_v6'
+# Initialize predictor (works without external dependencies)
+predictor = TPUv6Predictor()
+
+# Configure search
+config = SearchConfig(
+    max_iterations=100,
+    population_size=20,
+    target_tops_w=75.0,      # 75 TOPS/W target efficiency
+    max_latency_ms=10.0,     # 10ms maximum latency
+    min_accuracy=0.95        # 95% minimum accuracy
 )
 
-# Search for Pareto-optimal architectures
-pareto_archs = nas.search(
-    dataset='imagenet',
-    objectives={
-        'accuracy': 'maximize',
-        'latency_ms': ('target', 5.0),  # 5ms target
-        'energy_uj': 'minimize',
-        'model_size_mb': ('max', 10.0)  # 10MB limit
-    },
-    search_budget=100  # GPU hours
-)
+# Run search
+searcher = ZeroNASSearcher(arch_space, predictor, config)
+best_arch, best_metrics = searcher.search()
 
-# Get best architecture for deployment
-best_arch = pareto_archs[0]
-print(f"Architecture: {best_arch.genotype}")
-print(f"Predicted v6 metrics:")
-print(f"  Latency: {best_arch.latency_v6:.2f}ms")
-print(f"  Energy: {best_arch.energy_v6:.2f}μJ")
-print(f"  TOPS/W: {best_arch.efficiency:.1f}")
+# Display results
+print(f"Best architecture: {best_arch.name}")
+print(f"Layers: {len(best_arch.layers)}")
+print(f"Parameters: {best_arch.total_params:,}")
+print(f"Performance:")
+print(f"  Latency: {best_metrics.latency_ms:.2f}ms")
+print(f"  Energy: {best_metrics.energy_mj:.2f}mJ")
+print(f"  Accuracy: {best_metrics.accuracy:.3f}")
+print(f"  TOPS/W: {best_metrics.tops_per_watt:.1f}")
+print(f"  Efficiency Score: {best_metrics.efficiency_score:.3f}")
 ```
 
-### Performance Prediction from v5e
+### Command Line Interface
 
-```python
-from tpuv6_zeronas import EdgeTPUProfiler, PerformanceRegressor
+```bash
+# Basic architecture search
+python -m tpuv6_zeronas.cli search \
+    --max-iterations 50 \
+    --population-size 16 \
+    --target-tops-w 75.0 \
+    --max-latency 8.0 \
+    --optimize-for-tpuv6 \
+    --output results.json
 
-# Profile model on real Edge TPU v5e
-profiler = EdgeTPUProfiler(device='usb:0')  # or 'pci:0'
-model_path = 'mobilenet_v3_edgetpu.tflite'
+# Generate synthetic training data
+python scripts/generate_training_data.py
 
-v5e_metrics = profiler.profile(
-    model_path,
-    num_runs=1000,
-    input_shape=(1, 224, 224, 3)
-)
+# Train predictor model (requires scikit-learn)
+python -m tpuv6_zeronas.cli train --training-data training_data_v5e_to_v6.json
 
-# Predict v6 performance
-regressor = PerformanceRegressor.load('v5e_to_v6_scaling_laws.pkl')
-v6_prediction = regressor.predict(
-    v5e_metrics,
-    architecture_features=extract_arch_features(model_path)
-)
+# Benchmark specific architecture
+python -m tpuv6_zeronas.cli benchmark --architecture results.json
 
-print(f"V5e measured: {v5e_metrics.latency_ms:.2f}ms")
-print(f"V6 predicted: {v6_prediction.latency_ms:.2f}ms ({v6_prediction.confidence:.1%} conf)")
+# Run comprehensive tests
+python scripts/simple_integration_test.py
 ```
 
 ## Advanced Features

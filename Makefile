@@ -26,6 +26,12 @@ format-check:	## Check code formatting
 example:	## Run basic example
 	python scripts/run_example.py
 
+validate:	## Validate installation
+	python scripts/validate_installation.py
+
+generate-data:	## Generate synthetic training data
+	python scripts/generate_training_data.py
+
 clean:	## Clean up temporary files
 	find . -type f -name "*.pyc" -delete
 	find . -type d -name "__pycache__" -delete

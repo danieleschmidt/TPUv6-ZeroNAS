@@ -2,9 +2,14 @@
 
 import logging
 import time
-from typing import Dict, List, Optional, Tuple, Any
+import traceback
+from typing import Dict, List, Optional, Tuple, Any, Union
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
+
 from dataclasses import dataclass
 
 from .architecture import ArchitectureSpace, Architecture
@@ -45,36 +50,173 @@ class ZeroNASSearcher:
         
     def search(self) -> Tuple[Architecture, PerformanceMetrics]:
         """Run neural architecture search to find optimal TPUv6 architecture."""
+        if not self._validate_search_setup():
+            raise ValueError("Search setup validation failed")
+            
         self.logger.info("Starting TPUv6-ZeroNAS search...")
         self.logger.info(f"Target: {self.config.target_tops_w} TOPS/W")
+        self.logger.info(f"Max iterations: {self.config.max_iterations}")
+        self.logger.info(f"Population size: {self.config.population_size}")
         
-        population = self._initialize_population()
-        
-        for iteration in range(self.config.max_iterations):
-            self.logger.info(f"Iteration {iteration + 1}/{self.config.max_iterations}")
+        try:
+            population = self._initialize_population()
+            consecutive_failures = 0
+            max_consecutive_failures = 5
             
-            evaluated_pop = self._evaluate_population(population)
-            
-            self._update_best(evaluated_pop)
-            
-            if self._should_early_stop():
-                self.logger.info(f"Early stopping at iteration {iteration + 1}")
-                break
+            for iteration in range(self.config.max_iterations):
+                self.logger.info(f"Iteration {iteration + 1}/{self.config.max_iterations}")
                 
-            population = self._evolve_population(evaluated_pop)
+                try:
+                    evaluated_pop = self._evaluate_population(population)
+                    
+                    if not evaluated_pop:
+                        consecutive_failures += 1
+                        self.logger.warning(f"No valid architectures in iteration {iteration + 1}")
+                        
+                        if consecutive_failures >= max_consecutive_failures:
+                            self.logger.error("Too many consecutive failures, terminating search")
+                            break
+                        
+                        population = self._initialize_population()  # Reset population
+                        continue
+                    
+                    consecutive_failures = 0
+                    self._update_best(evaluated_pop)
+                    
+                    if self._should_early_stop():
+                        self.logger.info(f"Early stopping at iteration {iteration + 1}")
+                        break
+                    
+                    population = self._evolve_population(evaluated_pop)
+                    
+                except Exception as e:
+                    self.logger.error(f"Error in iteration {iteration + 1}: {e}")
+                    consecutive_failures += 1
+                    
+                    if consecutive_failures >= max_consecutive_failures:
+                        self.logger.error("Too many consecutive iteration failures")
+                        break
+                    
+                    continue
             
-        self.logger.info("Search completed!")
-        self.logger.info(f"Best architecture: {self.best_architecture}")
-        self.logger.info(f"Best metrics: {self.best_metrics}")
-        
-        return self.best_architecture, self.best_metrics
+            if self.best_architecture is None or self.best_metrics is None:
+                raise RuntimeError("Search failed to find any valid architecture")
+            
+            self.logger.info("Search completed successfully!")
+            self.logger.info(f"Best architecture: {self.best_architecture.name}")
+            self.logger.info(f"Best metrics: {self.best_metrics}")
+            self.logger.info(f"Total evaluations: {len(self.search_history)}")
+            
+            return self.best_architecture, self.best_metrics
+            
+        except Exception as e:
+            self.logger.error(f"Search failed with exception: {e}")
+            self.logger.error(f"Traceback: {traceback.format_exc()}")
+            raise
+    
+    def _validate_search_setup(self) -> bool:
+        """Validate search configuration and dependencies."""
+        try:
+            if self.config.max_iterations <= 0:
+                self.logger.error("max_iterations must be positive")
+                return False
+            
+            if self.config.population_size <= 0:
+                self.logger.error("population_size must be positive")
+                return False
+            
+            if not (0.0 < self.config.mutation_rate < 1.0):
+                self.logger.error("mutation_rate must be between 0 and 1")
+                return False
+            
+            if not (0.0 < self.config.crossover_rate < 1.0):
+                self.logger.error("crossover_rate must be between 0 and 1")
+                return False
+            
+            test_arch = self.architecture_space.sample_random()
+            test_metrics = self.predictor.predict(test_arch)
+            
+            if not isinstance(test_metrics, PerformanceMetrics):
+                self.logger.error("Predictor does not return valid PerformanceMetrics")
+                return False
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Search setup validation failed: {e}")
+            return False
+    
+    def _validate_architecture(self, arch: Architecture) -> bool:
+        """Validate architecture before evaluation."""
+        try:
+            if not arch or not arch.layers:
+                return False
+            
+            if arch.total_params <= 0:
+                return False
+            
+            if arch.total_ops <= 0:
+                return False
+            
+            if arch.memory_mb <= 0:
+                return False
+            
+            return True
+            
+        except Exception as e:
+            self.logger.debug(f"Architecture validation failed: {e}")
+            return False
+    
+    def _validate_metrics(self, metrics: PerformanceMetrics) -> bool:
+        """Validate performance metrics."""
+        try:
+            if not isinstance(metrics, PerformanceMetrics):
+                return False
+            
+            if not (0.0 < metrics.latency_ms < 1000.0):  # Reasonable latency bounds
+                return False
+            
+            if not (0.0 < metrics.energy_mj < 10000.0):  # Reasonable energy bounds
+                return False
+            
+            if not (0.0 <= metrics.accuracy <= 1.0):
+                return False
+            
+            if not (0.0 < metrics.tops_per_watt < 1000.0):  # Reasonable efficiency bounds
+                return False
+            
+            return True
+            
+        except Exception as e:
+            self.logger.debug(f"Metrics validation failed: {e}")
+            return False
     
     def _initialize_population(self) -> List[Architecture]:
         """Initialize random population of architectures."""
         population = []
-        for _ in range(self.config.population_size):
-            arch = self.architecture_space.sample_random()
-            population.append(arch)
+        attempts = 0
+        max_attempts = self.config.population_size * 3
+        
+        while len(population) < self.config.population_size and attempts < max_attempts:
+            try:
+                arch = self.architecture_space.sample_random()
+                
+                if self._validate_architecture(arch):
+                    population.append(arch)
+                else:
+                    self.logger.debug(f"Invalid architecture rejected: {arch.name}")
+                    
+            except Exception as e:
+                self.logger.warning(f"Failed to create architecture: {e}")
+                
+            attempts += 1
+        
+        if len(population) == 0:
+            raise RuntimeError("Failed to initialize any valid architectures")
+        
+        if len(population) < self.config.population_size:
+            self.logger.warning(f"Only initialized {len(population)} architectures (target: {self.config.population_size})")
+        
         return population
     
     def _evaluate_population(
@@ -83,11 +225,32 @@ class ZeroNASSearcher:
     ) -> List[Tuple[Architecture, PerformanceMetrics]]:
         """Evaluate population using TPUv6 predictor."""
         evaluated = []
+        failed_evaluations = 0
         
-        for arch in population:
-            metrics = self.predictor.predict(arch)
-            evaluated.append((arch, metrics))
-            
+        for i, arch in enumerate(population):
+            try:
+                if not self._validate_architecture(arch):
+                    self.logger.debug(f"Skipping invalid architecture {i}")
+                    failed_evaluations += 1
+                    continue
+                    
+                metrics = self.predictor.predict(arch)
+                
+                if not self._validate_metrics(metrics):
+                    self.logger.debug(f"Invalid metrics for architecture {arch.name}")
+                    failed_evaluations += 1
+                    continue
+                    
+                evaluated.append((arch, metrics))
+                
+            except Exception as e:
+                self.logger.warning(f"Failed to evaluate architecture {arch.name}: {e}")
+                failed_evaluations += 1
+                continue
+        
+        if failed_evaluations > 0:
+            self.logger.info(f"Failed to evaluate {failed_evaluations}/{len(population)} architectures")
+        
         return evaluated
     
     def _update_best(
@@ -155,14 +318,16 @@ class ZeroNASSearcher:
         new_population = elite.copy()
         
         while len(new_population) < self.config.population_size:
-            if np.random.random() < self.config.crossover_rate:
+            crossover_chance = hash(time.time()) % 100 / 100.0
+            if crossover_chance < self.config.crossover_rate:
                 parent1, parent2 = self._select_parents(evaluated_pop[:elite_size * 2])
                 child = self._crossover(parent1, parent2)
             else:
                 parent = self._select_parents(evaluated_pop[:elite_size * 2], n=1)[0]
                 child = parent
                 
-            if np.random.random() < self.config.mutation_rate:
+            mutation_chance = hash(time.time() + 1) % 100 / 100.0
+            if mutation_chance < self.config.mutation_rate:
                 child = self._mutate(child)
                 
             new_population.append(child)
@@ -178,8 +343,14 @@ class ZeroNASSearcher:
         parents = []
         for _ in range(n):
             tournament_size = min(3, len(population))
-            tournament = np.random.choice(len(population), tournament_size, replace=False)
-            best_idx = min(tournament, key=lambda i: self._compute_score(population[i][1]))
+            tournament = [hash(time.time() + i * 37) % len(population) for i in range(tournament_size)]
+            best_idx = tournament[0]
+            best_score = self._compute_score(population[best_idx][1])
+            for idx in tournament[1:]:
+                score = self._compute_score(population[idx][1])
+                if score > best_score:
+                    best_idx = idx
+                    best_score = score
             parents.append(population[best_idx][0])
         return parents
     
