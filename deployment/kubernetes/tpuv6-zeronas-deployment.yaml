@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpuv6-zeronas
+  labels:
+    app: tpuv6-zeronas
+    version: v0.1.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tpuv6-zeronas
+  template:
+    metadata:
+      labels:
+        app: tpuv6-zeronas
+    spec:
+      containers:
+      - name: tpuv6-zeronas
+        image: tpuv6-zeronas:prod
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TPUV6_LOG_LEVEL
+          value: "INFO"
+        - name: TPUV6_OUTPUT_DIR
+          value: "/results"
+        - name: PYTHONPATH
+          value: "/app"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: results-volume
+          mountPath: /results
+        - name: config-volume
+          mountPath: /config
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "from tpuv6_zeronas import ArchitectureSpace; print('healthy')"
+          initialDelaySeconds: 30
+          periodSeconds: 60
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - scripts/quick_test_minimal.py
+          initialDelaySeconds: 10
+          periodSeconds: 30
+      volumes:
+      - name: results-volume
+        persistentVolumeClaim:
+          claimName: tpuv6-results-pvc
+      - name: config-volume
+        configMap:
+          name: tpuv6-config
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tpuv6-zeronas-service
+spec:
+  selector:
+    app: tpuv6-zeronas
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tpuv6-results-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tpuv6-config
+data:
+  search-config.yaml: |
+    max_iterations: 100
+    population_size: 20
+    target_tops_w: 75.0
+    max_latency_ms: 10.0
+    min_accuracy: 0.95
+  logging.conf: |
+    [loggers]
+    keys=root
+    
+    [handlers]
+    keys=consoleHandler
+    
+    [formatters]
+    keys=simpleFormatter
+    
+    [logger_root]
+    level=INFO
+    handlers=consoleHandler
+    
+    [handler_consoleHandler]
+    class=StreamHandler
+    level=INFO
+    formatter=simpleFormatter
+    args=(sys.stdout,)
+    
+    [formatter_simpleFormatter]
+    format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
