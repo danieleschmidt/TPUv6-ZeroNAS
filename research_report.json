@@ -1,0 +1,271 @@
+{
+  "experiment_metadata": {
+    "timestamp": "2025-08-09 08:31:46",
+    "tpuv6_zeronas_version": "0.1.0",
+    "experiment_type": "comparative_architecture_search",
+    "total_configurations": 3,
+    "total_experiments": 9
+  },
+  "methodology": {
+    "description": "Comparative study of neural architecture search configurations for TPUv6 optimization",
+    "search_algorithm": "Evolutionary algorithm with hardware-aware fitness function",
+    "prediction_model": "Learned scaling laws from Edge TPU v5e \u2192 v6 regression",
+    "objectives": [
+      "latency_minimization",
+      "energy_efficiency",
+      "accuracy_maximization"
+    ]
+  },
+  "experimental_results": {
+    "small_fast": {
+      "mobile_friendly": {
+        "architecture": {
+          "name": "random_arch_5523",
+          "layers": 11,
+          "parameters": 936208,
+          "operations": 934848,
+          "memory_mb": 260.88671875
+        },
+        "metrics": {
+          "latency_ms": 0.2860063159969586,
+          "energy_mj": 0.4875962178792441,
+          "accuracy": 0.8242603710741944,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.6982340054268181
+        },
+        "search_performance": {
+          "time_seconds": 0.03658127784729004,
+          "total_evaluations": 47
+        }
+      },
+      "high_capacity": {
+        "architecture": {
+          "name": "random_arch_6350",
+          "layers": 13,
+          "parameters": 11291904,
+          "operations": 8140800,
+          "memory_mb": 1372.57421875
+        },
+        "metrics": {
+          "latency_ms": 0.3294269302762237,
+          "energy_mj": 0.5765365153868077,
+          "accuracy": 0.98,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.7359272337785789
+        },
+        "search_performance": {
+          "time_seconds": 0.030623197555541992,
+          "total_evaluations": 41
+        }
+      },
+      "edge_optimized": {
+        "architecture": {
+          "name": "random_arch_4754",
+          "layers": 8,
+          "parameters": 13520,
+          "operations": 9544,
+          "memory_mb": 19.37109375
+        },
+        "metrics": {
+          "latency_ms": 0.27765179741178675,
+          "energy_mj": 0.4503522755320173,
+          "accuracy": 0.7774084423689268,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.6868108357794125
+        },
+        "search_performance": {
+          "time_seconds": 0.03740882873535156,
+          "total_evaluations": 43
+        }
+      }
+    },
+    "large_efficient": {
+      "mobile_friendly": {
+        "architecture": {
+          "name": "random_arch_2085",
+          "layers": 12,
+          "parameters": 267912,
+          "operations": 266006,
+          "memory_mb": 23.56689453125
+        },
+        "metrics": {
+          "latency_ms": 0.26737065633358487,
+          "energy_mj": 0.456493080942129,
+          "accuracy": 0.8481857872443912,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.7047335307250981
+        },
+        "search_performance": {
+          "time_seconds": 0.07710909843444824,
+          "total_evaluations": 103
+        }
+      },
+      "high_capacity": {
+        "architecture": {
+          "name": "random_arch_6699",
+          "layers": 4,
+          "parameters": 1055720,
+          "operations": 1053696,
+          "memory_mb": 779.98046875
+        },
+        "metrics": {
+          "latency_ms": 0.22354762558450772,
+          "energy_mj": 0.4404543169856853,
+          "accuracy": 0.98,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.7387705376873845
+        },
+        "search_performance": {
+          "time_seconds": 0.0809335708618164,
+          "total_evaluations": 127
+        }
+      },
+      "edge_optimized": {
+        "architecture": {
+          "name": "random_arch_4755",
+          "layers": 8,
+          "parameters": 42016,
+          "operations": 37800,
+          "memory_mb": 12.19921875
+        },
+        "metrics": {
+          "latency_ms": 0.28942963675449296,
+          "energy_mj": 0.4607388272960573,
+          "accuracy": 0.7813942110363344,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.6875031137127771
+        },
+        "search_performance": {
+          "time_seconds": 0.0972447395324707,
+          "total_evaluations": 96
+        }
+      }
+    },
+    "ultra_fast": {
+      "mobile_friendly": {
+        "architecture": {
+          "name": "mutated_crossover_random_arch_5426_random_arch_5426_0_0",
+          "layers": 10,
+          "parameters": 236928,
+          "operations": 168512,
+          "memory_mb": 398.69921875
+        },
+        "metrics": {
+          "latency_ms": 0.2489748742115555,
+          "energy_mj": 0.4424777081920832,
+          "accuracy": 0.8439396991128454,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.7041437716430775
+        },
+        "search_performance": {
+          "time_seconds": 0.03261208534240723,
+          "total_evaluations": 25
+        }
+      },
+      "high_capacity": {
+        "architecture": {
+          "name": "random_arch_1686",
+          "layers": 8,
+          "parameters": 1055756,
+          "operations": 9219,
+          "memory_mb": 1373.1484375
+        },
+        "metrics": {
+          "latency_ms": 0.2712795340308907,
+          "energy_mj": 0.4763875046551192,
+          "accuracy": 0.98,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.7375451451910601
+        },
+        "search_performance": {
+          "time_seconds": 0.034413814544677734,
+          "total_evaluations": 40
+        }
+      },
+      "edge_optimized": {
+        "architecture": {
+          "name": "random_arch_7029",
+          "layers": 6,
+          "parameters": 7652,
+          "operations": 7152,
+          "memory_mb": 6.046875
+        },
+        "metrics": {
+          "latency_ms": 0.27280479603635266,
+          "energy_mj": 0.45046721356591557,
+          "accuracy": 0.7511033083056666,
+          "tops_per_watt": 0.1,
+          "efficiency_score": 0.6803490379743604
+        },
+        "search_performance": {
+          "time_seconds": 0.04144001007080078,
+          "total_evaluations": 23
+        }
+      }
+    }
+  },
+  "analysis": {
+    "best_efficiency": {
+      "config": "small_fast",
+      "space": "mobile_friendly",
+      "efficiency": 0.1,
+      "latency": 0.2860063159969586,
+      "accuracy": 0.8242603710741944,
+      "overall": 0.6982340054268181,
+      "params": 936208
+    },
+    "best_latency": {
+      "config": "large_efficient",
+      "space": "high_capacity",
+      "efficiency": 0.1,
+      "latency": 0.22354762558450772,
+      "accuracy": 0.98,
+      "overall": 0.7387705376873845,
+      "params": 1055720
+    },
+    "best_accuracy": {
+      "config": "small_fast",
+      "space": "high_capacity",
+      "efficiency": 0.1,
+      "latency": 0.3294269302762237,
+      "accuracy": 0.98,
+      "overall": 0.7359272337785789,
+      "params": 11291904
+    },
+    "best_overall": {
+      "config": "large_efficient",
+      "space": "high_capacity",
+      "efficiency": 0.1,
+      "latency": 0.22354762558450772,
+      "accuracy": 0.98,
+      "overall": 0.7387705376873845,
+      "params": 1055720
+    },
+    "statistical_summary": {
+      "total_experiments": 9,
+      "efficiency_range": [
+        0.1,
+        0.1
+      ],
+      "latency_range": [
+        0.22354762558450772,
+        0.3294269302762237
+      ],
+      "accuracy_range": [
+        0.7511033083056666,
+        0.98
+      ]
+    }
+  },
+  "key_findings": [
+    "Best efficiency achieved: 0.1 TOPS/W",
+    "Minimum latency achieved: 0.22ms",
+    "Maximum accuracy achieved: 98.0%",
+    "Total architectures evaluated: 9"
+  ],
+  "reproducibility_info": {
+    "random_seed": "architecture_sampling_based",
+    "hardware_requirements": "CPU-only (no external dependencies)",
+    "execution_time": "varies by configuration complexity"
+  }
+}

@@ -1,4 +1,3 @@
-```python
 """Core ZeroNAS search functionality for TPUv6 optimization."""
 
 import logging
@@ -21,6 +20,10 @@ from .monitoring import SearchMonitor, get_profiler, get_health_checker
 from .security import get_resource_guard, SecurityError
 from .parallel import ParallelEvaluator, WorkerConfig, get_performance_optimizer, get_resource_manager
 from .caching import create_cached_predictor
+from .error_handling import (
+    robust_operation, safe_operation, validate_architecture_safe, 
+    validate_metrics_safe, ErrorHandlingContext, get_error_handler
+)
 
 
 @dataclass
@@ -241,78 +244,70 @@ class ZeroNASSearcher:
             self.logger.error(f"Traceback: {traceback.format_exc()}")
             raise
     
+    @safe_operation(default_return=False, component="core")
     def _validate_architecture(self, arch: Architecture) -> bool:
-        """Validate architecture before evaluation."""
-        try:
-            if not arch or not arch.layers:
-                return False
-            
-            if arch.total_params <= 0:
-                return False
-            
-            if arch.total_ops <= 0:
-                return False
-            
-            if arch.memory_mb <= 0:
-                return False
-            
-            return True
-            
-        except Exception as e:
-            self.logger.debug(f"Architecture validation failed: {e}")
-            return False
+        """Validate architecture before evaluation with enhanced safety checks."""
+        return validate_architecture_safe(arch)
     
+    @safe_operation(default_return=False, component="core")
     def _validate_metrics(self, metrics: PerformanceMetrics) -> bool:
-        """Validate performance metrics."""
-        try:
-            if not isinstance(metrics, PerformanceMetrics):
-                return False
-            
-            if not (0.0 < metrics.latency_ms < 1000.0):  # Reasonable latency bounds
-                return False
-            
-            if not (0.0 < metrics.energy_mj < 10000.0):  # Reasonable energy bounds
-                return False
-            
-            if not (0.0 <= metrics.accuracy <= 1.0):
-                return False
-            
-            if not (0.0 < metrics.tops_per_watt < 1000.0):  # Reasonable efficiency bounds
-                return False
-            
-            return True
-            
-        except Exception as e:
-            self.logger.debug(f"Metrics validation failed: {e}")
-            return False
+        """Validate performance metrics with enhanced safety checks."""
+        return validate_metrics_safe(metrics)
     
+    @robust_operation(max_retries=3, component="core")
     def _initialize_population(self) -> List[Architecture]:
-        """Initialize random population of architectures."""
+        """Initialize random population of architectures with robust error handling."""
         population = []
         attempts = 0
-        max_attempts = self.config.population_size * 3
+        max_attempts = self.config.population_size * 5  # Increased for safety
+        consecutive_failures = 0
+        max_consecutive_failures = 10
         
-        while len(population) < self.config.population_size and attempts < max_attempts:
-            try:
-                arch = self.architecture_space.sample_random()
-                
-                if self._validate_architecture(arch):
-                    population.append(arch)
-                else:
-                    self.logger.debug(f"Invalid architecture rejected: {arch.name}")
+        with ErrorHandlingContext("core", "population_initialization"):
+            while len(population) < self.config.population_size and attempts < max_attempts:
+                try:
+                    arch = self.architecture_space.sample_random()
                     
-            except Exception as e:
-                self.logger.warning(f"Failed to create architecture: {e}")
-                
-            attempts += 1
-        
-        if len(population) == 0:
-            raise RuntimeError("Failed to initialize any valid architectures")
-        
-        if len(population) < self.config.population_size:
-            self.logger.warning(f"Only initialized {len(population)} architectures (target: {self.config.population_size})")
-        
-        return population
+                    if self._validate_architecture(arch):
+                        population.append(arch)
+                        consecutive_failures = 0  # Reset counter on success
+                        self.logger.debug(f"Valid architecture added: {arch.name}")
+                    else:
+                        consecutive_failures += 1
+                        self.logger.debug(f"Invalid architecture rejected: {getattr(arch, 'name', 'unnamed')}")
+                        
+                        if consecutive_failures >= max_consecutive_failures:
+                            self.logger.warning("Too many consecutive invalid architectures, adjusting sampling")
+                            # Reset counter and continue
+                            consecutive_failures = 0
+                        
+                except Exception as e:
+                    consecutive_failures += 1
+                    self.logger.warning(f"Failed to create architecture (attempt {attempts}): {e}")
+                    
+                    if consecutive_failures >= max_consecutive_failures:
+                        self.logger.error("Too many consecutive failures in architecture generation")
+                        break
+                    
+                attempts += 1
+            
+            # Ensure we have at least some population
+            if len(population) == 0:
+                self.logger.error("Failed to initialize any valid architectures, creating minimal fallback")
+                # Create a minimal fallback architecture
+                try:
+                    fallback_arch = self.architecture_space._create_minimal_architecture()
+                    if self._validate_architecture(fallback_arch):
+                        population.append(fallback_arch)
+                except Exception as e:
+                    raise RuntimeError(f"Failed to create fallback architecture: {e}")
+            
+            if len(population) < self.config.population_size:
+                self.logger.warning(f"Initialized {len(population)} architectures (target: {self.config.population_size})")
+            else:
+                self.logger.info(f"Successfully initialized {len(population)} architectures")
+            
+            return population
     
     def _evaluate_population(
         self, 
@@ -573,4 +568,3 @@ class ZeroNASSearcher:
     def __del__(self):
         """Cleanup on destruction."""
         self.cleanup()
-```

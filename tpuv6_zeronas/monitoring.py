@@ -8,7 +8,29 @@ from typing import Dict, List, Optional, Any, Callable
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from collections import defaultdict, deque
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    # Mock numpy for basic operations
+    class MockNumPy:
+        @staticmethod
+        def mean(values):
+            return sum(values) / len(values) if values else 0
+        @staticmethod
+        def std(values):
+            if not values:
+                return 0
+            mean_val = sum(values) / len(values)
+            variance = sum((x - mean_val) ** 2 for x in values) / len(values)
+            return variance ** 0.5
+        @staticmethod
+        def percentile(values, p):
+            if not values:
+                return 0
+            sorted_values = sorted(values)
+            idx = int(len(sorted_values) * p / 100.0)
+            return sorted_values[min(idx, len(sorted_values) - 1)]
+    np = MockNumPy()
 
 from .metrics import PerformanceMetrics
 from .architecture import Architecture
@@ -376,8 +398,8 @@ class HealthChecker:
             if memory_percent > 90:
                 self.health_issues.append(f"High memory usage: {memory_percent:.1f}%")
             
-            # Check CPU usage
-            cpu_percent = psutil.cpu_percent(interval=1)
+            # Check CPU usage (use non-blocking check)
+            cpu_percent = psutil.cpu_percent(interval=0.1)
             if cpu_percent > 95:
                 self.health_issues.append(f"High CPU usage: {cpu_percent:.1f}%")
             

@@ -1,4 +1,3 @@
-```python
 """TPUv6-ZeroNAS: Neural Architecture Search for TPUv6 Hardware Optimization."""
 
 __version__ = "0.1.0"
@@ -8,7 +7,7 @@ __email__ = "daniel@terragonlabs.com"
 from .core import ZeroNASSearcher, SearchConfig
 from .predictor import TPUv6Predictor
 from .architecture import ArchitectureSpace
-from .metrics import PerformanceMetrics
+from .metrics import PerformanceMetrics, MetricsAggregator
 from .optimizations import TPUv6Optimizer, TPUv6Config
 from .validation import validate_input
 from .monitoring import SearchMonitor
@@ -28,6 +27,7 @@ __all__ = [
     "TPUv6Predictor", 
     "ArchitectureSpace",
     "PerformanceMetrics",
+    "MetricsAggregator",
     "TPUv6Optimizer",
     "TPUv6Config",
     "validate_input",
@@ -43,4 +43,3 @@ if ADVANCED_AVAILABLE:
         "MultiObjectiveOptimizer",
         "OptimizationConfig",
     ])
-```
