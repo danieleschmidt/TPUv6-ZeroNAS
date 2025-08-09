@@ -3,7 +3,22 @@
 import logging
 from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass
-import numpy as np
+
+try:
+    import numpy as np
+except ImportError:
+    # Mock numpy for basic operations
+    class MockNumPy:
+        @staticmethod
+        def clip(x, a, b):
+            return max(a, min(b, x))
+        @staticmethod
+        def isfinite(x):
+            return isinstance(x, (int, float)) and not (x == float('inf') or x == float('-inf') or x != x)
+        @staticmethod
+        def isnan(x):
+            return x != x
+    np = MockNumPy()
 
 from .architecture import Architecture, Layer, LayerType
 from .metrics import PerformanceMetrics

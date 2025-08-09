@@ -303,11 +303,14 @@ class PredictionCache:
         """Get comprehensive cache statistics."""
         memory_stats = self.memory_cache.get_stats()
         
-        disk_size = sum(
-            Path(info['file']).stat().st_size 
-            for info in self.disk_cache_index.values() 
-            if Path(info['file']).exists()
-        )
+        try:
+            disk_size = sum(
+                Path(info['file']).stat().st_size 
+                for info in self.disk_cache_index.values() 
+                if Path(info['file']).exists()
+            )
+        except (OSError, KeyError, TypeError):
+            disk_size = 0
         
         return {
             'memory_cache': memory_stats,

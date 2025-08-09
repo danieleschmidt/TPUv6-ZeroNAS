@@ -5,7 +5,25 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    # Mock numpy for basic operations
+    class MockNumPy:
+        @staticmethod
+        def clip(x, a, b):
+            return max(a, min(b, x))
+        @staticmethod
+        def log(x):
+            if x <= 0:
+                return 0
+            import math
+            return math.log(x)
+        @staticmethod
+        def exp(x):
+            import math
+            return math.exp(min(x, 700))  # Prevent overflow
+    np = MockNumPy()
 
 from .architecture import Architecture, Layer, LayerType, ActivationType
 
