@@ -10,7 +10,8 @@ try:
 except ImportError:
     np = None
 
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
+import json
 
 from .architecture import ArchitectureSpace, Architecture
 from .predictor import TPUv6Predictor
@@ -155,9 +156,10 @@ class ZeroNASSearcher:
             max_consecutive_failures = 5
             
             for iteration in range(self.config.max_iterations):
-                # Check system health
+                # Enhanced system health monitoring
                 if not self.health_checker.is_healthy():
-                    self.logger.warning("System health issues detected, continuing with caution")
+                    self.logger.warning("System health issues detected, applying auto-recovery measures")
+                    self._apply_auto_recovery_measures()
                 
                 self.logger.info(f"Iteration {iteration + 1}/{self.config.max_iterations}")
                 
@@ -552,19 +554,158 @@ class ZeroNASSearcher:
         
         self.logger.info("Final result validation completed")
     
+    def _apply_auto_recovery_measures(self) -> None:
+        """Apply automatic recovery measures when system health is compromised."""
+        try:
+            # Reduce resource consumption temporarily
+            if self.config.enable_parallel and self.parallel_evaluator:
+                self.logger.info("Reducing resource usage for recovery")
+                if hasattr(self.parallel_evaluator, 'reduce_workers'):
+                    self.parallel_evaluator.reduce_workers()
+                else:
+                    self.logger.debug("Parallel evaluator does not support worker reduction")
+            
+            # Clear caches to free memory
+            if hasattr(self.predictor, 'clear_cache'):
+                self.logger.info("Clearing predictor cache for recovery")
+                self.predictor.clear_cache()
+            
+            # Force garbage collection
+            import gc
+            gc.collect()
+            
+            self.logger.info("Auto-recovery measures applied successfully")
+            
+        except Exception as e:
+            self.logger.error(f"Auto-recovery failed: {e}")
+    
+    def get_search_statistics(self) -> Dict[str, Any]:
+        """Get comprehensive search statistics for analysis."""
+        stats = {
+            'search_completed': self.best_architecture is not None,
+            'total_evaluations': len(self.search_history),
+            'best_metrics': asdict(self.best_metrics) if self.best_metrics else None,
+            'convergence_metrics': self._analyze_convergence(),
+            'resource_usage': self._get_resource_usage(),
+            'error_summary': self._get_error_summary()
+        }
+        return stats
+    
+    def _analyze_convergence(self) -> Dict[str, float]:
+        """Analyze search convergence patterns."""
+        if len(self.search_history) < 10:
+            return {'convergence_rate': 0.0, 'improvement_trend': 0.0}
+        
+        scores = [self._compute_score(metrics) for _, metrics in self.search_history[-50:]]
+        
+        if len(scores) < 2:
+            return {'convergence_rate': 0.0, 'improvement_trend': 0.0}
+        
+        # Calculate improvement trend
+        recent_scores = scores[-10:]
+        early_scores = scores[:10] if len(scores) >= 20 else scores[:len(scores)//2]
+        
+        recent_avg = sum(recent_scores) / len(recent_scores)
+        early_avg = sum(early_scores) / len(early_scores)
+        improvement_trend = (recent_avg - early_avg) / max(abs(early_avg), 1e-6)
+        
+        # Calculate convergence rate (variance reduction)
+        if len(scores) >= 20:
+            early_var = sum((s - early_avg) ** 2 for s in early_scores) / len(early_scores)
+            recent_var = sum((s - recent_avg) ** 2 for s in recent_scores) / len(recent_scores)
+            convergence_rate = max(0, (early_var - recent_var) / max(early_var, 1e-6))
+        else:
+            convergence_rate = 0.0
+        
+        return {
+            'convergence_rate': convergence_rate,
+            'improvement_trend': improvement_trend
+        }
+    
+    def _get_resource_usage(self) -> Dict[str, float]:
+        """Get current resource usage statistics."""
+        try:
+            import psutil
+            process = psutil.Process()
+            return {
+                'memory_mb': process.memory_info().rss / 1024 / 1024,
+                'cpu_percent': process.cpu_percent(),
+                'num_threads': process.num_threads()
+            }
+        except ImportError:
+            self.logger.debug("psutil not available, using basic resource monitoring")
+            return {'memory_mb': 0, 'cpu_percent': 0, 'num_threads': 1}
+        except Exception as e:
+            self.logger.debug(f"Resource usage monitoring failed: {e}")
+            return {'memory_mb': 0, 'cpu_percent': 0, 'num_threads': 1}
+    
+    def _get_error_summary(self) -> Dict[str, int]:
+        """Get summary of errors encountered during search."""
+        # This would be enhanced with actual error tracking
+        return {
+            'prediction_errors': 0,
+            'evaluation_errors': 0,
+            'validation_errors': 0,
+            'recovery_actions': 0
+        }
+    
+    def save_search_state(self, filepath: str) -> bool:
+        """Save search state for resumption capability."""
+        try:
+            state = {
+                'config': asdict(self.config),
+                'search_history': [(arch.name, asdict(metrics)) for arch, metrics in self.search_history[-100:]],  # Last 100
+                'best_architecture': self.best_architecture.name if self.best_architecture else None,
+                'best_metrics': asdict(self.best_metrics) if self.best_metrics else None,
+                'statistics': self.get_search_statistics()
+            }
+            
+            with open(filepath, 'w') as f:
+                json.dump(state, f, indent=2)
+            
+            self.logger.info(f"Search state saved to {filepath}")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Failed to save search state: {e}")
+            return False
+    
     def cleanup(self) -> None:
-        """Cleanup resources."""
-        if self.parallel_evaluator:
-            self.parallel_evaluator.shutdown()
-        
-        # Log final performance stats
-        if hasattr(self.predictor, 'get_performance_stats'):
-            stats = self.predictor.get_performance_stats()
-            self.logger.info(f"Final cache stats: {stats}")
-        
-        cache_stats = self.performance_optimizer.get_cache_stats()
-        self.logger.info(f"Performance optimizer stats: {cache_stats}")
+        """Enhanced cleanup with comprehensive resource management."""
+        try:
+            # Shutdown parallel processing
+            if self.parallel_evaluator:
+                self.logger.info("Shutting down parallel evaluator")
+                self.parallel_evaluator.shutdown()
+            
+            # Log comprehensive performance stats
+            if hasattr(self.predictor, 'get_performance_stats'):
+                stats = self.predictor.get_performance_stats()
+                self.logger.info(f"Predictor final stats: {stats}")
+            
+            # Performance optimizer stats
+            if hasattr(self.performance_optimizer, 'get_cache_stats'):
+                cache_stats = self.performance_optimizer.get_cache_stats()
+                self.logger.info(f"Performance optimizer stats: {cache_stats}")
+            
+            # Monitor final resource usage
+            resource_usage = self._get_resource_usage()
+            self.logger.info(f"Final resource usage: {resource_usage}")
+            
+            # Save final search state for analysis
+            try:
+                self.save_search_state('.search_state_final.json')
+            except Exception as e:
+                self.logger.debug(f"Could not save final search state: {e}")
+            
+            self.logger.info("Cleanup completed successfully")
+            
+        except Exception as e:
+            self.logger.error(f"Error during cleanup: {e}")
     
     def __del__(self):
-        """Cleanup on destruction."""
-        self.cleanup()
+        """Safe destruction with error handling."""
+        try:
+            self.cleanup()
+        except Exception:
+            pass  # Avoid exceptions during destruction

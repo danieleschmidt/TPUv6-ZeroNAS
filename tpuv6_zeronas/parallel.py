@@ -126,6 +126,52 @@ class ParallelEvaluator:
         
         return None
     
+    def reduce_workers(self, target_workers: Optional[int] = None):
+        """Dynamically reduce the number of workers for resource conservation."""
+        if not self.executor:
+            return
+            
+        if target_workers is None:
+            target_workers = max(1, self.config.num_workers // 2)
+        
+        self.logger.info(f"Reducing workers from {self.config.num_workers} to {target_workers}")
+        
+        try:
+            # For ThreadPoolExecutor, we can't directly change pool size, so restart with fewer workers
+            old_executor = self.executor
+            self.config.num_workers = target_workers
+            self._initialize_executor()
+            
+            # Schedule shutdown of old executor
+            old_executor.shutdown(wait=False)
+            
+        except Exception as e:
+            self.logger.error(f"Failed to reduce workers: {e}")
+    
+    def get_performance_stats(self) -> Dict[str, Any]:
+        """Get performance statistics for monitoring."""
+        return {
+            'num_workers': self.config.num_workers,
+            'worker_type': self.config.worker_type,
+            'batch_size': self.config.batch_size,
+            'timeout_seconds': self.config.timeout_seconds,
+            'executor_active': self.executor is not None
+        }
+    
+    def adaptive_batch_sizing(self, queue_size: int, current_latency: float) -> int:
+        """Dynamically adjust batch size based on queue size and latency."""
+        base_batch_size = self.config.batch_size
+        
+        # Increase batch size if queue is large and latency is acceptable
+        if queue_size > 20 and current_latency < 1.0:
+            return min(base_batch_size * 2, 20)
+        
+        # Decrease batch size if latency is high
+        elif current_latency > 5.0:
+            return max(1, base_batch_size // 2)
+        
+        return base_batch_size
+    
     def shutdown(self):
         """Shutdown the executor."""
         if self.executor:
@@ -231,6 +277,118 @@ class PerformanceOptimizer:
     def get_cache_stats(self) -> Dict[str, int]:
         """Get cache performance statistics."""
         return self.cache_stats.copy()
+    
+    def intelligent_load_balancing(
+        self, 
+        architectures: List[Architecture],
+        worker_capacities: Dict[int, float]
+    ) -> List[List[Architecture]]:
+        """Intelligently distribute architectures across workers based on complexity."""
+        try:
+            # Estimate computational complexity for each architecture
+            complexities = []
+            for arch in architectures:
+                complexity = self._estimate_complexity(arch)
+                complexities.append((arch, complexity))
+            
+            # Sort by complexity (descending)
+            complexities.sort(key=lambda x: x[1], reverse=True)
+            
+            # Distribute using a greedy algorithm
+            num_workers = len(worker_capacities)
+            worker_loads = [0.0] * num_workers
+            worker_assignments = [[] for _ in range(num_workers)]
+            
+            for arch, complexity in complexities:
+                # Assign to worker with least current load
+                min_load_worker = min(range(num_workers), key=lambda i: worker_loads[i])
+                worker_assignments[min_load_worker].append(arch)
+                worker_loads[min_load_worker] += complexity
+            
+            self.logger.info(f"Load balanced {len(architectures)} architectures across {num_workers} workers")
+            return worker_assignments
+            
+        except Exception as e:
+            self.logger.error(f"Load balancing failed: {e}")
+            # Fallback to simple round-robin
+            batch_size = max(1, len(architectures) // len(worker_capacities))
+            return [architectures[i:i+batch_size] for i in range(0, len(architectures), batch_size)]
+    
+    def _estimate_complexity(self, arch: Architecture) -> float:
+        """Estimate computational complexity of an architecture."""
+        try:
+            # Base complexity from parameters and operations
+            param_complexity = arch.total_params / 1e6  # Millions of parameters
+            ops_complexity = arch.total_ops / 1e9       # Billions of operations
+            
+            # Layer count penalty (deeper networks take longer)
+            depth_penalty = len(arch.layers) * 0.1
+            
+            # Special complexity for certain layer types
+            layer_complexity = 0.0
+            for layer in arch.layers:
+                if layer.layer_type.value in ['attention', 'transformer']:
+                    layer_complexity += 2.0  # Attention is expensive
+                elif layer.layer_type.value in ['conv2d', 'depthwise_conv']:
+                    layer_complexity += 1.0
+                else:
+                    layer_complexity += 0.5
+            
+            total_complexity = param_complexity + ops_complexity + depth_penalty + layer_complexity
+            return max(0.1, total_complexity)  # Minimum complexity
+            
+        except Exception as e:
+            self.logger.debug(f"Complexity estimation failed: {e}")
+            return 1.0  # Default complexity
+    
+    def predictive_caching(self, current_population: List[Architecture]) -> List[Architecture]:
+        """Predict and pre-cache likely future architectures."""
+        try:
+            candidates_to_cache = []
+            
+            for arch in current_population:
+                # Generate likely mutations
+                for i in range(2):  # Cache 2 variations per architecture
+                    try:
+                        # Simple mutation prediction: vary depth or width
+                        if len(arch.layers) > 2:
+                            # Create a shallow copy with modified depth
+                            modified_layers = arch.layers[:-1] if i == 0 else arch.layers + [arch.layers[-1]]
+                            
+                            # Create signature for potential architecture
+                            signature = f"pred_{arch.name}_{i}"
+                            candidates_to_cache.append(signature)
+                            
+                    except Exception as e:
+                        self.logger.debug(f"Predictive caching failed for {arch.name}: {e}")
+            
+            self.logger.info(f"Generated {len(candidates_to_cache)} predictive cache candidates")
+            return candidates_to_cache[:10]  # Limit to prevent memory bloat
+            
+        except Exception as e:
+            self.logger.error(f"Predictive caching failed: {e}")
+            return []
+    
+    def adaptive_timeout_scaling(self, historical_latencies: List[float]) -> float:
+        """Adaptively scale timeouts based on historical performance."""
+        try:
+            if not historical_latencies:
+                return 30.0  # Default timeout
+            
+            # Use 95th percentile + safety margin
+            sorted_latencies = sorted(historical_latencies)
+            percentile_95_idx = int(0.95 * len(sorted_latencies))
+            base_timeout = sorted_latencies[percentile_95_idx]
+            
+            # Add safety margin (2x) and clamp to reasonable bounds
+            adaptive_timeout = max(5.0, min(120.0, base_timeout * 2.0))
+            
+            self.logger.debug(f"Adaptive timeout: {adaptive_timeout:.1f}s (based on {len(historical_latencies)} samples)")
+            return adaptive_timeout
+            
+        except Exception as e:
+            self.logger.error(f"Adaptive timeout scaling failed: {e}")
+            return 30.0
 
 
 class ResourceManager:

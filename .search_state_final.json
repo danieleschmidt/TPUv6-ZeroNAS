@@ -1,0 +1,318 @@
+{
+  "config": {
+    "max_iterations": 4,
+    "population_size": 8,
+    "mutation_rate": 0.1,
+    "crossover_rate": 0.7,
+    "early_stop_threshold": 1e-06,
+    "target_tops_w": 75.0,
+    "max_latency_ms": 10.0,
+    "min_accuracy": 0.95,
+    "enable_parallel": true,
+    "enable_caching": true,
+    "enable_adaptive": true,
+    "parallel_workers": null
+  },
+  "search_history": [
+    [
+      "random_arch_1222",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24254463324839975,
+        "accuracy": 0.13212452864000002,
+        "tops_per_watt": 0.1,
+        "memory_mb": 392.57421875,
+        "flops": 13109248
+      }
+    ],
+    [
+      "random_arch_4173",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.23380850002751946,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 1096.94921875,
+        "flops": 2152512
+      }
+    ],
+    [
+      "random_arch_2707",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24215136601482315,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 197.72265625,
+        "flops": 591110
+      }
+    ],
+    [
+      "random_arch_3476",
+      {
+        "latency_ms": 1.2756472301073432,
+        "energy_mj": 0.24380166663099034,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 74.6484375,
+        "flops": 4547
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5050",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24294562383721383,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 155.421875,
+        "flops": 160723
+      }
+    ],
+    [
+      "random_arch_3197",
+      {
+        "latency_ms": 2.7050472366844387,
+        "energy_mj": 0.2399939850526649,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 4.2109375,
+        "flops": 99
+      }
+    ],
+    [
+      "random_arch_2284",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24304805127271797,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 100.296875,
+        "flops": 777
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_1222",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24254463324839975,
+        "accuracy": 0.13212452864000002,
+        "tops_per_watt": 0.1,
+        "memory_mb": 392.57421875,
+        "flops": 13109248
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "mutated_random_arch_5251_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ],
+    [
+      "random_arch_5251",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2435013761899606,
+        "accuracy": 0.15075322912,
+        "tops_per_watt": 0.1,
+        "memory_mb": 449.61328125,
+        "flops": 14207056
+      }
+    ]
+  ],
+  "best_architecture": "random_arch_6707",
+  "best_metrics": {
+    "latency_ms": 2.88948074705616,
+    "energy_mj": 0.25172200463566285,
+    "accuracy": 0.1,
+    "tops_per_watt": 0.1,
+    "memory_mb": 2.87109375,
+    "flops": 12
+  },
+  "statistics": {
+    "search_completed": true,
+    "total_evaluations": 24,
+    "best_metrics": {
+      "latency_ms": 2.88948074705616,
+      "energy_mj": 0.25172200463566285,
+      "accuracy": 0.1,
+      "tops_per_watt": 0.1,
+      "memory_mb": 2.87109375,
+      "flops": 12
+    },
+    "convergence_metrics": {
+      "convergence_rate": 1.0,
+      "improvement_trend": 0.28986515817902825
+    },
+    "resource_usage": {
+      "memory_mb": 0,
+      "cpu_percent": 0,
+      "num_threads": 1
+    },
+    "error_summary": {
+      "prediction_errors": 0,
+      "evaluation_errors": 0,
+      "validation_errors": 0,
+      "recovery_actions": 0
+    }
+  }
+}
