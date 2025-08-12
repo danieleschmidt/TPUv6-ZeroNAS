@@ -4,7 +4,10 @@ import logging
 import time
 import math
 import hashlib
-from typing import Dict, List, Optional, Tuple, Any, Set
+from typing import Dict, List, Optional, Tuple, Any, Set, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Self
 from dataclasses import dataclass, asdict
 
 try:
@@ -58,6 +61,7 @@ except ImportError:
 
 from .architecture import Architecture
 from .metrics import PerformanceMetrics
+from .enhanced_predictor_methods import EnhancedPredictorMethods
 
 
 @dataclass
@@ -141,7 +145,7 @@ class TPUv6Config:
             self.supported_precisions = ['int8', 'int4', 'bf16', 'fp16', 'fp32']
 
 
-class EnhancedTPUv6Predictor:
+class TPUv6Predictor(EnhancedPredictorMethods):
     """Enhanced TPUv6 predictor with uncertainty quantification and research-backed scaling laws."""
     
     def __init__(self, 
@@ -602,6 +606,74 @@ class EnhancedTPUv6Predictor:
                 flops=1000000
             )
     
+    def _calculate_prediction_confidence(self, features: Dict[str, float]) -> float:
+        """Calculate confidence score for prediction."""
+        try:
+            # Confidence based on architectural complexity and data quality
+            complexity_score = features.get('optimization_complexity', 0.5)
+            novelty_score = features.get('architectural_novelty_score', 0.1)
+            
+            # Higher complexity and novelty reduce confidence
+            confidence = 0.9 - complexity_score * 0.2 - novelty_score * 0.3
+            return max(0.3, min(0.95, confidence))
+        except:
+            return 0.75
+    
+    def _get_fallback_uncertainty_prediction(self, architecture: Architecture) -> PredictionUncertainty:
+        """Get uncertainty prediction when advanced methods fail."""
+        try:
+            features = self._get_minimal_features(architecture)
+            mean_latency = 2.0 + features['total_ops'] * 3e-9
+            confidence = self._calculate_prediction_confidence(features)
+            
+            # Simple uncertainty estimation
+            variance = mean_latency * (1.0 - confidence) * 0.5
+            ci_95 = (mean_latency - variance * 1.96, mean_latency + variance * 1.96)
+            
+            return PredictionUncertainty(
+                mean=mean_latency,
+                confidence_interval_95=ci_95,
+                prediction_variance=variance,
+                model_confidence=confidence
+            )
+        except:
+            return PredictionUncertainty(
+                mean=5.0,
+                confidence_interval_95=(3.0, 7.0),
+                prediction_variance=1.0,
+                model_confidence=0.5
+            )
+    
+    def _get_enhanced_fallback_metrics(self, architecture: Architecture) -> PerformanceMetrics:
+        """Enhanced fallback metrics using architectural features."""
+        try:
+            features = self._get_minimal_features(architecture)
+            
+            # Enhanced fallback predictions using architectural analysis
+            latency = 2.0 + features['total_ops'] * 3e-9 + features['memory_mb'] * 0.05
+            energy = 15.0 + features['total_ops'] * 8e-9 + features['memory_mb'] * 0.08
+            accuracy = min(0.95, 0.70 + features['total_params'] * 1.5e-7)
+            efficiency = min(75.0, 30.0 + features['systolic_utilization'] * 50.0)
+            
+            return PerformanceMetrics(
+                latency_ms=latency,
+                energy_mj=energy,
+                accuracy=accuracy,
+                tops_per_watt=efficiency,
+                memory_mb=features['memory_mb'],
+                flops=int(features['total_ops'])
+            )
+        except Exception as e:
+            self.logger.warning(f"Enhanced fallback failed: {e}")
+            return PerformanceMetrics(
+                latency_ms=5.0,
+                energy_mj=10.0,
+                accuracy=0.75,
+                tops_per_watt=40.0,
+                memory_mb=10.0,
+                flops=1000000
+            )
+    
     def get_performance_stats(self) -> Dict[str, Any]:
         """Get predictor performance statistics."""
         return {
@@ -633,7 +705,7 @@ class EnhancedTPUv6Predictor:
 class PredictorEnsemble:
     """Ensemble of multiple predictors for improved accuracy."""
     
-    def __init__(self, predictors: List[TPUv6Predictor]):
+    def __init__(self, predictors: List['TPUv6Predictor']):
         self.predictors = predictors
         self.weights = [1.0 / len(predictors)] * len(predictors)
         self.logger = logging.getLogger(__name__)

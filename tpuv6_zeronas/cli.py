@@ -41,8 +41,42 @@ def create_search_config(args) -> SearchConfig:
 
 
 def run_search(args) -> None:
-    """Run neural architecture search."""
+    """Run neural architecture search with enhanced validation."""
     logger = logging.getLogger(__name__)
+    
+    # Enhanced input validation
+    try:
+        from .security import get_resource_guard
+        from .validation import validate_input
+        
+        guard = get_resource_guard()
+        
+        # Validate numeric inputs
+        if args.max_iterations <= 0 or args.max_iterations > 10000:
+            raise ValueError(f"Invalid max_iterations: {args.max_iterations}. Must be 1-10000")
+        
+        if args.population_size <= 0 or args.population_size > 500:
+            raise ValueError(f"Invalid population_size: {args.population_size}. Must be 1-500")
+        
+        if args.target_tops_w <= 0 or args.target_tops_w > 1000:
+            raise ValueError(f"Invalid target_tops_w: {args.target_tops_w}. Must be 1-1000")
+        
+        if args.max_latency <= 0 or args.max_latency > 10000:
+            raise ValueError(f"Invalid max_latency: {args.max_latency}. Must be 1-10000ms")
+        
+        if args.min_accuracy < 0 or args.min_accuracy > 1:
+            raise ValueError(f"Invalid min_accuracy: {args.min_accuracy}. Must be 0-1")
+        
+        # Validate file paths
+        if hasattr(args, 'predictor_model') and args.predictor_model:
+            args.predictor_model = guard.sanitize_file_path(args.predictor_model)
+        
+        if args.output:
+            args.output = guard.sanitize_file_path(args.output)
+            
+    except Exception as e:
+        logger.error(f"Input validation failed: {e}")
+        raise
     
     logger.info("Starting TPUv6-ZeroNAS search...")
     logger.info(f"Target: {args.target_tops_w} TOPS/W")
@@ -51,7 +85,7 @@ def run_search(args) -> None:
     arch_space = ArchitectureSpace(
         input_shape=(args.input_height, args.input_width, args.input_channels),
         num_classes=args.num_classes,
-        max_depth=args.max_depth
+        max_depth=min(args.max_depth, 50)  # Security cap
     )
     
     predictor = TPUv6Predictor()
