@@ -71,11 +71,11 @@ def verify_python_syntax():
 def verify_imports():
     """Verify that internal imports work."""
     try:
-        # Test basic enum imports
-        exec("from enum import Enum")
-        exec("from dataclasses import dataclass")
-        exec("from typing import Dict, List, Optional, Tuple, Any")
-        exec("from pathlib import Path")
+        # Test basic imports using safe import mechanism
+        from enum import Enum
+        from dataclasses import dataclass
+        from typing import Dict, List, Optional, Tuple, Any
+        from pathlib import Path
         
         print("✅ Standard library imports work")
         return True

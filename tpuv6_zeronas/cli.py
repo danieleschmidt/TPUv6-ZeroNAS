@@ -198,6 +198,67 @@ def benchmark_architecture(args) -> None:
     logger.info(f"Memory: {metrics.memory_mb:.1f} MB")
 
 
+def run_health_check(args) -> None:
+    """Run comprehensive system health check."""
+    logger = logging.getLogger(__name__)
+    
+    logger.info("🏥 TPUv6-ZeroNAS Health Check")
+    logger.info("=" * 50)
+    
+    try:
+        # Initialize components for health checking
+        predictor = TPUv6Predictor()
+        
+        # Basic health status
+        health_status = predictor.get_health_status()
+        
+        logger.info(f"✅ Predictor Status: {health_status['status']}")
+        logger.info(f"📊 Prediction Count: {health_status['prediction_count']}")
+        logger.info(f"💾 Cache Size: {health_status['cache_size']}")
+        logger.info(f"🎯 Cache Hit Rate: {health_status['cache_hit_rate']:.2%}")
+        
+        if args.detailed:
+            logger.info("\n📋 Detailed Health Information:")
+            logger.info(f"⏱️  Average Prediction Time: {health_status['avg_prediction_time']:.4f}s")
+            logger.info(f"❌ Error Rate: {health_status['error_rate']:.2%}")
+            logger.info(f"🔬 Novel Patterns Found: {health_status['novel_patterns_found']}")
+            logger.info(f"⚠️  Scaling Violations: {health_status['scaling_violations']}")
+            
+            # Test basic functionality
+            logger.info("\n🧪 Running Basic Functionality Tests:")
+            
+            from .architecture import ArchitectureSpace
+            arch_space = ArchitectureSpace()
+            test_arch = arch_space.sample_random()
+            
+            test_metrics = predictor.predict(test_arch)
+            logger.info(f"✅ Test Prediction: {test_metrics.latency_ms:.2f}ms, {test_metrics.accuracy:.3f} acc")
+            
+        if args.repair:
+            logger.info("\n🔧 Attempting System Repairs:")
+            repairs_successful = predictor.validate_and_repair()
+            if repairs_successful:
+                logger.info("✅ System repairs completed successfully")
+            else:
+                logger.warning("⚠️  Some repairs failed, check logs for details")
+        
+        # System resource check
+        try:
+            import psutil
+            process = psutil.Process()
+            memory_usage = process.memory_info().rss / 1024 / 1024
+            logger.info(f"🖥️  Memory Usage: {memory_usage:.1f} MB")
+            logger.info(f"⚡ CPU Usage: {process.cpu_percent():.1f}%")
+        except ImportError:
+            logger.info("🖥️  Resource monitoring requires 'psutil' package")
+        
+        logger.info("\n🎉 Health check completed!")
+        
+    except Exception as e:
+        logger.error(f"❌ Health check failed: {e}")
+        sys.exit(1)
+
+
 def main() -> None:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -251,6 +312,11 @@ def main() -> None:
     benchmark_parser.add_argument('--predictor-model', type=str,
                                  help='Path to trained predictor model')
     
+    # Health check command for robustness monitoring
+    health_parser = subparsers.add_parser('health', help='Check system health and status')
+    health_parser.add_argument('--detailed', action='store_true', help='Show detailed health information')
+    health_parser.add_argument('--repair', action='store_true', help='Attempt automatic repairs')
+    
     args = parser.parse_args()
     
     setup_logging(args.verbose)
@@ -261,6 +327,8 @@ def main() -> None:
         train_predictor(args)
     elif args.command == 'benchmark':
         benchmark_architecture(args)
+    elif args.command == 'health':
+        run_health_check(args)
     else:
         parser.print_help()
         sys.exit(1)

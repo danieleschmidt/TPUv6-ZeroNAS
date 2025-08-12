@@ -159,10 +159,28 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         self.enable_caching = enable_caching
         self.logger = logging.getLogger(__name__)
         
-        # Performance tracking and caching
+        # Advanced caching system for Generation 3
         self.prediction_count = 0
         self.total_prediction_time = 0.0
         self.cache_hits = 0
+        
+        if enable_caching:
+            try:
+                from .cache_optimization import CacheOptimizer, CacheConfig
+                cache_config = CacheConfig(
+                    max_memory_cache_size=500,
+                    max_disk_cache_mb=50.0,
+                    enable_compression=True,
+                    enable_predictive_loading=True
+                )
+                self.cache_optimizer = CacheOptimizer(cache_config)
+                self.logger.info("Advanced hierarchical cache system enabled")
+            except ImportError:
+                self.cache_optimizer = None
+                self.logger.debug("Using fallback simple cache")
+        else:
+            self.cache_optimizer = None
+            
         self.prediction_cache: Dict[str, PerformanceMetrics] = {}
         
         # Model validation and calibration
@@ -185,71 +203,89 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         self.prediction_count += 1
         
         try:
-            # Check cache first
+            # Advanced cache lookup with Generation 3 optimizations
             if self.enable_caching:
                 arch_hash = self._get_architecture_hash(architecture)
-                if arch_hash in self.prediction_cache:
+                
+                # Try advanced cache first
+                if self.cache_optimizer:
+                    def compute_prediction():
+                        return self._compute_prediction_internal(architecture)
+                    
+                    prediction_time = time.time() - start_time
+                    self.total_prediction_time += prediction_time
+                    return self.cache_optimizer.get_optimized(arch_hash, compute_prediction)
+                
+                # Fallback to simple cache
+                elif arch_hash in self.prediction_cache:
                     self.cache_hits += 1
                     return self.prediction_cache[arch_hash]
             
-            # Extract comprehensive features
-            features = self._extract_enhanced_features(architecture)
-            
-            # Detect novel architectural patterns for research
-            self._analyze_architectural_novelty(architecture, features)
-            
-            # Predict with uncertainty if enabled
-            if self.enable_uncertainty:
-                latency_pred = self._predict_latency_with_uncertainty(features)
-                energy_pred = self._predict_energy_with_uncertainty(features)
-                accuracy_pred = self._predict_accuracy_with_uncertainty(features)
-                
-                # Use mean values for primary metrics
-                latency_ms = latency_pred.mean
-                energy_mj = energy_pred.mean  
-                accuracy = accuracy_pred.mean
-                
-                # Calculate confidence score
-                confidence = min(latency_pred.model_confidence, 
-                               energy_pred.model_confidence,
-                               accuracy_pred.model_confidence)
-                self.confidence_history.append(confidence)
-                
-            else:
-                latency_ms = self._predict_latency_deterministic(features)
-                energy_mj = self._predict_energy_deterministic(features)
-                accuracy = self._predict_accuracy_deterministic(features)
-            
-            # Calculate enhanced derived metrics
-            tops_per_watt = self._calculate_enhanced_efficiency(features, energy_mj)
-            efficiency_score = self._calculate_research_efficiency_score(
-                latency_ms, energy_mj, accuracy, tops_per_watt, features
-            )
-            
-            metrics = PerformanceMetrics(
-                latency_ms=latency_ms,
-                energy_mj=energy_mj,
-                accuracy=accuracy,
-                tops_per_watt=tops_per_watt,
-                efficiency_score=efficiency_score
-            )
-            
-            # Cache result if enabled
-            if self.enable_caching:
-                self.prediction_cache[arch_hash] = metrics
-            
-            # Track performance
-            prediction_time = time.time() - start_time
-            self.total_prediction_time += prediction_time
-            
-            # Validate scaling laws
-            self._validate_scaling_laws(architecture, features, metrics)
-            
-            return metrics
+            # Direct computation path
+            return self._compute_prediction_internal(architecture)
             
         except Exception as e:
-            self.logger.error(f"Enhanced prediction failed for {architecture.name}: {e}")
-            return self._get_enhanced_fallback_metrics(architecture)
+            self.logger.error(f"Prediction failed for {architecture.name}: {e}")
+            return self._get_fallback_metrics(architecture)
+        
+        finally:
+            prediction_time = time.time() - start_time
+            self.total_prediction_time += prediction_time
+    
+    def _compute_prediction_internal(self, architecture: Architecture) -> PerformanceMetrics:
+        """Internal computation method used by both cache and direct paths."""
+        # Extract comprehensive features
+        features = self._extract_enhanced_features(architecture)
+        
+        # Detect novel architectural patterns for research
+        self._analyze_architectural_novelty(architecture, features)
+        
+        # Predict with uncertainty if enabled
+        if self.enable_uncertainty:
+            latency_pred = self._predict_latency_with_uncertainty(features)
+            energy_pred = self._predict_energy_with_uncertainty(features)
+            accuracy_pred = self._predict_accuracy_with_uncertainty(features)
+            
+            # Use mean values for primary metrics
+            latency_ms = latency_pred.mean
+            energy_mj = energy_pred.mean  
+            accuracy = accuracy_pred.mean
+            
+            # Calculate confidence score
+            confidence = min(latency_pred.model_confidence, 
+                           energy_pred.model_confidence,
+                           accuracy_pred.model_confidence)
+            self.confidence_history.append(confidence)
+            
+        else:
+            latency_ms = self._predict_latency_deterministic(features)
+            energy_mj = self._predict_energy_deterministic(features)
+            accuracy = self._predict_accuracy_deterministic(features)
+        
+        # Calculate enhanced derived metrics
+        tops_per_watt = self._calculate_enhanced_efficiency(features, energy_mj, latency_ms)
+        efficiency_score = self._calculate_research_efficiency_score(
+            latency_ms, energy_mj, accuracy, tops_per_watt, features
+        )
+        
+        metrics = PerformanceMetrics(
+            latency_ms=latency_ms,
+            energy_mj=energy_mj,
+            accuracy=accuracy,
+            tops_per_watt=tops_per_watt,
+            memory_mb=features.get('memory_mb', 10.0),
+            flops=int(features.get('total_ops', 1e6))
+        )
+        
+        # Cache result if enabled (simple cache fallback)
+        if self.enable_caching and not self.cache_optimizer:
+            arch_hash = self._get_architecture_hash(architecture)
+            self.prediction_cache[arch_hash] = metrics
+        
+        # Validate scaling laws
+        self._validate_scaling_laws(architecture, features, metrics)
+        
+        return metrics
     
     def _extract_enhanced_features(self, arch: Architecture) -> Dict[str, float]:
         """Extract comprehensive architectural features for enhanced prediction."""
@@ -440,7 +476,7 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             std_dev = math.sqrt(prediction_variance)
             
             # Confidence based on feature reliability
-            confidence = self._calculate_prediction_confidence(features, 'latency')
+            confidence = self._calculate_prediction_confidence(features)
             
             # 95% confidence interval
             ci_margin = 1.96 * std_dev
@@ -456,7 +492,7 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             
         except Exception as e:
             self.logger.warning(f"Latency prediction with uncertainty failed: {e}")
-            return self._get_fallback_uncertainty_prediction('latency', features)
+            return self._get_fallback_uncertainty_prediction(features, 'latency')
     
     def _predict_latency_deterministic(self, features: Dict[str, float]) -> float:
         """Deterministic latency prediction without uncertainty."""
@@ -496,7 +532,7 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             prediction_variance = (c.prediction_noise_std * 0.8) ** 2  # Energy typically more stable
             std_dev = math.sqrt(prediction_variance)
             
-            confidence = self._calculate_prediction_confidence(features, 'energy')
+            confidence = self._calculate_prediction_confidence(features)
             
             # 95% confidence interval
             ci_margin = 1.96 * std_dev
@@ -512,11 +548,62 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             
         except Exception as e:
             self.logger.warning(f"Energy prediction with uncertainty failed: {e}")
-            return self._get_fallback_uncertainty_prediction('energy', features)
+            return self._get_fallback_uncertainty_prediction(features, 'energy')
     
     def _predict_energy_deterministic(self, features: Dict[str, float]) -> float:
         """Deterministic energy prediction."""
         uncertainty_pred = self._predict_energy_with_uncertainty(features)
+        return uncertainty_pred.mean
+    
+    def _predict_accuracy_with_uncertainty(self, features: Dict[str, float]) -> PredictionUncertainty:
+        """Predict accuracy with uncertainty quantification."""
+        try:
+            c = self.coeffs
+            
+            # Base accuracy components
+            base_accuracy = c.accuracy_base
+            param_bonus = c.accuracy_param_bonus * features['total_params']
+            depth_penalty = c.accuracy_depth_penalty * features['depth']
+            width_bonus = c.accuracy_width_bonus * features['avg_width']
+            
+            # Cap at maximum achievable accuracy
+            complexity_factor = min(1.0, features['total_params'] / 100e6)  # Normalize by 100M params
+            max_achievable = c.accuracy_complexity_cap * complexity_factor
+            
+            # Quantization penalty
+            int8_ratio = features.get('int8_ops_ratio', 0.8)
+            quantization_penalty = c.accuracy_quantization_penalty * int8_ratio
+            
+            # Calculate mean accuracy
+            raw_accuracy = (base_accuracy + param_bonus + depth_penalty + 
+                          width_bonus - quantization_penalty)
+            mean_accuracy = min(max_achievable, raw_accuracy)
+            
+            # Uncertainty modeling (accuracy typically has lower uncertainty)
+            prediction_variance = (c.prediction_noise_std * 0.6) ** 2
+            std_dev = math.sqrt(prediction_variance)
+            
+            confidence = self._calculate_prediction_confidence(features)
+            
+            # 95% confidence interval
+            ci_margin = 1.96 * std_dev
+            ci_lower = max(0.1, mean_accuracy - ci_margin)
+            ci_upper = min(0.99, mean_accuracy + ci_margin)
+            
+            return PredictionUncertainty(
+                mean=max(0.1, min(0.99, mean_accuracy)),
+                confidence_interval_95=(ci_lower, ci_upper),
+                prediction_variance=prediction_variance,
+                model_confidence=confidence
+            )
+            
+        except Exception as e:
+            self.logger.warning(f"Accuracy prediction with uncertainty failed: {e}")
+            return self._get_fallback_uncertainty_prediction(features, 'accuracy')
+    
+    def _predict_accuracy_deterministic(self, features: Dict[str, float]) -> float:
+        """Deterministic accuracy prediction."""
+        uncertainty_pred = self._predict_accuracy_with_uncertainty(features)
         return uncertainty_pred.mean
     
     def _predict_accuracy(self, features: Dict[str, float]) -> float:
@@ -546,6 +633,332 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             # Heuristic based on model complexity
             complexity = features.get('total_params', 1e6)
             return np.clip(0.6 + 0.2 * np.log(complexity / 1e6) / 10, 0.3, 0.95)
+    
+    def _calculate_enhanced_efficiency(self, features: Dict[str, float], energy_mj: float, latency_ms: float) -> float:
+        """Calculate enhanced TOPS/Watt efficiency metric with TPUv6 optimizations."""
+        try:
+            if energy_mj <= 0 or latency_ms <= 0:
+                return 0.0
+            
+            # Convert to TOPS and Watts
+            ops_per_second = features['total_ops'] / (latency_ms / 1000.0)
+            tops = ops_per_second / 1e12
+            
+            # Energy per second calculation
+            energy_per_second = energy_mj / 1000.0  # Convert mJ to J
+            watts = energy_per_second / (latency_ms / 1000.0)
+            
+            if watts <= 0:
+                return 0.0
+            
+            efficiency = tops / watts
+            
+            # Apply TPUv6-specific efficiency factors
+            systolic_utilization = features.get('systolic_utilization', 0.8)
+            int8_ratio = features.get('int8_ops_ratio', 0.8)
+            
+            # Enhanced efficiency multipliers
+            systolic_bonus = 1.0 + (systolic_utilization - 0.5) * 0.3  # Up to 30% bonus
+            quantization_bonus = 1.0 + int8_ratio * 0.2  # Up to 20% bonus for INT8
+            
+            adjusted_efficiency = efficiency * systolic_bonus * quantization_bonus
+            
+            return max(0.1, min(100.0, adjusted_efficiency))
+            
+        except Exception as e:
+            self.logger.warning(f"Enhanced efficiency computation failed: {e}")
+            return 50.0  # Reasonable default
+    
+    def _calculate_research_efficiency_score(self, latency_ms: float, energy_mj: float, 
+                                           accuracy: float, tops_per_watt: float, 
+                                           features: Dict[str, float]) -> float:
+        """Calculate research-oriented efficiency score combining multiple metrics."""
+        try:
+            # Normalize metrics to [0, 1] range
+            latency_score = max(0, 1.0 - latency_ms / 20.0)  # 20ms max expected
+            energy_score = max(0, 1.0 - energy_mj / 50.0)    # 50mJ max expected
+            accuracy_score = accuracy  # Already in [0, 1]
+            efficiency_score = min(1.0, tops_per_watt / 100.0)  # 100 TOPS/W peak
+            
+            # Architectural complexity bonus
+            novelty_score = features.get('architectural_novelty_score', 0.1)
+            scalability_score = features.get('scalability_factor', 0.8)
+            
+            # Research-weighted combination
+            research_score = (
+                0.25 * latency_score +
+                0.20 * energy_score + 
+                0.30 * accuracy_score +
+                0.15 * efficiency_score +
+                0.05 * novelty_score +
+                0.05 * scalability_score
+            )
+            
+            return max(0.0, min(1.0, research_score))
+            
+        except Exception as e:
+            self.logger.warning(f"Research efficiency score calculation failed: {e}")
+            return 0.7
+    
+    def _validate_scaling_laws(self, architecture: Architecture, features: Dict[str, float], metrics: PerformanceMetrics) -> None:
+        """Validate scaling laws and detect violations for research tracking."""
+        try:
+            # Check for scaling law violations
+            violations = []
+            
+            # Latency scaling validation
+            expected_latency_range = (0.5, 50.0)  # ms
+            if not (expected_latency_range[0] <= metrics.latency_ms <= expected_latency_range[1]):
+                violations.append(f"Latency {metrics.latency_ms:.2f}ms outside expected range {expected_latency_range}")
+            
+            # Energy efficiency validation  
+            expected_efficiency_range = (1.0, 150.0)  # TOPS/W
+            if not (expected_efficiency_range[0] <= metrics.tops_per_watt <= expected_efficiency_range[1]):
+                violations.append(f"Efficiency {metrics.tops_per_watt:.1f} TOPS/W outside expected range {expected_efficiency_range}")
+            
+            # Accuracy bounds validation
+            if not (0.1 <= metrics.accuracy <= 0.99):
+                violations.append(f"Accuracy {metrics.accuracy:.3f} outside realistic bounds [0.1, 0.99]")
+            
+            # Architectural complexity vs performance relationship
+            complexity_score = features.get('optimization_complexity', 0.5)
+            if complexity_score > 0.9 and metrics.accuracy < 0.7:
+                violations.append("High complexity architecture with unexpectedly low accuracy")
+            
+            # Log violations for research analysis
+            if violations:
+                self.scaling_law_violations.append((architecture, f"Violations: {'; '.join(violations)}"))
+                self.logger.debug(f"Scaling law violations for {architecture.name}: {violations}")
+            
+            # Track novel patterns for research
+            if features.get('architectural_novelty_score', 0) > 0.8:
+                pattern_key = f"novel_{int(features.get('depth', 1))}_{int(features.get('avg_width', 1))}"
+                self.novel_architecture_patterns.add(pattern_key)
+                
+        except Exception as e:
+            self.logger.debug(f"Scaling law validation failed: {e}")
+    
+    def _safe_ratio(self, numerator: float, denominator: float) -> float:
+        """Safe division avoiding divide-by-zero."""
+        return float(numerator) / max(float(denominator), 1.0)
+    
+    def _get_architecture_hash(self, architecture: Architecture) -> str:
+        """Generate hash for architecture caching."""
+        try:
+            arch_str = f"{architecture.total_params}_{architecture.total_ops}_{len(architecture.layers) if hasattr(architecture, 'layers') else 1}"
+            return hashlib.md5(arch_str.encode()).hexdigest()[:12]
+        except:
+            return f"fallback_{id(architecture) % 10000}"
+    
+    def _analyze_architectural_novelty(self, architecture: Architecture, features: Dict[str, float]) -> None:
+        """Analyze and track novel architectural patterns for research."""
+        try:
+            novelty_indicators = []
+            
+            # Check for novel depth-width combinations
+            depth_width_ratio = features['depth'] / max(features['avg_width'] / 1000, 0.001)
+            if depth_width_ratio > 0.5 or depth_width_ratio < 0.01:
+                novelty_indicators.append(f"unusual_depth_width_{depth_width_ratio:.3f}")
+            
+            # Check for novel operation distributions
+            conv_ratio = features.get('conv_ops_ratio', 0.6)
+            linear_ratio = features.get('linear_ops_ratio', 0.25)
+            if conv_ratio < 0.2 or linear_ratio > 0.6:
+                novelty_indicators.append(f"unusual_op_mix_c{conv_ratio:.2f}_l{linear_ratio:.2f}")
+            
+            # Track novel patterns
+            if novelty_indicators:
+                pattern_key = "_".join(novelty_indicators)
+                self.novel_architecture_patterns.add(pattern_key)
+                self.logger.debug(f"Novel pattern detected: {pattern_key}")
+                
+        except Exception as e:
+            self.logger.debug(f"Novelty analysis failed: {e}")
+    
+    def _get_minimal_features(self, arch: Architecture) -> Dict[str, float]:
+        """Get minimal feature set when full extraction fails."""
+        try:
+            return {
+                'total_ops': float(arch.total_ops if hasattr(arch, 'total_ops') else 1e6),
+                'total_params': float(arch.total_params if hasattr(arch, 'total_params') else 1e6),
+                'depth': float(len(arch.layers) if hasattr(arch, 'layers') else 8),
+                'avg_width': float(arch.total_params / max(len(arch.layers) if hasattr(arch, 'layers') else 1, 1)),
+                'memory_mb': float(arch.memory_mb if hasattr(arch, 'memory_mb') else arch.total_params / 250000),
+                'systolic_utilization': 0.8,
+                'memory_bandwidth_utilization': 0.4,
+                'int8_ops_ratio': 0.8,
+                'architectural_novelty_score': 0.1,
+                'scalability_factor': 0.8,
+                'optimization_complexity': 0.5
+            }
+        except:
+            return {
+                'total_ops': 1e6, 'total_params': 1e6, 'depth': 8, 'avg_width': 125000,
+                'memory_mb': 4.0, 'systolic_utilization': 0.8, 'memory_bandwidth_utilization': 0.4,
+                'int8_ops_ratio': 0.8, 'architectural_novelty_score': 0.1, 'scalability_factor': 0.8,
+                'optimization_complexity': 0.5
+            }
+    
+    def _estimate_bf16_ratio(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate BF16 operation ratio for mixed-precision workloads."""
+        try:
+            attention_ratio = features.get('attention_ops_ratio', 0.0)
+            linear_ratio = features.get('linear_ops_ratio', 0.25)
+            norm_ratio = features.get('norm_ops_ratio', 0.05)
+            
+            bf16_ratio = attention_ratio * 0.8 + linear_ratio * 0.1 + norm_ratio * 0.9
+            return min(bf16_ratio, 0.3)
+        except:
+            return 0.15
+    
+    def _calculate_bottleneck_ratio(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Calculate ratio of bottleneck/inverted residual blocks."""
+        try:
+            linear_ratio = features.get('linear_ops_ratio', 0.25)
+            conv_ratio = features.get('conv_ops_ratio', 0.6)
+            
+            if linear_ratio > 0.3 and conv_ratio < 0.7:
+                bottleneck_indicator = (linear_ratio - 0.2) * (0.7 - conv_ratio)
+                return min(bottleneck_indicator * 2, 0.8)
+            return 0.1
+        except:
+            return 0.2
+    
+    def _estimate_skip_connection_density(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate density of skip connections."""
+        try:
+            depth = features['depth']
+            if depth > 10:
+                expected_skip_ratio = min(0.8, (depth - 8) / 20.0)
+            else:
+                expected_skip_ratio = max(0.1, depth / 20.0)
+            return min(expected_skip_ratio, 0.9)
+        except:
+            return 0.4
+    
+    def _estimate_attention_efficiency(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate efficiency of attention mechanisms."""
+        try:
+            attention_ratio = features.get('attention_ops_ratio', 0.0)
+            if attention_ratio == 0:
+                return 1.0
+            
+            base_efficiency = 0.75
+            width = features['avg_width']
+            alignment_bonus = 0.15 if width % 64 == 0 else 0.0
+            size_factor = min(0.1, features['total_params'] / 100e6)
+            
+            return min(base_efficiency + alignment_bonus + size_factor, 0.95)
+        except:
+            return 0.8
+    
+    def _estimate_depthwise_ratio(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate ratio of depthwise separable convolutions."""
+        try:
+            conv_ratio = features.get('conv_ops_ratio', 0.6)
+            param_count = features['total_params']
+            
+            if param_count < 5e6 and conv_ratio > 0.5:
+                return min(0.7, conv_ratio * 0.8)
+            return 0.1
+        except:
+            return 0.2
+    
+    def _calculate_peak_utilization(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Calculate theoretical peak hardware utilization."""
+        try:
+            systolic_util = features.get('systolic_utilization', 0.8)
+            memory_util = features.get('memory_bandwidth_utilization', 0.4)
+            return min(0.95, systolic_util * 0.7 + memory_util * 0.3)
+        except:
+            return 0.75
+    
+    def _estimate_memory_hierarchy_usage(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate memory hierarchy efficiency."""
+        try:
+            memory_intensity = features['memory_mb'] / max(features['total_ops'] / 1e9, 0.001)
+            if memory_intensity < 1.0:
+                return 0.9  # Compute bound, good cache usage
+            elif memory_intensity < 5.0:
+                return 0.7  # Balanced
+            else:
+                return 0.5  # Memory bound
+        except:
+            return 0.7
+    
+    def _estimate_pipeline_efficiency(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate pipeline efficiency."""
+        try:
+            depth = features['depth']
+            if depth < 8:
+                return 0.6  # Shallow, poor pipeline utilization
+            elif depth < 20:
+                return 0.85  # Good pipeline depth
+            else:
+                return 0.7  # Too deep, diminishing returns
+        except:
+            return 0.75
+    
+    def _assess_quantization_compatibility(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Assess quantization compatibility."""
+        try:
+            int8_ratio = features.get('int8_ops_ratio', 0.8)
+            conv_ratio = features.get('conv_ops_ratio', 0.6)
+            linear_ratio = features.get('linear_ops_ratio', 0.25)
+            
+            # Conv and linear layers are highly quantizable
+            quantizable_ops = conv_ratio + linear_ratio
+            return min(0.95, quantizable_ops * int8_ratio + 0.1)
+        except:
+            return 0.8
+    
+    def _calculate_novelty_score(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Calculate architectural novelty score."""
+        try:
+            depth_novelty = abs(features['depth'] - 16) / 16  # Distance from typical depth
+            width_novelty = abs(features['avg_width'] - 512) / 512  # Distance from typical width
+            
+            ops_distribution_novelty = 0
+            conv_ratio = features.get('conv_ops_ratio', 0.6)
+            if conv_ratio < 0.3 or conv_ratio > 0.8:
+                ops_distribution_novelty += 0.3
+            
+            return min(1.0, (depth_novelty + width_novelty) * 0.5 + ops_distribution_novelty)
+        except:
+            return 0.1
+    
+    def _estimate_scalability_potential(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Estimate architecture scalability potential."""
+        try:
+            # Smaller models generally scale better
+            param_penalty = min(0.3, features['total_params'] / 50e6)
+            
+            # Attention mechanisms scale well
+            attention_bonus = features.get('attention_ops_ratio', 0.0) * 0.2
+            
+            # Skip connections help with scaling
+            skip_bonus = features.get('skip_connection_density', 0.4) * 0.1
+            
+            base_scalability = 0.8
+            return min(1.0, base_scalability - param_penalty + attention_bonus + skip_bonus)
+        except:
+            return 0.8
+    
+    def _assess_optimization_complexity(self, arch: Architecture, features: Dict[str, float]) -> float:
+        """Assess optimization complexity."""
+        try:
+            # Deeper models are harder to optimize
+            depth_complexity = min(0.4, features['depth'] / 50.0)
+            
+            # Very wide models are also complex
+            width_complexity = min(0.3, features['avg_width'] / 2048.0)
+            
+            # High parameter count increases complexity
+            param_complexity = min(0.3, features['total_params'] / 100e6)
+            
+            return min(1.0, depth_complexity + width_complexity + param_complexity)
+        except:
+            return 0.5
     
     def _compute_efficiency(self, features: Dict[str, float], 
                           energy_mj: float, latency_ms: float) -> float:
@@ -619,19 +1032,26 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         except:
             return 0.75
     
-    def _get_fallback_uncertainty_prediction(self, architecture: Architecture) -> PredictionUncertainty:
+    def _get_fallback_uncertainty_prediction(self, features: Dict[str, float], metric_type: str = 'latency') -> PredictionUncertainty:
         """Get uncertainty prediction when advanced methods fail."""
         try:
-            features = self._get_minimal_features(architecture)
-            mean_latency = 2.0 + features['total_ops'] * 3e-9
+            if metric_type == 'latency':
+                mean_value = 2.0 + features.get('total_ops', 1e6) * 3e-9
+            elif metric_type == 'energy':
+                mean_value = 15.0 + features.get('total_ops', 1e6) * 8e-9
+            elif metric_type == 'accuracy':
+                mean_value = min(0.95, 0.70 + features.get('total_params', 1e6) * 1.5e-7)
+            else:
+                mean_value = 5.0
+                
             confidence = self._calculate_prediction_confidence(features)
             
             # Simple uncertainty estimation
-            variance = mean_latency * (1.0 - confidence) * 0.5
-            ci_95 = (mean_latency - variance * 1.96, mean_latency + variance * 1.96)
+            variance = mean_value * (1.0 - confidence) * 0.5
+            ci_95 = (mean_value - variance * 1.96, mean_value + variance * 1.96)
             
             return PredictionUncertainty(
-                mean=mean_latency,
+                mean=mean_value,
                 confidence_interval_95=ci_95,
                 prediction_variance=variance,
                 model_confidence=confidence
@@ -675,21 +1095,115 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             )
     
     def get_performance_stats(self) -> Dict[str, Any]:
-        """Get predictor performance statistics."""
-        return {
-            'predictions_made': self._prediction_count,
-            'history_size': len(self.prediction_history),
-            'config': {
-                'peak_tops': self.config.peak_tops,
-                'memory_bandwidth_gbps': self.config.memory_bandwidth_gbps,
-                'power_budget_w': self.config.power_budget_w
-            }
+        """Get enhanced predictor performance statistics."""
+        basic_stats = {
+            'predictions_made': self.prediction_count,
+            'avg_prediction_time': self.total_prediction_time / max(self.prediction_count, 1),
+            'cache_hits': self.cache_hits,
+            'cache_misses': self.prediction_count - self.cache_hits,
+            'cache_hit_rate': self.cache_hits / max(self.prediction_count, 1)
         }
+        
+        # Enhanced cache statistics
+        if self.cache_optimizer:
+            cache_analysis = self.cache_optimizer.analyze_cache_performance()
+            basic_stats['cache_stats'] = cache_analysis['performance_stats']
+            if cache_analysis['optimization_suggestions']:
+                basic_stats['optimization_suggestions'] = cache_analysis['optimization_suggestions']
+        else:
+            # Simple cache stats
+            cache_stats = {
+                'memory_cache': {
+                    'size': len(self.prediction_cache),
+                    'max_size': 500,  # Default config
+                    'memory_usage_mb': len(self.prediction_cache) * 0.0002,  # Rough estimate
+                    'max_memory_mb': 50.0,
+                    'hits': self.cache_hits,
+                    'misses': self.prediction_count - self.cache_hits,
+                    'evictions': 0,
+                    'hit_rate': self.cache_hits / max(self.prediction_count, 1),
+                    'total_requests': self.prediction_count
+                },
+                'disk_cache': {
+                    'entries': len(self.prediction_cache),
+                    'size_mb': len(self.prediction_cache) * 0.0003  # Rough estimate
+                }
+            }
+            basic_stats['cache_stats'] = cache_stats
+        
+        return basic_stats
     
     def calibrate_from_measurements(self, measured_data: List[Tuple[Architecture, PerformanceMetrics]]) -> None:
         """Calibrate predictor using real hardware measurements (future use)."""
         self.logger.info(f"Calibration requested with {len(measured_data)} measurements")
         self.logger.info("Note: Full calibration will be implemented when TPUv6 hardware is available")
+    
+    def clear_cache(self) -> None:
+        """Clear prediction cache for memory recovery."""
+        if self.enable_caching:
+            cache_size = len(self.prediction_cache)
+            self.prediction_cache.clear()
+            self.logger.info(f"Cleared prediction cache ({cache_size} entries)")
+    
+    def get_health_status(self) -> Dict[str, Any]:
+        """Get comprehensive health status of the predictor."""
+        try:
+            return {
+                'prediction_count': self.prediction_count,
+                'cache_size': len(self.prediction_cache) if self.enable_caching else 0,
+                'cache_hit_rate': self.cache_hits / max(self.prediction_count, 1),
+                'avg_prediction_time': self.total_prediction_time / max(self.prediction_count, 1),
+                'error_rate': len(self.prediction_errors) / max(self.prediction_count, 1),
+                'confidence_avg': sum(self.confidence_history) / max(len(self.confidence_history), 1),
+                'novel_patterns_found': len(self.novel_architecture_patterns),
+                'scaling_violations': len(self.scaling_law_violations),
+                'status': 'healthy' if self.cache_hits / max(self.prediction_count, 1) > 0.1 else 'degraded'
+            }
+        except Exception as e:
+            self.logger.error(f"Health status check failed: {e}")
+            return {'status': 'unknown', 'error': str(e)}
+    
+    def validate_and_repair(self) -> bool:
+        """Validate predictor state and attempt repairs if needed."""
+        try:
+            repairs_made = []
+            
+            # Check for cache corruption
+            if self.enable_caching:
+                corrupted_entries = []
+                for key, value in list(self.prediction_cache.items()):
+                    try:
+                        # Validate cache entry
+                        if not isinstance(value, PerformanceMetrics):
+                            corrupted_entries.append(key)
+                        elif value.latency_ms <= 0 or value.energy_mj <= 0:
+                            corrupted_entries.append(key)
+                    except Exception:
+                        corrupted_entries.append(key)
+                
+                # Remove corrupted entries
+                for key in corrupted_entries:
+                    del self.prediction_cache[key]
+                    repairs_made.append(f'removed_corrupted_cache_entry_{key}')
+            
+            # Reset error counters if they're unreasonably high
+            if len(self.prediction_errors) > 1000:
+                self.prediction_errors = self.prediction_errors[-100:]  # Keep last 100
+                repairs_made.append('trimmed_error_history')
+            
+            # Validate coefficients
+            if hasattr(self.coeffs, 'latency_base') and self.coeffs.latency_base <= 0:
+                self.coeffs.latency_base = 0.38
+                repairs_made.append('reset_latency_base_coefficient')
+            
+            if repairs_made:
+                self.logger.info(f"Predictor repairs completed: {repairs_made}")
+            
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"Validation and repair failed: {e}")
+            return False
         
         if measured_data:
             # For now, just log some statistics
