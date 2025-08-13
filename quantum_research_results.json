@@ -1,0 +1,341 @@
+{
+  "experiment_type": "quantum_research_demo",
+  "timestamp": 1755118084.909031,
+  "quantum_search": {
+    "architecture": "gaussian_mut_quantum_arch_1_4113_4114",
+    "metrics": {
+      "latency_ms": 0.1,
+      "accuracy": 0.1,
+      "energy_mj": 0.23181382465771938,
+      "tops_per_watt": 0.1
+    },
+    "search_time": 0.10409045219421387,
+    "statistics": {
+      "generation_stats": [
+        {
+          "generation": 0,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.45873615601574147,
+          "population_diversity": 554647.8886249735,
+          "quantum_coherence": 0.95,
+          "rl_epsilon": 0.0995,
+          "generation_time": 0.002704620361328125,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 1,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.45873615601574147,
+          "population_diversity": 554647.8886249735,
+          "quantum_coherence": 0.9025,
+          "rl_epsilon": 0.09900250000000001,
+          "generation_time": 0.000766754150390625,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 2,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.45873615601574147,
+          "population_diversity": 554647.8886249735,
+          "quantum_coherence": 0.8573749999999999,
+          "rl_epsilon": 0.0985074875,
+          "generation_time": 0.0007686614990234375,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 3,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.4662302155487357,
+          "population_diversity": 532907.0325129279,
+          "quantum_coherence": 0.8145062499999999,
+          "rl_epsilon": 0.09801495006250001,
+          "generation_time": 0.001965045928955078,
+          "action_taken": "crossover_uniform"
+        },
+        {
+          "generation": 4,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.4662302155487357,
+          "population_diversity": 532907.0325129279,
+          "quantum_coherence": 0.7737809374999999,
+          "rl_epsilon": 0.09752487531218751,
+          "generation_time": 0.0007474422454833984,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 5,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.4662302155487357,
+          "population_diversity": 532907.0325129279,
+          "quantum_coherence": 0.7350918906249998,
+          "rl_epsilon": 0.09703725093562657,
+          "generation_time": 0.0007410049438476562,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 6,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.4662302155487357,
+          "population_diversity": 532907.0325129279,
+          "quantum_coherence": 0.6983372960937497,
+          "rl_epsilon": 0.09655206468094843,
+          "generation_time": 0.0008442401885986328,
+          "action_taken": "mutate_gaussian"
+        },
+        {
+          "generation": 7,
+          "best_fitness": 0.47257205684017894,
+          "avg_fitness": 0.4662302155487357,
+          "population_diversity": 532907.0325129279,
+          "quantum_coherence": 0.6634204312890623,
+          "rl_epsilon": 0.09606930435754368,
+          "generation_time": 0.0008068084716796875,
+          "action_taken": "mutate_gaussian"
+        }
+      ],
+      "quantum_state": {
+        "coherence_time": 0.597078388160156,
+        "measurement_count": 97,
+        "entangled_pairs": 6,
+        "architecture_probabilities": {
+          "gaussian_mut_gaussian_mut_gaussian_mut_gaussian_mut_quantum_cross_gaussian_gaussian_125_4129_4132_4135_4138": 0.0
+        }
+      },
+      "rl_controller": {
+        "epsilon": 0.09606930435754368,
+        "q_table_size": 1,
+        "total_actions": 9
+      },
+      "neuro_evolution": {
+        "strategy_performance": {
+          "mutate_gaussian": 0.472572056840179,
+          "crossover_uniform": 0.47257205684017894
+        },
+        "population_size": 0,
+        "fitness_history_size": 0
+      }
+    }
+  },
+  "federated_search": {
+    "architecture": null,
+    "metrics": null,
+    "search_time": 0.662299633026123,
+    "statistics": {
+      "federated_state": {
+        "global_round": 8,
+        "participating_nodes": 8,
+        "consensus_architectures": 0,
+        "pareto_front_size": 0,
+        "privacy_budget": 0.5,
+        "node_contributions": {
+          "node_006": 8,
+          "node_007": 8,
+          "node_005": 8,
+          "node_004": 8,
+          "node_003": 8
+        }
+      },
+      "communication": {
+        "total_rounds": 8,
+        "total_cost_mb": 4.019000000000001,
+        "avg_cost_per_round": 0.5023750000000001
+      },
+      "privacy": {
+        "epsilon": 0.5,
+        "remaining_budget": 0.5,
+        "budget_consumed": 0.5
+      },
+      "nodes": {
+        "total_nodes": 8,
+        "avg_reliability": 0.5203389646616904,
+        "total_contributions": 0
+      },
+      "convergence_history": [
+        {
+          "round": 0,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 8,
+          "communication_cost": 0.8180000000000001,
+          "round_time": 0.15159392356872559,
+          "privacy_budget": 0.9375,
+          "convergence_score": 0.0
+        },
+        {
+          "round": 1,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 7,
+          "communication_cost": 0.7170000000000001,
+          "round_time": 0.09458184242248535,
+          "privacy_budget": 0.875,
+          "convergence_score": 0.0
+        },
+        {
+          "round": 2,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 6,
+          "communication_cost": 0.6160000000000001,
+          "round_time": 0.11055350303649902,
+          "privacy_budget": 0.8125,
+          "convergence_score": 0.0
+        },
+        {
+          "round": 3,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 5,
+          "communication_cost": 0.515,
+          "round_time": 0.08993363380432129,
+          "privacy_budget": 0.75,
+          "convergence_score": NaN
+        },
+        {
+          "round": 4,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 4,
+          "communication_cost": 0.41400000000000003,
+          "round_time": 0.09012508392333984,
+          "privacy_budget": 0.6875,
+          "convergence_score": NaN
+        },
+        {
+          "round": 5,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 3,
+          "communication_cost": 0.31300000000000006,
+          "round_time": 0.060807228088378906,
+          "privacy_budget": 0.625,
+          "convergence_score": NaN
+        },
+        {
+          "round": 6,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 3,
+          "communication_cost": 0.31300000000000006,
+          "round_time": 0.03854036331176758,
+          "privacy_budget": 0.5625,
+          "convergence_score": NaN
+        },
+        {
+          "round": 7,
+          "global_best_fitness": -Infinity,
+          "participating_nodes": 3,
+          "communication_cost": 0.31300000000000006,
+          "round_time": 0.025729894638061523,
+          "privacy_budget": 0.5,
+          "convergence_score": NaN
+        }
+      ]
+    }
+  },
+  "neuromorphic_search": {
+    "architecture": "neuro_arch_2_4805",
+    "metrics": {
+      "latency_ms": 0.1,
+      "accuracy": 0.08000000000000002,
+      "energy_mj": 0.23256449098986623,
+      "tops_per_watt": 0.2,
+      "spike_sparsity": 1.0
+    },
+    "search_time": 0.10409045219421387,
+    "statistics": {
+      "search_progress": {
+        "generations_completed": 8,
+        "best_fitness": 0.5105448659684854,
+        "avg_fitness": 0.5105448659684854,
+        "population_diversity": 0.0
+      },
+      "neuromorphic_metrics": {
+        "avg_spike_sparsity": 1.0,
+        "avg_energy_efficiency": 0.23256449098986623,
+        "total_neuromorphic_layers": 0
+      },
+      "energy_model": {
+        "spike_energy_pj": 1.0,
+        "synapse_energy_pj": 0.1,
+        "leak_power_nw": 0.01,
+        "memristor_write_pj": 10.0,
+        "memristor_read_pj": 0.1
+      },
+      "timing_model": {
+        "spike_delay_ns": 1.0,
+        "synapse_delay_ns": 0.1,
+        "memristor_write_ns": 10.0,
+        "memristor_read_ns": 1.0,
+        "refractory_period_ns": 1000.0
+      },
+      "search_history": [
+        {
+          "generation": 0,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.4943815033764742,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23885268954939598,
+          "generation_time": 0.007108926773071289
+        },
+        {
+          "generation": 1,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105001133710619,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23554799748475852,
+          "generation_time": 0.0048370361328125
+        },
+        {
+          "generation": 2,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105431625182945,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23267805433592637,
+          "generation_time": 0.004712820053100586
+        },
+        {
+          "generation": 3,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105448659684854,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23256449098986623,
+          "generation_time": 0.005948305130004883
+        },
+        {
+          "generation": 4,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105448659684854,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23256449098986623,
+          "generation_time": 0.009597301483154297
+        },
+        {
+          "generation": 5,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105448659684854,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23256449098986623,
+          "generation_time": 0.01569199562072754
+        },
+        {
+          "generation": 6,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105448659684854,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23256449098986623,
+          "generation_time": 0.022627830505371094
+        },
+        {
+          "generation": 7,
+          "best_fitness": 0.5105448659684854,
+          "avg_fitness": 0.5105448659684854,
+          "population_diversity": 0.0,
+          "avg_spike_sparsity": 1.0,
+          "avg_energy_efficiency": 0.23256449098986623,
+          "generation_time": 0.0310823917388916
+        }
+      ]
+    }
+  }
+}
