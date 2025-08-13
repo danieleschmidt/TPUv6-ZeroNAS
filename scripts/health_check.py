@@ -88,6 +88,7 @@ def check_search_capability() -> Dict[str, Any]:
         config = SearchConfig(
             max_iterations=2,
             population_size=3,
+            min_accuracy=0.1,  # Lower threshold for health check
             enable_parallel=True,
             enable_caching=True
         )

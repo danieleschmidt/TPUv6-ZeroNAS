@@ -42,6 +42,7 @@ class SearchConfig:
     enable_parallel: bool = True
     enable_caching: bool = True
     enable_adaptive: bool = True
+    enable_research: bool = False  # Advanced research analysis
     parallel_workers: int = None  # Auto-detect if None
 
 
@@ -238,6 +239,10 @@ class ZeroNASSearcher:
                 self._validate_final_result(self.best_architecture, self.best_metrics)
                 self.monitor.log_search_end(self.best_architecture, self.best_metrics)
             
+            # Advanced research analysis (if enabled)
+            if hasattr(self.config, 'enable_research') and self.config.enable_research:
+                self._run_advanced_research_analysis(population)
+            
             return self.best_architecture, self.best_metrics
             
         except Exception as e:
@@ -420,16 +425,29 @@ class ZeroNASSearcher:
         return current_score > best_score
     
     def _compute_score(self, metrics: PerformanceMetrics) -> float:
-        """Compute multi-objective score for architecture."""
-        efficiency_score = metrics.tops_per_watt / self.config.target_tops_w
-        accuracy_score = metrics.accuracy
-        latency_penalty = max(0, metrics.latency_ms - self.config.max_latency_ms)
+        """Compute multi-objective score for architecture with constraints."""
+        # Hard constraint violations get heavily penalized
+        constraint_penalty = 0.0
         
+        # Accuracy constraint
+        if metrics.accuracy < self.config.min_accuracy:
+            constraint_penalty += (self.config.min_accuracy - metrics.accuracy) * 10
+        
+        # Latency constraint  
+        if metrics.latency_ms > self.config.max_latency_ms:
+            constraint_penalty += (metrics.latency_ms - self.config.max_latency_ms) * 0.1
+        
+        # Base scoring components
+        efficiency_score = min(metrics.tops_per_watt / self.config.target_tops_w, 2.0)
+        accuracy_score = metrics.accuracy
+        
+        # Combine scores with constraint penalty
         score = (0.4 * efficiency_score + 
                 0.4 * accuracy_score - 
-                0.2 * latency_penalty)
+                constraint_penalty)
         
-        return score
+        # Ensure minimum feasible score
+        return max(score, -10.0)
     
     def _should_early_stop(self) -> bool:
         """Check if search should stop early."""
@@ -669,6 +687,33 @@ class ZeroNASSearcher:
         except Exception as e:
             self.logger.error(f"Failed to save search state: {e}")
             return False
+    
+    def _run_advanced_research_analysis(self, population: List[Architecture]) -> None:
+        """Run advanced research analysis on the population."""
+        try:
+            from .advanced_research_engine import AdvancedResearchEngine
+            
+            self.logger.info("🔬 Running advanced research analysis...")
+            research_engine = AdvancedResearchEngine(self.predictor, self.config)
+            
+            research_results = research_engine.run_comprehensive_research_experiment(
+                population[:50],  # Limit for efficiency
+                ['pareto_optimization', 'scaling_law_discovery', 'pattern_discovery']
+            )
+            
+            # Save research results
+            from pathlib import Path
+            research_path = Path('advanced_research_results.json')
+            with open(research_path, 'w') as f:
+                import json
+                json.dump(research_results, f, indent=2, default=str)
+            
+            self.logger.info(f"💾 Advanced research results saved to {research_path}")
+            
+        except ImportError as e:
+            self.logger.warning("Advanced research engine not available")
+        except Exception as e:
+            self.logger.error(f"Advanced research analysis failed: {e}")
     
     def cleanup(self) -> None:
         """Enhanced cleanup with comprehensive resource management."""
