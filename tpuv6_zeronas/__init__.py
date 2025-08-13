@@ -17,9 +17,14 @@ from .security import secure_load_file
 try:
     from .parallel import DistributedSearcher, ParallelSearchConfig
     from .optimization import ProgressiveSearchOptimizer, MultiObjectiveOptimizer, OptimizationConfig
+    from .quantum_nas import QuantumInspiredNAS, create_quantum_nas_searcher
+    from .federated_nas import FederatedNAS, create_federated_nas_searcher
+    from .neuromorphic_nas import NeuromorphicNAS, create_neuromorphic_nas_searcher
     ADVANCED_AVAILABLE = True
+    QUANTUM_AVAILABLE = True
 except ImportError:
     ADVANCED_AVAILABLE = False
+    QUANTUM_AVAILABLE = False
 
 __all__ = [
     "ZeroNASSearcher",
@@ -42,4 +47,14 @@ if ADVANCED_AVAILABLE:
         "ProgressiveSearchOptimizer",
         "MultiObjectiveOptimizer",
         "OptimizationConfig",
+    ])
+
+if QUANTUM_AVAILABLE:
+    __all__.extend([
+        "QuantumInspiredNAS",
+        "create_quantum_nas_searcher",
+        "FederatedNAS",
+        "create_federated_nas_searcher",
+        "NeuromorphicNAS",
+        "create_neuromorphic_nas_searcher",
     ])

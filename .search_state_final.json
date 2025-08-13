@@ -1,13 +1,13 @@
 {
   "config": {
-    "max_iterations": 20,
-    "population_size": 10,
+    "max_iterations": 4,
+    "population_size": 8,
     "mutation_rate": 0.1,
     "crossover_rate": 0.7,
     "early_stop_threshold": 1e-06,
     "target_tops_w": 75.0,
     "max_latency_ms": 10.0,
-    "min_accuracy": 0.8,
+    "min_accuracy": 0.95,
     "enable_parallel": true,
     "enable_caching": true,
     "enable_adaptive": true,
@@ -16,1129 +16,271 @@
   },
   "search_history": [
     [
-      "random_arch_2680",
+      "random_arch_3437",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23301282508355556,
+        "energy_mj": 0.24195417665422575,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 793.76171875,
-        "flops": 1434176
+        "memory_mb": 300.69921875,
+        "flops": 84496
       }
     ],
     [
-      "random_arch_7280",
+      "random_arch_1898",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24168038352022192,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 41.7265625,
-        "flops": 110259
-      }
-    ],
-    [
-      "random_arch_8869",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2453348883482799,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 877.98046875,
-        "flops": 777984
-      }
-    ],
-    [
-      "random_arch_2655",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24349747104253028,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 117.5234375,
-        "flops": 178563
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "crossover_random_arch_1685_random_arch_1685_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417325747957792,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 117136
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "mutated_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173249385728568,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 33.49609375,
-        "flops": 121728
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "mutated_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173468397011832,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "mutated_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2416932709365973,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 31.19921875,
-        "flops": 121488
-      }
-    ],
-    [
-      "crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "mutated_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417211800974138,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 36.55859375,
-        "flops": 130944
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "mutated_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2429486325213222,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 89.38671875,
-        "flops": 14640
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417330061101592,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 121744
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
+        "latency_ms": 1.8700389831276167,
+        "energy_mj": 0.24302001029818687,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
+        "memory_mb": 64.12109375,
+        "flops": 460
       }
     ],
     [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
+      "random_arch_8980",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
+        "energy_mj": 0.23229911246575072,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
+        "memory_mb": 101.63671875,
+        "flops": 1109632
       }
     ],
     [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
+      "random_arch_6921",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
+        "energy_mj": 0.24408634234483345,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
+        "memory_mb": 366.54296875,
+        "flops": 321408
       }
     ],
     [
-      "crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0",
+      "random_arch_3770",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24173252995297753,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 109456
-      }
-    ],
-    [
-      "random_arch_8414",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
-      }
-    ],
-    [
-      "random_arch_1326",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
-      }
-    ],
-    [
-      "mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417353672228688,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 134032
-      }
-    ],
-    [
-      "crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.2417353672228688,
+        "latency_ms": 1.7880997676246644,
+        "energy_mj": 0.2392913557599909,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 134032
+        "memory_mb": 395.4453125,
+        "flops": 4111
       }
     ],
     [
-      "mutated_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0",
+      "random_arch_5152",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.24220379251300586,
+        "latency_ms": 2.8623182954749544,
+        "energy_mj": 0.24916998431216766,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 95.51171875,
-        "flops": 31632
+        "memory_mb": 2.87109375,
+        "flops": 12
       }
     ],
     [
-      "crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2417353672228688,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 134032
+        "energy_mj": 0.2884423773228934,
+        "accuracy": 0.6747524659199999,
+        "tops_per_watt": 0.24992664964240094,
+        "memory_mb": 165.94921875,
+        "flops": 68029440
       }
     ],
     [
-      "crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0",
+      "random_arch_3077",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2417353672228688,
+        "energy_mj": 0.23913973696690013,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 34.26171875,
-        "flops": 134032
+        "memory_mb": 20.09765625,
+        "flops": 646
       }
     ],
     [
-      "random_arch_8414",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "random_arch_1326",
+      "random_arch_3437",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
+        "energy_mj": 0.24195417665422575,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
+        "memory_mb": 300.69921875,
+        "flops": 84496
       }
     ],
     [
-      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0",
+      "mutated_crossover_random_arch_4633_random_arch_4633_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.3184882735373876,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33828731995733036,
+        "memory_mb": 221.07421875,
+        "flops": 101978112
       }
     ],
     [
-      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "random_arch_8414",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24418339574813072,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 737.296875,
-        "flops": 177225
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "random_arch_1326",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2428486429469942,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 306.82421875,
-        "flops": 142720
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_0",
+      "mutated_random_arch_4633_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847886838715106,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829436405629587,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ],
     [
-      "crossover_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_crossover_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_crossover_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_crossover_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_crossover_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_crossover_crossover_random_arch_1685_random_arch_1685_0_crossover_random_arch_1685_random_arch_1685_0_0_0_0_0_0_0_0_0_0",
+      "random_arch_4633",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24174167247612735,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 35.02734375,
-        "flops": 134048
+        "energy_mj": 0.31847876414784504,
+        "accuracy": 0.988,
+        "tops_per_watt": 0.33829454312622503,
+        "memory_mb": 208.82421875,
+        "flops": 101977088
       }
     ]
   ],
-  "best_architecture": "random_arch_6102",
+  "best_architecture": "random_arch_4633",
   "best_metrics": {
     "latency_ms": 0.1,
-    "energy_mj": 0.23535235094396612,
-    "accuracy": 0.1,
-    "tops_per_watt": 0.1,
-    "memory_mb": 233.53955078125,
-    "flops": 4651200
+    "energy_mj": 0.31847876414784504,
+    "accuracy": 0.988,
+    "tops_per_watt": 0.33829454312622503,
+    "memory_mb": 208.82421875,
+    "flops": 101977088
   },
   "statistics": {
     "search_completed": true,
-    "total_evaluations": 106,
+    "total_evaluations": 22,
     "best_metrics": {
       "latency_ms": 0.1,
-      "energy_mj": 0.23535235094396612,
-      "accuracy": 0.1,
-      "tops_per_watt": 0.1,
-      "memory_mb": 233.53955078125,
-      "flops": 4651200
+      "energy_mj": 0.31847876414784504,
+      "accuracy": 0.988,
+      "tops_per_watt": 0.33829454312622503,
+      "memory_mb": 208.82421875,
+      "flops": 101977088
     },
     "convergence_metrics": {
-      "convergence_rate": 0,
-      "improvement_trend": 0.0
+      "convergence_rate": 1.0,
+      "improvement_trend": 1.0569100346121203
     },
     "resource_usage": {
       "memory_mb": 0,

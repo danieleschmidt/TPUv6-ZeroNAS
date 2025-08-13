@@ -142,6 +142,35 @@ class Architecture:
             
         return (total_memory * 4) / (1024 * 1024)
     
+    def copy(self) -> 'Architecture':
+        """Create a deep copy of the architecture."""
+        import copy
+        copied_layers = []
+        for layer in self.layers:
+            # Create new layer with same attributes
+            new_layer = Layer(
+                layer_type=layer.layer_type,
+                input_channels=layer.input_channels,
+                output_channels=layer.output_channels,
+                kernel_size=layer.kernel_size,
+                stride=layer.stride,
+                padding=layer.padding,
+                activation=layer.activation,
+                use_bias=layer.use_bias
+            )
+            # Copy any additional attributes
+            for attr_name, attr_value in layer.__dict__.items():
+                if not hasattr(new_layer, attr_name):
+                    setattr(new_layer, attr_name, copy.deepcopy(attr_value))
+            copied_layers.append(new_layer)
+        
+        return Architecture(
+            layers=copied_layers,
+            input_shape=self.input_shape,
+            num_classes=self.num_classes,
+            name=self.name
+        )
+    
     @property
     def conv_ops(self) -> int:
         """Convolution operation count."""
