@@ -95,7 +95,7 @@ class ScalingLawCoefficients:
     energy_power_budget_factor: float = 1.12  # Power budget utilization
     
     # Accuracy prediction (enhanced modeling)
-    accuracy_base: float = 0.79  # Improved baseline due to better hardware
+    accuracy_base: float = 0.92  # Improved baseline due to better hardware
     accuracy_param_bonus: float = 1.7e-7  # Parameter count benefit
     accuracy_depth_penalty: float = -0.005  # Reduced depth penalty (better optimization)
     accuracy_width_bonus: float = 3.2e-5  # Width benefit for accuracy
@@ -159,6 +159,14 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         self.enable_caching = enable_caching
         self.logger = logging.getLogger(__name__)
         
+        # Initialize accuracy coefficients for backward compatibility
+        self._accuracy_coeffs = {
+            'base': 0.92,
+            'depth_bonus': 0.008,
+            'width_bonus': 0.00004,
+            'complexity_penalty': -1e-12
+        }
+        
         # Advanced caching system for Generation 3
         self.prediction_count = 0
         self.total_prediction_time = 0.0
@@ -196,6 +204,11 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         self.logger.info(f"Hardware: {self.config.peak_tops} TOPS, {self.config.memory_bandwidth_gbps} GBps")
         self.logger.info(f"Uncertainty quantification: {enable_uncertainty}")
         self.logger.info(f"Performance caching: {enable_caching}")
+    
+    @property
+    def accuracy_coeffs(self) -> Dict[str, float]:
+        """Get accuracy coefficients for prediction."""
+        return self._accuracy_coeffs
     
     def predict(self, architecture: Architecture) -> PerformanceMetrics:
         """Enhanced prediction with uncertainty quantification and caching."""

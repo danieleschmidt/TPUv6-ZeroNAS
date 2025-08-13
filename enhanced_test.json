@@ -1,0 +1,80 @@
+{
+  "architecture": {
+    "name": "random_arch_5659",
+    "layers": [
+      {
+        "type": "linear",
+        "input_channels": 3,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "gelu"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 64,
+        "output_channels": 256,
+        "kernel_size": [
+          1,
+          1
+        ],
+        "stride": [
+          2,
+          2
+        ],
+        "activation": "relu"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 256,
+        "output_channels": 1024,
+        "kernel_size": [
+          1,
+          1
+        ],
+        "stride": [
+          1,
+          1
+        ],
+        "activation": "relu"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 1024,
+        "output_channels": 512,
+        "kernel_size": [
+          5,
+          5
+        ],
+        "stride": [
+          1,
+          1
+        ],
+        "activation": "swish"
+      }
+    ],
+    "input_shape": [
+      224,
+      224,
+      3
+    ],
+    "num_classes": 1000,
+    "total_ops": 13385920,
+    "total_params": 13387776,
+    "memory_mb": 98.57421875
+  },
+  "metrics": {
+    "latency_ms": 0.1,
+    "energy_mj": 0.24258898572978216,
+    "accuracy": 0.13227122688,
+    "tops_per_watt": 0.1,
+    "memory_mb": 98.57421875,
+    "flops": 13385920,
+    "efficiency_score": 0.5303208877392385
+  },
+  "search_config": {
+    "max_iterations": 15,
+    "population_size": 8,
+    "target_tops_w": 75.0
+  }
+}

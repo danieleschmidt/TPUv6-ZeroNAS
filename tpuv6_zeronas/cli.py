@@ -69,10 +69,10 @@ def run_search(args) -> None:
         
         # Validate file paths
         if hasattr(args, 'predictor_model') and args.predictor_model:
-            args.predictor_model = guard.sanitize_file_path(args.predictor_model)
+            args.predictor_model = guard.validate_file_path(args.predictor_model)
         
         if args.output:
-            args.output = guard.sanitize_file_path(args.output)
+            args.output = guard.validate_file_path(args.output)
             
     except Exception as e:
         logger.error(f"Input validation failed: {e}")
