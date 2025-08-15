@@ -1,0 +1,92 @@
+{
+  "architecture": {
+    "name": "random_arch_9625",
+    "layers": [
+      {
+        "type": "relu",
+        "input_channels": 3,
+        "output_channels": 3,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "gelu",
+        "input_channels": 3,
+        "output_channels": 3,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "relu"
+      },
+      {
+        "type": "linear",
+        "input_channels": 3,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 64,
+        "output_channels": 64,
+        "kernel_size": [
+          7,
+          7
+        ],
+        "stride": [
+          1,
+          1
+        ],
+        "activation": "swish"
+      },
+      {
+        "type": "batch_norm",
+        "input_channels": 64,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "relu",
+        "input_channels": 64,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "batch_norm",
+        "input_channels": 64,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      }
+    ],
+    "input_shape": [
+      224,
+      224,
+      3
+    ],
+    "num_classes": 1000,
+    "total_ops": 201094,
+    "total_params": 201280,
+    "memory_mb": 62.97265625
+  },
+  "metrics": {
+    "latency_ms": 0.1,
+    "energy_mj": 0.24172726399973496,
+    "accuracy": 0.1,
+    "tops_per_watt": 0.1,
+    "memory_mb": 62.97265625,
+    "flops": 201094,
+    "efficiency_score": 0.5222552249276946
+  },
+  "search_config": {
+    "max_iterations": 3,
+    "population_size": 5,
+    "target_tops_w": 75.0
+  }
+}

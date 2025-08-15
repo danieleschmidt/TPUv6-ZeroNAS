@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpuv6-zeronas
+  namespace: research
+  labels:
+    app: tpuv6-zeronas
+    version: v1.0.0
+    component: nas-engine
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tpuv6-zeronas
+  template:
+    metadata:
+      labels:
+        app: tpuv6-zeronas
+        version: v1.0.0
+    spec:
+      serviceAccountName: tpuv6-zeronas
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+      - name: nas-engine
+        image: tpuv6-zeronas:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: api
+        - containerPort: 8888
+          name: jupyter
+        env:
+        - name: TPUV6_LOG_LEVEL
+          value: "INFO"
+        - name: TPUV6_ENABLE_RESEARCH
+          value: "true"
+        - name: TPUV6_PARALLEL_WORKERS
+          value: "4"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
+        livenessProbe:
+          exec:
+            command:
+            - python
+            - -c
+            - "from tpuv6_zeronas import TPUv6Predictor; print('healthy')"
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - scripts/health_check.py
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: workspace
+          mountPath: /workspace
+        - name: cache
+          mountPath: /app/.cache
+        - name: config
+          mountPath: /app/config
+          readOnly: true
+      volumes:
+      - name: workspace
+        persistentVolumeClaim:
+          claimName: tpuv6-workspace
+      - name: cache
+        emptyDir:
+          sizeLimit: 10Gi
+      - name: config
+        configMap:
+          name: tpuv6-config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tpuv6-zeronas-service
+  namespace: research
+  labels:
+    app: tpuv6-zeronas
+spec:
+  type: LoadBalancer
+  selector:
+    app: tpuv6-zeronas
+  ports:
+  - name: api
+    port: 80
+    targetPort: 8000
+    protocol: TCP
+  - name: jupyter
+    port: 8888
+    targetPort: 8888
+    protocol: TCP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tpuv6-workspace
+  namespace: research
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: fast-ssd
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tpuv6-config
+  namespace: research
+data:
+  search_config.yaml: |
+    max_iterations: 1000
+    population_size: 50
+    target_tops_w: 75.0
+    max_latency_ms: 10.0
+    min_accuracy: 0.95
+    enable_parallel: true
+    enable_caching: true
+    enable_research: true
+    parallel_workers: 4
