@@ -1,0 +1,84 @@
+# TPUv6-ZeroNAS Production Dockerfile
+# Multi-stage build for optimal production deployment
+
+# Stage 1: Base Python environment
+FROM python:3.9-slim as base
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security
+RUN groupadd -r tpunas && useradd -r -g tpunas tpunas
+
+# Stage 2: Build environment
+FROM base as builder
+
+# Copy requirements and install Python dependencies
+COPY requirements-minimal.txt /tmp/
+RUN pip install --user -r /tmp/requirements-minimal.txt
+
+# Stage 3: Production runtime
+FROM base as production
+
+# Copy Python packages from builder
+COPY --from=builder /root/.local /home/tpunas/.local
+
+# Set up application directory
+WORKDIR /app
+COPY . /app/
+
+# Install TPUv6-ZeroNAS in minimal mode
+RUN pip install --no-deps -e .
+
+# Change ownership to non-root user
+RUN chown -R tpunas:tpunas /app /home/tpunas
+
+# Switch to non-root user
+USER tpunas
+
+# Set PATH for user-installed packages
+ENV PATH=/home/tpunas/.local/bin:$PATH
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python -c "from tpuv6_zeronas import TPUv6Predictor; print('healthy')" || exit 1
+
+# Default command
+CMD ["python", "-m", "tpuv6_zeronas.cli", "search", "--max-iterations", "100"]
+
+# Production stage with full features
+FROM production as research
+
+# Switch back to root for additional packages
+USER root
+
+# Install full research dependencies
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
+
+# Install development tools for research
+RUN pip install jupyter notebook matplotlib seaborn plotly
+
+# Create research workspace
+RUN mkdir -p /workspace && chown -R tpunas:tpunas /workspace
+
+# Switch back to non-root user
+USER tpunas
+
+# Set working directory for research
+WORKDIR /workspace
+
+# Expose Jupyter port
+EXPOSE 8888
+
+# Research environment command
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
