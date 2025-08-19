@@ -1,0 +1,126 @@
+{
+  "timestamp": 1755627873.4863632,
+  "execution_time_seconds": 0.6457827091217041,
+  "overall_summary": {
+    "gates_passed": 6,
+    "gates_total": 8,
+    "success_rate": 0.75,
+    "quality_grade": "C",
+    "production_ready": false
+  },
+  "detailed_results": {
+    "Code Quality": {
+      "passed": true,
+      "metrics": {
+        "import_success": true,
+        "module_coverage": 1.0,
+        "available_modules": 7,
+        "python_files": 32,
+        "total_lines": 19873,
+        "avg_lines_per_file": 621.03125
+      },
+      "issues": [],
+      "summary": "Code quality acceptable"
+    },
+    "Security Analysis": {
+      "passed": true,
+      "metrics": {
+        "security_module": true,
+        "resource_guard": true,
+        "secure_files_ratio": 1.0,
+        "input_validation_coverage": 0.0
+      },
+      "issues": [],
+      "summary": "Security analysis passed"
+    },
+    "Performance Benchmarks": {
+      "passed": false,
+      "metrics": {
+        "performance_score": 0.0
+      },
+      "benchmarks": {
+        "single_prediction_ms": 0.38313865661621094,
+        "prediction_target_ms": 100,
+        "prediction_performance": "PASS",
+        "batch_prediction_ms": 1.0993480682373047,
+        "avg_per_prediction_ms": 0.10993480682373047,
+        "search_time_seconds": 0.0450899600982666,
+        "search_target_seconds": 30,
+        "search_performance": "PASS",
+        "error": "No module named 'psutil'"
+      },
+      "summary": "Performance benchmarks below targets"
+    },
+    "Test Coverage": {
+      "passed": false,
+      "metrics": {
+        "test_files": 6,
+        "integration_test_success": true,
+        "integration_status": "FAILED",
+        "core_functionality_coverage": 0.8
+      },
+      "summary": "Test coverage insufficient"
+    },
+    "Documentation Quality": {
+      "passed": true,
+      "metrics": {
+        "documentation_coverage": 1.0,
+        "avg_doc_quality": 0.714025,
+        "existing_docs": 4,
+        "code_documentation_ratio": 1.0
+      },
+      "summary": "Documentation comprehensive"
+    },
+    "Deployment Readiness": {
+      "passed": true,
+      "metrics": {
+        "deployment_config_coverage": 1.0,
+        "dependencies_specified": true,
+        "environment_readiness": 0.3333333333333333,
+        "safety_score": 1.0
+      },
+      "issues": [],
+      "summary": "Deployment ready"
+    },
+    "Research Validation": {
+      "passed": true,
+      "metrics": {
+        "research_module_coverage": 1.0,
+        "research_methodology_valid": true,
+        "research_engine_functional": true,
+        "statistical_analysis": true,
+        "sample_mean": 0.86,
+        "sample_variance": 0.00020000000000000036
+      },
+      "summary": "Research capabilities validated"
+    },
+    "Compliance & Standards": {
+      "passed": true,
+      "metrics": {
+        "license_present": true,
+        "style_compliance_ratio": 1.0,
+        "security_features": true,
+        "version_control": true,
+        "reproducibility_score": 1.0,
+        "compliance_score": 1.0
+      },
+      "summary": "Standards compliance excellent"
+    }
+  },
+  "performance_benchmarks": {
+    "single_prediction_ms": 0.38313865661621094,
+    "prediction_target_ms": 100,
+    "prediction_performance": "PASS",
+    "batch_prediction_ms": 1.0993480682373047,
+    "avg_per_prediction_ms": 0.10993480682373047,
+    "search_time_seconds": 0.0450899600982666,
+    "search_target_seconds": 30,
+    "search_performance": "PASS",
+    "error": "No module named 'psutil'"
+  },
+  "recommendations": [
+    "Improve Performance Benchmarks: Performance benchmarks below targets",
+    "Improve Test Coverage: Test coverage insufficient",
+    "Reduce memory usage for scalable deployment"
+  ]
+}

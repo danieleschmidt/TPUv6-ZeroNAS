@@ -62,6 +62,40 @@ class TPUv6Optimizer:
         self.config = config or TPUv6Config()
         self.logger = logging.getLogger(__name__)
     
+    def optimize_search_parameters(
+        self,
+        target_efficiency: float = 0.85,
+        available_compute_hours: float = 1.0,
+        memory_constraints_gb: float = 8.0
+    ):
+        """Optimize search parameters for efficient resource utilization."""
+        from .core import SearchConfig
+        
+        # Calculate optimal population size based on available compute
+        base_population = 50
+        compute_scaling = min(2.0, available_compute_hours * 20)  # More compute = larger population
+        optimal_population = int(base_population * compute_scaling)
+        
+        # Calculate iterations based on efficiency target
+        base_iterations = 100
+        efficiency_scaling = target_efficiency * 2.0  # Higher efficiency = more iterations
+        optimal_iterations = int(base_iterations * efficiency_scaling)
+        
+        # Memory constraints
+        if memory_constraints_gb < 4.0:
+            optimal_population = min(optimal_population, 20)
+            optimal_iterations = min(optimal_iterations, 50)
+        
+        return SearchConfig(
+            max_iterations=optimal_iterations,
+            population_size=optimal_population,
+            mutation_rate=0.1,
+            crossover_rate=0.7,
+            enable_parallel=True,
+            enable_caching=True,
+            enable_adaptive=True
+        )
+    
     def optimize_architecture(self, architecture: Architecture) -> Architecture:
         """Apply TPUv6-specific optimizations to architecture."""
         self.logger.info(f"Optimizing architecture for TPUv6: {architecture.name}")
