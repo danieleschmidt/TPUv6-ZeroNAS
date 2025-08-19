@@ -72,7 +72,9 @@ class HardwarePlatform(Enum):
     """Supported hardware platforms for transfer learning."""
     TPU_V4 = "tpu_v4"
     TPU_V5E = "tpu_v5e" 
+    EDGE_TPU_V5E = "edge_tpu_v5e"  # Legacy compatibility
     TPU_V6 = "tpu_v6"
+    EDGE_TPU_V6_SIMULATED = "edge_tpu_v6_simulated"  # For research
     GPU_V100 = "gpu_v100"
     GPU_A100 = "gpu_a100"
     GPU_H100 = "gpu_h100"
@@ -171,10 +173,20 @@ class PhysicsInformedConstraints:
 class UniversalHardwareTransferEngine:
     """Revolutionary universal hardware transfer learning engine."""
     
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, 
+                 source_platform: Optional[HardwarePlatform] = None,
+                 target_platform: Optional[HardwarePlatform] = None,
+                 transfer_learning_depth: int = 3,
+                 config: Optional[Dict[str, Any]] = None):
         """Initialize universal transfer learning engine."""
         self.config = config or {}
+        self.source_platform = source_platform or HardwarePlatform.EDGE_TPU_V5E
+        self.target_platform = target_platform or HardwarePlatform.EDGE_TPU_V6_SIMULATED
+        self.transfer_learning_depth = transfer_learning_depth
         self.logger = logging.getLogger(__name__)
+        
+        # Initialize supported platforms for compatibility
+        self.supported_platforms = list(HardwarePlatform)
         
         # Hardware platform registry
         self.platform_registry = self._initialize_platform_registry()
@@ -800,3 +812,35 @@ def validate_transfer_accuracy(
             validation_results[f"{source_platform.value}_to_{target_platform.value}"] = avg_error
     
     return validation_results
+
+
+def transfer_performance_prediction(
+    engine: UniversalHardwareTransferEngine, 
+    test_metrics: Dict[str, float]
+) -> Dict[str, float]:
+    """Transfer performance prediction between platforms."""
+    # Simple scaling based on hardware differences
+    source_hw = engine.platform_registry.get(engine.source_platform)
+    target_hw = engine.platform_registry.get(engine.target_platform)
+    
+    if not source_hw or not target_hw:
+        return test_metrics  # Return unchanged if platforms unknown
+    
+    # Compute scaling factors
+    compute_scaling = target_hw.peak_ops_per_second / source_hw.peak_ops_per_second
+    memory_scaling = target_hw.memory_bandwidth_gbps / source_hw.memory_bandwidth_gbps
+    power_scaling = target_hw.power_envelope_w / source_hw.power_envelope_w
+    
+    # Apply scaling to metrics
+    transferred = {}
+    for metric, value in test_metrics.items():
+        if metric == 'latency':
+            transferred[metric] = value / compute_scaling
+        elif metric == 'energy':
+            transferred[metric] = value * (power_scaling / compute_scaling)
+        elif metric == 'accuracy':
+            transferred[metric] = value  # Platform independent
+        else:
+            transferred[metric] = value  # Default: no change
+    
+    return transferred

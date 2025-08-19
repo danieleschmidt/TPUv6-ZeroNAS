@@ -197,14 +197,24 @@ def get_audit_logger() -> AuditLogger:
     return _audit_logger
 
 
-def secure_load_file(file_path: Union[str, Path], file_type: str = 'auto') -> Any:
+def secure_load_file(file_path: Union[str, Path], file_type: str = 'auto', max_size_mb: float = 100.0) -> Any:
     """Securely load a file with full validation."""
-    # For now, just basic JSON loading - can be enhanced later
+    # Enhanced secure file loading with size and validation checks
+    resource_guard = get_resource_guard()
+    
     if isinstance(file_path, str):
         file_path = Path(file_path)
     
-    if not file_path.exists():
-        raise SecurityError(f'File does not exist: {file_path}')
+    # Validate file path security
+    validated_path = resource_guard.validate_file_path(file_path)
+    
+    if not validated_path.exists():
+        raise SecurityError(f'File does not exist: {validated_path}')
+    
+    # Check file size
+    file_size_mb = validated_path.stat().st_size / (1024 * 1024)
+    if file_size_mb > max_size_mb:
+        raise SecurityError(f'File too large: {file_size_mb:.1f}MB > {max_size_mb}MB')
     
     if file_type == 'auto':
         if file_path.suffix.lower() == '.json':
