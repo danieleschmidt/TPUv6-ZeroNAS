@@ -12,6 +12,10 @@ from .optimizations import TPUv6Optimizer, TPUv6Config
 from .validation import validate_input
 from .monitoring import SearchMonitor
 from .security import secure_load_file
+from .enhanced_robustness import (
+    get_circuit_breaker, get_retry_handler, get_shutdown_handler,
+    get_health_monitor, resource_cleanup
+)
 
 # Optional advanced modules (may have additional dependencies)
 try:

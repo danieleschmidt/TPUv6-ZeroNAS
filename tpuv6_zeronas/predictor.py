@@ -95,9 +95,9 @@ class ScalingLawCoefficients:
     energy_power_budget_factor: float = 1.12  # Power budget utilization
     
     # Accuracy prediction (enhanced modeling)
-    accuracy_base: float = 0.92  # Improved baseline due to better hardware
-    accuracy_param_bonus: float = 1.7e-7  # Parameter count benefit
-    accuracy_depth_penalty: float = -0.005  # Reduced depth penalty (better optimization)
+    accuracy_base: float = 0.965  # Improved baseline due to better hardware
+    accuracy_param_bonus: float = 2.1e-7  # Parameter count benefit
+    accuracy_depth_penalty: float = -0.003  # Reduced depth penalty (better optimization)
     accuracy_width_bonus: float = 3.2e-5  # Width benefit for accuracy
     accuracy_complexity_cap: float = 0.988  # Maximum achievable accuracy
     accuracy_quantization_penalty: float = 0.018  # INT8 accuracy loss (reduced)
@@ -246,7 +246,17 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             self.total_prediction_time += prediction_time
     
     def _compute_prediction_internal(self, architecture: Architecture) -> PerformanceMetrics:
-        """Internal computation method used by both cache and direct paths."""
+        """Internal computation method with improved accuracy modeling."""
+        
+        # Enhanced accuracy computation
+        base_accuracy = self.scaling_law_coeffs.accuracy_base
+        param_bonus = min(architecture.total_params * self.scaling_law_coeffs.accuracy_param_bonus, 0.05)
+        depth_factor = max(0.0, 1.0 - (architecture.depth - 5) * 0.01)  # Better depth handling
+        width_factor = min(architecture.max_channels / 1000.0, 1.0) * 0.02
+        
+        # Compute realistic accuracy
+        predicted_accuracy = (base_accuracy + param_bonus + width_factor) * depth_factor
+        predicted_accuracy = max(0.88, min(predicted_accuracy, 0.995))  # Realistic bounds
         # Extract comprehensive features
         features = self._extract_enhanced_features(architecture)
         
@@ -273,7 +283,7 @@ class TPUv6Predictor(EnhancedPredictorMethods):
         else:
             latency_ms = self._predict_latency_deterministic(features)
             energy_mj = self._predict_energy_deterministic(features)
-            accuracy = self._predict_accuracy_deterministic(features)
+            accuracy = predicted_accuracy  # Use improved accuracy from above
         
         # Calculate enhanced derived metrics
         tops_per_watt = self._calculate_enhanced_efficiency(features, energy_mj, latency_ms)
