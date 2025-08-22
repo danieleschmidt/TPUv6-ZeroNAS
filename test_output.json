@@ -1,0 +1,214 @@
+{
+  "architecture": {
+    "name": "random_arch_7230",
+    "layers": [
+      {
+        "type": "relu",
+        "input_channels": 3,
+        "output_channels": 3,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "relu"
+      },
+      {
+        "type": "batch_norm",
+        "input_channels": 3,
+        "output_channels": 3,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 3,
+        "output_channels": 3,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "linear",
+        "input_channels": 3,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "relu"
+      },
+      {
+        "type": "gelu",
+        "input_channels": 64,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "gelu"
+      },
+      {
+        "type": "linear",
+        "input_channels": 64,
+        "output_channels": 16,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 16,
+        "output_channels": 1024,
+        "kernel_size": [
+          3,
+          3
+        ],
+        "stride": [
+          1,
+          1
+        ],
+        "activation": "gelu"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 1024,
+        "output_channels": 128,
+        "kernel_size": [
+          7,
+          7
+        ],
+        "stride": [
+          2,
+          2
+        ],
+        "activation": "relu"
+      },
+      {
+        "type": "gelu",
+        "input_channels": 128,
+        "output_channels": 128,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "relu"
+      },
+      {
+        "type": "gelu",
+        "input_channels": 128,
+        "output_channels": 128,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "relu",
+        "input_channels": 128,
+        "output_channels": 128,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "swish"
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 128,
+        "output_channels": 128,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 128,
+        "output_channels": 16,
+        "kernel_size": [
+          1,
+          1
+        ],
+        "stride": [
+          1,
+          1
+        ],
+        "activation": "relu"
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 16,
+        "output_channels": 16,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "linear",
+        "input_channels": 16,
+        "output_channels": 64,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "relu"
+      },
+      {
+        "type": "conv2d",
+        "input_channels": 64,
+        "output_channels": 1024,
+        "kernel_size": [
+          5,
+          5
+        ],
+        "stride": [
+          2,
+          2
+        ],
+        "activation": "swish"
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 1024,
+        "output_channels": 1024,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 1024,
+        "output_channels": 1024,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "depthwise_conv",
+        "input_channels": 1024,
+        "output_channels": 1024,
+        "kernel_size": null,
+        "stride": null,
+        "activation": null
+      },
+      {
+        "type": "gelu",
+        "input_channels": 1024,
+        "output_channels": 1024,
+        "kernel_size": null,
+        "stride": null,
+        "activation": "gelu"
+      }
+    ],
+    "input_shape": [
+      224,
+      224,
+      3
+    ],
+    "num_classes": 1000,
+    "total_ops": 8217369,
+    "total_params": 11380610,
+    "memory_mb": 322.328125
+  },
+  "metrics": {
+    "latency_ms": 0.1,
+    "energy_mj": 0.23839870332759022,
+    "accuracy": 0.11244042679999999,
+    "tops_per_watt": 0.1,
+    "memory_mb": 322.328125,
+    "flops": 8217369,
+    "efficiency_score": 0.5253736132195771
+  },
+  "search_config": {
+    "max_iterations": 5,
+    "population_size": 4,
+    "target_tops_w": 75.0
+  }
+}
