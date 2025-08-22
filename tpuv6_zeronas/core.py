@@ -38,12 +38,14 @@ class SearchConfig:
     target_tops_w: float = 75.0
     max_latency_ms: float = 10.0
     min_accuracy: float = 0.95
-    # Optimization features
+    # Optimization features  
     enable_parallel: bool = True
     enable_caching: bool = True
     enable_adaptive: bool = True
     enable_research: bool = False  # Advanced research analysis
+    enable_adaptive_scaling: bool = True  # Generation 3: Adaptive scaling
     parallel_workers: int = None  # Auto-detect if None
+    adaptive_scaling_factor: float = 1.5  # Dynamic scaling multiplier
 
 
 class ZeroNASSearcher:
@@ -90,6 +92,21 @@ class ZeroNASSearcher:
                 batch_size=min(10, self.config.population_size // 4)
             )
             self.parallel_evaluator = ParallelEvaluator(self.predictor, worker_config)
+        
+        # Setup adaptive scaling if enabled (Generation 3)
+        self.adaptive_scaler = None
+        if getattr(self.config, 'enable_adaptive_scaling', False):
+            try:
+                from .adaptive_scaling import AdaptiveScaler, ScalingConfig
+                scaling_config = ScalingConfig(
+                    target_throughput=self.config.population_size * 2,
+                    max_replicas=min(8, self.config.population_size // 2),
+                    min_replicas=1
+                )
+                self.adaptive_scaler = AdaptiveScaler(scaling_config)
+                self.logger.info("🚀 Adaptive scaling system enabled")
+            except ImportError:
+                self.logger.debug("Adaptive scaling not available, continuing without")
     
     def _validate_initialization(self) -> None:
         """Validate searcher initialization parameters."""

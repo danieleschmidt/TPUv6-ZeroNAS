@@ -1,6 +1,6 @@
 {
-  "timestamp": 1755627873.4863632,
-  "execution_time_seconds": 0.6457827091217041,
+  "timestamp": 1755881822.842018,
+  "execution_time_seconds": 0.7240808010101318,
   "overall_summary": {
     "gates_passed": 6,
     "gates_total": 8,
@@ -15,9 +15,9 @@
         "import_success": true,
         "module_coverage": 1.0,
         "available_modules": 7,
-        "python_files": 32,
-        "total_lines": 19873,
-        "avg_lines_per_file": 621.03125
+        "python_files": 34,
+        "total_lines": 20580,
+        "avg_lines_per_file": 605.2941176470588
       },
       "issues": [],
       "summary": "Code quality acceptable"
@@ -39,12 +39,12 @@
         "performance_score": 0.0
       },
       "benchmarks": {
-        "single_prediction_ms": 0.38313865661621094,
+        "single_prediction_ms": 0.4611015319824219,
         "prediction_target_ms": 100,
         "prediction_performance": "PASS",
-        "batch_prediction_ms": 1.0993480682373047,
-        "avg_per_prediction_ms": 0.10993480682373047,
-        "search_time_seconds": 0.0450899600982666,
+        "batch_prediction_ms": 1.348257064819336,
+        "avg_per_prediction_ms": 0.1348257064819336,
+        "search_time_seconds": 0.04114532470703125,
         "search_target_seconds": 30,
         "search_performance": "PASS",
         "error": "No module named 'psutil'"
@@ -108,12 +108,12 @@
     }
   },
   "performance_benchmarks": {
-    "single_prediction_ms": 0.38313865661621094,
+    "single_prediction_ms": 0.4611015319824219,
     "prediction_target_ms": 100,
     "prediction_performance": "PASS",
-    "batch_prediction_ms": 1.0993480682373047,
-    "avg_per_prediction_ms": 0.10993480682373047,
-    "search_time_seconds": 0.0450899600982666,
+    "batch_prediction_ms": 1.348257064819336,
+    "avg_per_prediction_ms": 0.1348257064819336,
+    "search_time_seconds": 0.04114532470703125,
     "search_target_seconds": 30,
     "search_performance": "PASS",
     "error": "No module named 'psutil'"
