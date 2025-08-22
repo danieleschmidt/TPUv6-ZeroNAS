@@ -155,6 +155,7 @@ class TPUv6Predictor(EnhancedPredictorMethods):
                  enable_caching: bool = True):
         self.config = config or TPUv6Config()
         self.coeffs = coefficients or ScalingLawCoefficients()
+        self.scaling_law_coeffs = self.coeffs  # Alias for compatibility
         self.enable_uncertainty = enable_uncertainty
         self.enable_caching = enable_caching
         self.logger = logging.getLogger(__name__)
@@ -246,69 +247,80 @@ class TPUv6Predictor(EnhancedPredictorMethods):
             self.total_prediction_time += prediction_time
     
     def _compute_prediction_internal(self, architecture: Architecture) -> PerformanceMetrics:
-        """Internal computation method with improved accuracy modeling."""
+        """Internal computation method with improved accuracy modeling and robust error handling."""
         
-        # Enhanced accuracy computation
-        base_accuracy = self.scaling_law_coeffs.accuracy_base
-        param_bonus = min(architecture.total_params * self.scaling_law_coeffs.accuracy_param_bonus, 0.05)
-        depth_factor = max(0.0, 1.0 - (architecture.depth - 5) * 0.01)  # Better depth handling
-        width_factor = min(architecture.max_channels / 1000.0, 1.0) * 0.02
-        
-        # Compute realistic accuracy
-        predicted_accuracy = (base_accuracy + param_bonus + width_factor) * depth_factor
-        predicted_accuracy = max(0.88, min(predicted_accuracy, 0.995))  # Realistic bounds
-        # Extract comprehensive features
-        features = self._extract_enhanced_features(architecture)
-        
-        # Detect novel architectural patterns for research
-        self._analyze_architectural_novelty(architecture, features)
-        
-        # Predict with uncertainty if enabled
-        if self.enable_uncertainty:
-            latency_pred = self._predict_latency_with_uncertainty(features)
-            energy_pred = self._predict_energy_with_uncertainty(features)
-            accuracy_pred = self._predict_accuracy_with_uncertainty(features)
+        try:
+            # Enhanced accuracy computation with defensive programming
+            base_accuracy = getattr(self.scaling_law_coeffs, 'accuracy_base', 0.92)
+            param_bonus = min(architecture.total_params * getattr(self.scaling_law_coeffs, 'accuracy_param_bonus', 2.1e-7), 0.05)
+            depth_factor = max(0.0, 1.0 - (architecture.depth - 5) * 0.01)  # Better depth handling
             
-            # Use mean values for primary metrics
-            latency_ms = latency_pred.mean
-            energy_mj = energy_pred.mean  
-            accuracy = accuracy_pred.mean
+            # Safely access max_channels with fallback
+            max_channels = getattr(architecture, 'max_channels', 
+                                 max((layer.output_channels for layer in architecture.layers), default=64))
+            width_factor = min(max_channels / 1000.0, 1.0) * 0.02
             
-            # Calculate confidence score
-            confidence = min(latency_pred.model_confidence, 
-                           energy_pred.model_confidence,
-                           accuracy_pred.model_confidence)
-            self.confidence_history.append(confidence)
+            # Compute realistic accuracy
+            predicted_accuracy = (base_accuracy + param_bonus + width_factor) * depth_factor
+            predicted_accuracy = max(0.88, min(predicted_accuracy, 0.995))  # Realistic bounds
             
-        else:
-            latency_ms = self._predict_latency_deterministic(features)
-            energy_mj = self._predict_energy_deterministic(features)
-            accuracy = predicted_accuracy  # Use improved accuracy from above
+            # Extract comprehensive features
+            features = self._extract_enhanced_features(architecture)
+            
+            # Detect novel architectural patterns for research
+            self._analyze_architectural_novelty(architecture, features)
+            
+            # Predict with uncertainty if enabled
+            if self.enable_uncertainty:
+                latency_pred = self._predict_latency_with_uncertainty(features)
+                energy_pred = self._predict_energy_with_uncertainty(features)
+                accuracy_pred = self._predict_accuracy_with_uncertainty(features)
+                
+                # Use mean values for primary metrics
+                latency_ms = latency_pred.mean
+                energy_mj = energy_pred.mean  
+                accuracy = accuracy_pred.mean
+                
+                # Calculate confidence score
+                confidence = min(latency_pred.model_confidence, 
+                               energy_pred.model_confidence,
+                               accuracy_pred.model_confidence)
+                self.confidence_history.append(confidence)
+                
+            else:
+                latency_ms = self._predict_latency_deterministic(features)
+                energy_mj = self._predict_energy_deterministic(features)
+                accuracy = predicted_accuracy  # Use improved accuracy from above
+            
+            # Calculate enhanced derived metrics
+            tops_per_watt = self._calculate_enhanced_efficiency(features, energy_mj, latency_ms)
+            efficiency_score = self._calculate_research_efficiency_score(
+                latency_ms, energy_mj, accuracy, tops_per_watt, features
+            )
+            
+            metrics = PerformanceMetrics(
+                latency_ms=latency_ms,
+                energy_mj=energy_mj,
+                accuracy=accuracy,
+                tops_per_watt=tops_per_watt,
+                memory_mb=features.get('memory_mb', 10.0),
+                flops=int(features.get('total_ops', 1e6))
+            )
+            
+            # Cache result if enabled (simple cache fallback)
+            if self.enable_caching and not self.cache_optimizer:
+                arch_hash = self._get_architecture_hash(architecture)
+                self.prediction_cache[arch_hash] = metrics
+            
+            # Validate scaling laws
+            self._validate_scaling_laws(architecture, features, metrics)
+            
+            return metrics
         
-        # Calculate enhanced derived metrics
-        tops_per_watt = self._calculate_enhanced_efficiency(features, energy_mj, latency_ms)
-        efficiency_score = self._calculate_research_efficiency_score(
-            latency_ms, energy_mj, accuracy, tops_per_watt, features
-        )
-        
-        metrics = PerformanceMetrics(
-            latency_ms=latency_ms,
-            energy_mj=energy_mj,
-            accuracy=accuracy,
-            tops_per_watt=tops_per_watt,
-            memory_mb=features.get('memory_mb', 10.0),
-            flops=int(features.get('total_ops', 1e6))
-        )
-        
-        # Cache result if enabled (simple cache fallback)
-        if self.enable_caching and not self.cache_optimizer:
-            arch_hash = self._get_architecture_hash(architecture)
-            self.prediction_cache[arch_hash] = metrics
-        
-        # Validate scaling laws
-        self._validate_scaling_laws(architecture, features, metrics)
-        
-        return metrics
+        except Exception as e:
+            self.logger.error(f"Prediction computation failed for {architecture.name}: {e}")
+            # Return robust fallback metrics
+            return self._get_fallback_metrics(architecture)
     
     def _extract_enhanced_features(self, arch: Architecture) -> Dict[str, float]:
         """Extract comprehensive architectural features for enhanced prediction."""

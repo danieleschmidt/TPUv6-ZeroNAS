@@ -127,6 +127,13 @@ class Architecture:
         return sum(layer.output_channels for layer in self.layers) / len(self.layers)
     
     @property
+    def max_channels(self) -> int:
+        """Maximum number of channels across all layers."""
+        if not self.layers:
+            return 0
+        return max(layer.output_channels for layer in self.layers)
+    
+    @property
     def memory_mb(self) -> float:
         """Estimated memory footprint in MB."""
         h, w, c = self.input_shape
