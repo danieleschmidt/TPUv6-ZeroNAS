@@ -1,12 +1,12 @@
 {
   "config": {
-    "max_iterations": 4,
+    "max_iterations": 10,
     "population_size": 8,
     "mutation_rate": 0.1,
     "crossover_rate": 0.7,
     "early_stop_threshold": 1e-06,
     "target_tops_w": 75.0,
-    "max_latency_ms": 10.0,
+    "max_latency_ms": 5.0,
     "min_accuracy": 0.95,
     "enable_parallel": true,
     "enable_caching": true,
@@ -16,322 +16,718 @@
   },
   "search_history": [
     [
-      "random_arch_9095",
+      "random_arch_3109",
       {
-        "latency_ms": 1.8285087744533266,
-        "energy_mj": 0.2410933094317011,
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 7.2734375,
-        "flops": 1795
+        "memory_mb": 2.296875,
+        "flops": 9
       }
     ],
     [
-      "random_arch_8629",
+      "random_arch_3701",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23155866546464746,
+        "energy_mj": 0.2424560364902048,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 393.72265625,
-        "flops": 4102
+        "memory_mb": 288.44921875,
+        "flops": 51280
       }
     ],
     [
-      "random_arch_6801",
+      "random_arch_2501",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24182998989007623,
+        "energy_mj": 0.23471504375398708,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 246.72265625,
-        "flops": 38662
+        "memory_mb": 446.55078125,
+        "flops": 3728882
       }
     ],
     [
-      "random_arch_9181",
+      "random_arch_2575",
+      {
+        "latency_ms": 3.364390076438901,
+        "energy_mj": 0.2447153928666496,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 101.4453125,
+        "flops": 2527
+      }
+    ],
+    [
+      "random_arch_7021",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23365593843700416,
+        "energy_mj": 0.24231690309034865,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2717955
+        "memory_mb": 645.99609375,
+        "flops": 408860
       }
     ],
     [
-      "random_arch_9296",
+      "random_arch_5518",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2432455349721075,
+        "energy_mj": 0.23221177438715807,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 169.5859375,
-        "flops": 138905
+        "memory_mb": 70.0546875,
+        "flops": 1029491
       }
     ],
     [
-      "random_arch_9214",
+      "random_arch_8945",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.2442357667977481,
+        "energy_mj": 0.24403189902853645,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 218.203125,
-        "flops": 64265
+        "memory_mb": 233.32421875,
+        "flops": 339462
       }
     ],
     [
-      "random_arch_1525",
+      "random_arch_8201",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.24238313868641603,
+        "energy_mj": 0.24341069967005918,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 392.57421875,
-        "flops": 15360
+        "memory_mb": 53.689453125,
+        "flops": 196595
       }
     ],
     [
-      "random_arch_4068",
+      "random_arch_3109",
+      {
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 9
+      }
+    ],
+    [
+      "random_arch_3701",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23239077037074146,
+        "energy_mj": 0.24213226068450763,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 76.1796875,
-        "flops": 1238339
+        "memory_mb": 291.51171875,
+        "flops": 317344
       }
     ],
     [
-      "random_arch_9095",
-      {
-        "latency_ms": 1.8285087744533266,
-        "energy_mj": 0.2410933094317011,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 7.2734375,
-        "flops": 1795
-      }
-    ],
-    [
-      "random_arch_8629",
+      "crossover_random_arch_2501_random_arch_2501_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23155866546464746,
+        "energy_mj": 0.23471504375398708,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 393.72265625,
-        "flops": 4102
+        "memory_mb": 446.55078125,
+        "flops": 3728882
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "crossover_random_arch_3701_random_arch_2575_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.24213467454798504,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 297.63671875,
+        "flops": 317360
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "crossover_random_arch_2501_random_arch_2501_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.23471504375398708,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 446.55078125,
+        "flops": 3728882
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "crossover_random_arch_2575_random_arch_3701_0",
+      {
+        "latency_ms": 0.4755118408172935,
+        "energy_mj": 0.243880231968439,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 125.9453125,
+        "flops": 10591
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 9
+      }
+    ],
+    [
+      "random_arch_3701",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.24213228684752655,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 291.51171875,
+        "flops": 317408
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 9
+      }
+    ],
+    [
+      "crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.234737654728371,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 481.578125,
+        "flops": 3729193
       }
     ],
     [
-      "mutated_crossover_random_arch_9181_random_arch_9181_0_0",
+      "crossover_crossover_random_arch_2501_random_arch_2501_0_crossover_random_arch_2501_random_arch_2501_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351055205750285,
+        "energy_mj": 0.23471509489334375,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 102.689453125,
-        "flops": 2553859
+        "memory_mb": 446.55078125,
+        "flops": 3728943
       }
     ],
     [
-      "random_arch_9095",
-      {
-        "latency_ms": 1.8285087744533266,
-        "energy_mj": 0.2410933094317011,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 7.2734375,
-        "flops": 1795
-      }
-    ],
-    [
-      "random_arch_8629",
+      "crossover_crossover_random_arch_2501_random_arch_2501_0_crossover_random_arch_2501_random_arch_2501_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23155866546464746,
+        "energy_mj": 0.23471509489334375,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 393.72265625,
-        "flops": 4102
+        "memory_mb": 446.55078125,
+        "flops": 3728943
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "mutated_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.23472270342401438,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 458.2265625,
+        "flops": 3729132
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "mutated_crossover_crossover_random_arch_3701_random_arch_2575_0_crossover_random_arch_3701_random_arch_2575_0_0_0",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.23246245126549708,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 322.13671875,
+        "flops": 1136640
       }
     ],
     [
-      "crossover_random_arch_9181_random_arch_9181_0",
+      "random_arch_3109",
+      {
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 9
+      }
+    ],
+    [
+      "random_arch_3701",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.24213228684752655,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 291.51171875,
+        "flops": 317408
       }
     ],
     [
-      "random_arch_9095",
+      "mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0",
       {
-        "latency_ms": 1.8285087744533266,
-        "energy_mj": 0.2410933094317011,
+        "latency_ms": 2.7937778782732217,
+        "energy_mj": 0.2517297664767836,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 7.2734375,
-        "flops": 1795
+        "memory_mb": 13.97265625,
+        "flops": 70
       }
     ],
     [
-      "random_arch_8629",
+      "crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.23155866546464746,
+        "latency_ms": 2.5643563140233905,
+        "energy_mj": 0.24026800423233818,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 393.72265625,
-        "flops": 4102
+        "memory_mb": 25.6484375,
+        "flops": 259
       }
     ],
     [
-      "crossover_crossover_random_arch_9181_random_arch_9181_0_crossover_random_arch_9181_random_arch_9181_0_0",
+      "crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "latency_ms": 2.7906623251811595,
+        "energy_mj": 0.2517216031611222,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 2.296875,
+        "flops": 9
       }
     ],
     [
-      "crossover_crossover_random_arch_9181_random_arch_9181_0_crossover_random_arch_9181_random_arch_9181_0_0",
+      "crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "latency_ms": 2.5121814454371867,
+        "energy_mj": 0.23429053189789584,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 13.97265625,
+        "flops": 198
       }
     ],
     [
-      "crossover_crossover_random_arch_9181_random_arch_9181_0_crossover_random_arch_9181_random_arch_9181_0_0",
+      "random_arch_3109",
       {
-        "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 2.296875,
+        "flops": 70
       }
     ],
     [
-      "crossover_crossover_random_arch_9181_random_arch_9181_0_crossover_random_arch_9181_random_arch_9181_0_0",
-      {
-        "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
-        "accuracy": 0.1,
-        "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
-      }
-    ],
-    [
-      "crossover_crossover_random_arch_9181_random_arch_9181_0_crossover_random_arch_9181_random_arch_9181_0_0",
+      "random_arch_3701",
       {
         "latency_ms": 0.1,
-        "energy_mj": 0.23351858315513074,
+        "energy_mj": 0.24233282545123255,
         "accuracy": 0.1,
         "tops_per_watt": 0.1,
-        "memory_mb": 114.939453125,
-        "flops": 2554115
+        "memory_mb": 475.26171875,
+        "flops": 321248
+      }
+    ],
+    [
+      "crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0",
+      {
+        "latency_ms": 2.7013643973773056,
+        "energy_mj": 0.25173069798297787,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 13.97265625,
+        "flops": 1091
+      }
+    ],
+    [
+      "mutated_crossover_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_0",
+      {
+        "latency_ms": 0.6247649782670435,
+        "energy_mj": 0.24746930292962435,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 209.3984375,
+        "flops": 4160
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24233284878763214,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 321376
+      }
+    ],
+    [
+      "crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "crossover_random_arch_3701_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_0",
+      {
+        "latency_ms": 0.6247649782670435,
+        "energy_mj": 0.24746930292962435,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 209.3984375,
+        "flops": 4160
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.790673086709486,
+        "energy_mj": 0.2517225346673163,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 1030
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24217774698924993,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 320355
+      }
+    ],
+    [
+      "crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24212021448224658,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 279.8359375,
+        "flops": 317286
+      }
+    ],
+    [
+      "crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_crossover_random_arch_3701_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_0_0",
+      {
+        "latency_ms": 2.6120681468457443,
+        "energy_mj": 0.23131292321765098,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 13.97265625,
+        "flops": 9
+      }
+    ],
+    [
+      "crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.790673086709486,
+        "energy_mj": 0.2517225346673163,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 1030
+      }
+    ],
+    [
+      "crossover_random_arch_3701_random_arch_3109_0",
+      {
+        "latency_ms": 0.7140460685585082,
+        "energy_mj": 0.2480000579842951,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 197.72265625,
+        "flops": 4099
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24217774698924993,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 320355
+      }
+    ],
+    [
+      "crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24212021448224658,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 279.8359375,
+        "flops": 317286
+      }
+    ],
+    [
+      "crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "mutated_crossover_random_arch_3701_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_crossover_random_arch_3701_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_0_0_0_0",
+      {
+        "latency_ms": 1.1979254215053756,
+        "energy_mj": 0.2335991479197197,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 209.97265625,
+        "flops": 3142
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.790673086709486,
+        "energy_mj": 0.2517225346673163,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 1030
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24217774698924993,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 320355
+      }
+    ],
+    [
+      "mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24273333196249008,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 51.296875,
+        "flops": 36230
+      }
+    ],
+    [
+      "mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24210954803134396,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 267.5859375,
+        "flops": 316262
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24217774698924993,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 320355
+      }
+    ],
+    [
+      "crossover_random_arch_3701_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_0",
+      {
+        "latency_ms": 0.7140460685585082,
+        "energy_mj": 0.2480000579842951,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 197.72265625,
+        "flops": 4099
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.790673086709486,
+        "energy_mj": 0.2517225346673163,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 1030
+      }
+    ],
+    [
+      "crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24212021448224658,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 279.8359375,
+        "flops": 317286
+      }
+    ],
+    [
+      "random_arch_3109",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "random_arch_3701",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24232557895535842,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 475.26171875,
+        "flops": 321328
+      }
+    ],
+    [
+      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_0_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.2420924568643488,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 244.234375,
+        "flops": 316214
+      }
+    ],
+    [
+      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_0_0_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3701_0_0_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24225896301358604,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 267.5859375,
+        "flops": 317235
+      }
+    ],
+    [
+      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0_0",
+      {
+        "latency_ms": 0.1,
+        "energy_mj": 0.24135992277605015,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 51.296875,
+        "flops": 35270
+      }
+    ],
+    [
+      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "crossover_mutated_crossover_crossover_crossover_crossover_crossover_mutated_crossover_random_arch_3701_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_crossover_crossover_random_arch_3701_crossover_random_arch_2501_random_arch_2501_0_0_crossover_crossover_random_arch_2501_random_arch_2501_0_random_arch_3109_0_0_0_random_arch_3109_0_random_arch_3701_0_random_arch_3109_0_random_arch_3109_0_0_random_arch_3109_0",
+      {
+        "latency_ms": 2.618859626471034,
+        "energy_mj": 0.24282605733623835,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 2.296875,
+        "flops": 70
+      }
+    ],
+    [
+      "crossover_random_arch_3701_random_arch_3109_0",
+      {
+        "latency_ms": 0.6247649782670435,
+        "energy_mj": 0.24746930292962435,
+        "accuracy": 0.1,
+        "tops_per_watt": 0.1,
+        "memory_mb": 209.3984375,
+        "flops": 4160
       }
     ]
   ],
-  "best_architecture": "random_arch_7991",
+  "best_architecture": "random_arch_3942",
   "best_metrics": {
     "latency_ms": 0.1,
-    "energy_mj": 0.23291434918652382,
-    "accuracy": 0.1,
-    "tops_per_watt": 0.1,
-    "memory_mb": 327.87890625,
-    "flops": 1671302
+    "energy_mj": 0.2558030714498149,
+    "accuracy": 0.29250617344,
+    "tops_per_watt": 0.11611587945857517,
+    "memory_mb": 1567.42578125,
+    "flops": 28029970
   },
   "statistics": {
     "search_completed": true,
-    "total_evaluations": 27,
+    "total_evaluations": 63,
     "best_metrics": {
       "latency_ms": 0.1,
-      "energy_mj": 0.23291434918652382,
-      "accuracy": 0.1,
-      "tops_per_watt": 0.1,
-      "memory_mb": 327.87890625,
-      "flops": 1671302
+      "energy_mj": 0.2558030714498149,
+      "accuracy": 0.29250617344,
+      "tops_per_watt": 0.11611587945857517,
+      "memory_mb": 1567.42578125,
+      "flops": 28029970
     },
     "convergence_metrics": {
       "convergence_rate": 0,
