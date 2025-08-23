@@ -25,6 +25,8 @@ from .error_handling import (
     robust_operation, safe_operation, validate_architecture_safe, 
     validate_metrics_safe, ErrorHandlingContext, get_error_handler
 )
+from .advanced_optimization import AdvancedSearchOptimizer
+from .hyperparameter_optimization import AdaptiveHyperparameterManager
 
 
 @dataclass
@@ -44,6 +46,8 @@ class SearchConfig:
     enable_adaptive: bool = True
     enable_research: bool = False  # Advanced research analysis
     enable_adaptive_scaling: bool = True  # Generation 3: Adaptive scaling
+    enable_advanced_optimization: bool = True  # Generation 3: Advanced optimization 
+    enable_hyperparameter_optimization: bool = True  # Generation 3: Hyperparameter optimization
     parallel_workers: int = None  # Auto-detect if None
     adaptive_scaling_factor: float = 1.5  # Dynamic scaling multiplier
 
@@ -74,6 +78,30 @@ class ZeroNASSearcher:
         self.profiler = get_profiler()
         self.health_checker = get_health_checker()
         self.validator = ArchitectureValidator()
+        
+        # Enhanced search state tracking
+        self.constraint_violation_history = {
+            'accuracy': [], 'latency': [], 'energy': []
+        }
+        self.search_adaptation_enabled = True
+        
+        # Generation 3: Advanced optimization
+        self.advanced_optimizer = None
+        if getattr(self.config, 'enable_advanced_optimization', False):
+            try:
+                self.advanced_optimizer = AdvancedSearchOptimizer(self.predictor)
+                self.logger.info("🚀 Advanced optimization enabled")
+            except Exception as e:
+                self.logger.warning(f"Advanced optimization initialization failed: {e}")
+        
+        # Generation 3: Hyperparameter optimization
+        self.hp_manager = None
+        if getattr(self.config, 'enable_hyperparameter_optimization', False):
+            try:
+                self.hp_manager = AdaptiveHyperparameterManager()
+                self.logger.info("🎯 Hyperparameter optimization enabled")
+            except Exception as e:
+                self.logger.warning(f"Hyperparameter optimization initialization failed: {e}")
         
         # Initialize optimization features
         self.performance_optimizer = get_performance_optimizer()
@@ -184,8 +212,10 @@ class ZeroNASSearcher:
                 try:
                     iteration_start = time.time()
                     
-                    # Use optimized evaluation if available
-                    if self.config.enable_parallel and self.parallel_evaluator:
+                    # Use advanced optimization if available
+                    if self.advanced_optimizer:
+                        evaluated_pop = self.advanced_optimizer.optimize_population_evaluation(population)
+                    elif self.config.enable_parallel and self.parallel_evaluator:
                         evaluated_pop = self.performance_optimizer.optimize_population_evaluation(
                             population, self.parallel_evaluator
                         )
@@ -213,6 +243,14 @@ class ZeroNASSearcher:
                         self.best_metrics,
                         [metrics for _, metrics in evaluated_pop]
                     )
+                    
+                    # Adaptive hyperparameter optimization
+                    if self.hp_manager and iteration > 0:
+                        current_score = self._compute_score(self.best_metrics) if self.best_metrics else 0.0
+                        if self.hp_manager.should_adapt_hyperparameters(iteration):
+                            adapted_params = self.hp_manager.adapt_hyperparameters(self.config, current_score)
+                            if adapted_params:
+                                self.logger.info(f"🔄 Hyperparameters adapted at iteration {iteration + 1}")
                     
                     self.profiler.record_time('iteration', time.time() - iteration_start)
                     
@@ -418,13 +456,20 @@ class ZeroNASSearcher:
         self, 
         evaluated_pop: List[Tuple[Architecture, PerformanceMetrics]]
     ) -> None:
-        """Update best architecture based on multi-objective optimization."""
+        """Update best architecture with constraint violation tracking."""
         for arch, metrics in evaluated_pop:
+            # Track constraint violations for adaptive behavior
+            self._track_constraint_violations(metrics)
+            
             if self._is_better_architecture(metrics):
                 self.best_architecture = arch
                 self.best_metrics = metrics
                 
         self.search_history.extend(evaluated_pop)
+        
+        # Adapt search strategy based on constraint violation patterns
+        if self.search_adaptation_enabled and len(self.search_history) > 20:
+            self._adapt_search_strategy()
     
     def _is_better_architecture(self, metrics: PerformanceMetrics) -> bool:
         """Check if architecture is better based on constraints and objectives."""
@@ -442,29 +487,123 @@ class ZeroNASSearcher:
         return current_score > best_score
     
     def _compute_score(self, metrics: PerformanceMetrics) -> float:
-        """Compute multi-objective score for architecture with constraints."""
-        # Hard constraint violations get heavily penalized
+        """Compute enhanced multi-objective score with adaptive weighting."""
+        # Progressive constraint handling with graduated penalties
         constraint_penalty = 0.0
+        constraint_satisfaction = 1.0
         
-        # Accuracy constraint
+        # Accuracy constraint with graduated penalty
         if metrics.accuracy < self.config.min_accuracy:
-            constraint_penalty += (self.config.min_accuracy - metrics.accuracy) * 10
+            accuracy_deficit = self.config.min_accuracy - metrics.accuracy
+            if accuracy_deficit > 0.1:  # Severe violation
+                constraint_penalty += accuracy_deficit * 20
+                constraint_satisfaction *= 0.3
+            else:  # Minor violation
+                constraint_penalty += accuracy_deficit * 5
+                constraint_satisfaction *= 0.7
+        else:
+            # Bonus for exceeding accuracy requirements
+            accuracy_bonus = min(0.05, (metrics.accuracy - self.config.min_accuracy) * 0.5)
+            constraint_penalty -= accuracy_bonus
         
-        # Latency constraint  
+        # Latency constraint with graduated penalty  
         if metrics.latency_ms > self.config.max_latency_ms:
-            constraint_penalty += (metrics.latency_ms - self.config.max_latency_ms) * 0.1
+            latency_excess = metrics.latency_ms - self.config.max_latency_ms
+            if latency_excess > self.config.max_latency_ms * 0.5:  # Severe violation
+                constraint_penalty += latency_excess * 0.5
+                constraint_satisfaction *= 0.5
+            else:  # Minor violation
+                constraint_penalty += latency_excess * 0.1
+                constraint_satisfaction *= 0.8
         
-        # Base scoring components
-        efficiency_score = min(metrics.tops_per_watt / self.config.target_tops_w, 2.0)
+        # Enhanced scoring components with better balance
+        efficiency_score = min(metrics.tops_per_watt / self.config.target_tops_w, 1.5)
         accuracy_score = metrics.accuracy
+        latency_score = max(0.1, 1.0 / max(metrics.latency_ms, 0.1))  # Favor lower latency
+        energy_score = max(0.1, 1.0 / max(metrics.energy_mj, 0.1))  # Favor lower energy
         
-        # Combine scores with constraint penalty
-        score = (0.4 * efficiency_score + 
-                0.4 * accuracy_score - 
-                constraint_penalty)
+        # Adaptive weighting based on constraint satisfaction
+        if constraint_satisfaction > 0.9:  # Well-constrained solution
+            # Focus on optimization objectives
+            score = (0.35 * efficiency_score + 
+                    0.35 * accuracy_score + 
+                    0.15 * latency_score + 
+                    0.15 * energy_score)
+        else:  # Constraint-violating solution
+            # Heavily weight constraint satisfaction
+            score = (0.2 * efficiency_score + 
+                    0.6 * accuracy_score + 
+                    0.1 * latency_score + 
+                    0.1 * energy_score)
         
-        # Ensure minimum feasible score
-        return max(score, -10.0)
+        # Apply constraint penalty and satisfaction multiplier
+        final_score = (score * constraint_satisfaction) - constraint_penalty
+        
+        # Ensure reasonable bounds with better dynamic range
+        return max(final_score, -20.0)
+    
+    def _track_constraint_violations(self, metrics: PerformanceMetrics) -> None:
+        """Track constraint violations to adapt search strategy."""
+        try:
+            # Track accuracy violations
+            if metrics.accuracy < self.config.min_accuracy:
+                self.constraint_violation_history['accuracy'].append(
+                    self.config.min_accuracy - metrics.accuracy
+                )
+            
+            # Track latency violations
+            if metrics.latency_ms > self.config.max_latency_ms:
+                self.constraint_violation_history['latency'].append(
+                    metrics.latency_ms - self.config.max_latency_ms
+                )
+            
+            # Track energy efficiency (if significantly poor)
+            if metrics.tops_per_watt < self.config.target_tops_w * 0.3:
+                self.constraint_violation_history['energy'].append(
+                    self.config.target_tops_w * 0.3 - metrics.tops_per_watt
+                )
+            
+            # Keep only recent history (last 50 violations per type)
+            for constraint_type in self.constraint_violation_history:
+                if len(self.constraint_violation_history[constraint_type]) > 50:
+                    self.constraint_violation_history[constraint_type] = \
+                        self.constraint_violation_history[constraint_type][-50:]
+                        
+        except Exception as e:
+            self.logger.debug(f"Constraint tracking failed: {e}")
+    
+    def _adapt_search_strategy(self) -> None:
+        """Adapt search strategy based on constraint violation patterns."""
+        try:
+            total_evaluations = len(self.search_history)
+            
+            # Calculate violation rates
+            accuracy_violations = len(self.constraint_violation_history['accuracy'])
+            latency_violations = len(self.constraint_violation_history['latency'])
+            energy_violations = len(self.constraint_violation_history['energy'])
+            
+            accuracy_violation_rate = accuracy_violations / max(total_evaluations, 1)
+            latency_violation_rate = latency_violations / max(total_evaluations, 1)
+            
+            # Adapt mutation rate based on constraint satisfaction
+            if accuracy_violation_rate > 0.7:  # High accuracy violations
+                # Encourage more conservative mutations to improve accuracy
+                self.config.mutation_rate = max(0.05, self.config.mutation_rate * 0.8)
+                self.logger.debug("Reducing mutation rate due to accuracy violations")
+            elif accuracy_violation_rate < 0.2 and latency_violation_rate < 0.2:
+                # Good constraint satisfaction, can be more aggressive
+                self.config.mutation_rate = min(0.3, self.config.mutation_rate * 1.1)
+                self.logger.debug("Increasing mutation rate due to good constraint satisfaction")
+            
+            # Adapt population diversity based on convergence
+            if hasattr(self, 'parallel_evaluator') and self.parallel_evaluator:
+                if accuracy_violation_rate > 0.5:
+                    # Need more diversity to find feasible solutions
+                    self.config.population_size = min(100, int(self.config.population_size * 1.2))
+                    self.logger.debug("Increasing population size for better exploration")
+            
+        except Exception as e:
+            self.logger.debug(f"Search adaptation failed: {e}")
     
     def _should_early_stop(self) -> bool:
         """Check if search should stop early."""
@@ -759,6 +898,23 @@ class ZeroNASSearcher:
                 self.save_search_state('.search_state_final.json')
             except Exception as e:
                 self.logger.debug(f"Could not save final search state: {e}")
+            
+            # Generate advanced optimization report
+            if self.advanced_optimizer:
+                try:
+                    opt_report = self.advanced_optimizer.get_optimization_report()
+                    self.logger.info(f"📊 Advanced optimization report: {opt_report}")
+                    self.advanced_optimizer.cleanup()
+                except Exception as e:
+                    self.logger.debug(f"Advanced optimizer cleanup failed: {e}")
+            
+            # Generate hyperparameter optimization summary
+            if self.hp_manager:
+                try:
+                    hp_summary = self.hp_manager.get_optimization_summary()
+                    self.logger.info(f"🎯 Hyperparameter optimization summary: {hp_summary}")
+                except Exception as e:
+                    self.logger.debug(f"Hyperparameter optimization summary failed: {e}")
             
             self.logger.info("Cleanup completed successfully")
             
