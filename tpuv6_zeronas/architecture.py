@@ -253,23 +253,44 @@ class ArchitectureSpace:
         ]
     
     def sample_random(self) -> Architecture:
-        """Sample a random architecture from the search space."""
+        """Sample a random architecture from the search space with enhanced layer compatibility."""
         max_attempts = 10
         
         for attempt in range(max_attempts):
             try:
-                depth = random.randint(3, self.max_depth)
+                depth = random.randint(3, min(8, self.max_depth))  # Reasonable depth range
                 layers = []
                 
-                current_channels = self.input_shape[2]
+                current_channels = self.input_shape[2]  # Start with input channels (e.g., 3 for RGB)
+                current_spatial_size = max(self.input_shape[:2])  # Track spatial dimensions
                 
                 for i in range(depth):
-                    layer_type = random.choice(self.layer_types)
+                    # Choose layer type with better logic
+                    if i == 0:
+                        # First layer must be conv to handle image input
+                        layer_type = LayerType.CONV2D
+                    elif i == depth - 1:
+                        # Final layer is typically linear for classification
+                        layer_type = LayerType.LINEAR
+                    else:
+                        # Middle layers can be varied
+                        layer_type = random.choice([
+                            LayerType.CONV2D, LayerType.DEPTHWISE_CONV, 
+                            LayerType.BATCH_NORM, LayerType.RELU
+                        ])
                     
                     try:
                         if layer_type == LayerType.CONV2D:
-                            output_channels = random.choice(self.channel_choices)
-                            kernel_size = random.choice(self.kernel_choices)
+                            # Progressive channel expansion
+                            if i == 0:
+                                output_channels = random.choice([16, 32, 64])  # Start small
+                            else:
+                                output_channels = min(
+                                    random.choice(self.channel_choices),
+                                    current_channels * 4  # Reasonable expansion
+                                )
+                            
+                            kernel_size = random.choice([(1, 1), (3, 3), (5, 5)])
                             stride = (1, 1) if i == 0 else random.choice([(1, 1), (2, 2)])
                             activation = random.choice(self.activations)
                             
@@ -283,38 +304,76 @@ class ArchitectureSpace:
                                 activation=activation
                             )
                             current_channels = output_channels
+                            if stride == (2, 2):
+                                current_spatial_size //= 2
                             
+                        elif layer_type == LayerType.DEPTHWISE_CONV:
+                            # Depthwise keeps same channels
+                            kernel_size = random.choice([(3, 3), (5, 5)])
+                            stride = random.choice([(1, 1), (2, 2)])
+                            
+                            layer = Layer(
+                                layer_type=layer_type,
+                                input_channels=current_channels,
+                                output_channels=current_channels,  # Depthwise preserves channels
+                                kernel_size=kernel_size,
+                                stride=stride,
+                                padding="same",
+                                activation=random.choice(self.activations)
+                            )
+                            if stride == (2, 2):
+                                current_spatial_size //= 2
+                                
                         elif layer_type == LayerType.LINEAR:
+                            # For final layer, output num_classes
                             if i == depth - 1:
                                 output_channels = self.num_classes
                             else:
-                                output_channels = random.choice(self.channel_choices)
+                                # Intermediate linear layer
+                                output_channels = random.choice([256, 512, 1024])
                                 
                             layer = Layer(
                                 layer_type=layer_type,
                                 input_channels=current_channels,
                                 output_channels=output_channels,
-                                activation=random.choice(self.activations) if i < depth - 1 else None
+                                activation=None if i == depth - 1 else random.choice(self.activations)
                             )
                             current_channels = output_channels
                             
-                        else:
+                        else:  # Activation/norm layers
                             layer = Layer(
                                 layer_type=layer_type,
                                 input_channels=current_channels,
-                                output_channels=current_channels,
+                                output_channels=current_channels,  # Preserve channels
                                 activation=random.choice(self.activations) if layer_type in [LayerType.RELU, LayerType.GELU] else None
                             )
                         
-                        if self._validate_layer(layer):
+                        if self._validate_layer(layer, current_spatial_size):
                             layers.append(layer)
                         else:
-                            continue
+                            # If validation fails, try a simpler layer
+                            simple_layer = Layer(
+                                layer_type=LayerType.RELU,
+                                input_channels=current_channels,
+                                output_channels=current_channels
+                            )
+                            if self._validate_layer(simple_layer, current_spatial_size):
+                                layers.append(simple_layer)
                             
                     except Exception as e:
                         continue  # Skip this layer and try again
                 
-                if len(layers) >= 3:  # Minimum viable architecture
+                # Ensure we have a valid architecture
+                if len(layers) >= 3:
+                    # Ensure architecture ends with classification layer
+                    if layers[-1].layer_type != LayerType.LINEAR or layers[-1].output_channels != self.num_classes:
+                        layers.append(Layer(
+                            layer_type=LayerType.LINEAR,
+                            input_channels=current_channels,
+                            output_channels=self.num_classes,
+                            activation=None
+                        ))
+                    
                     arch = Architecture(
                         layers=layers,
                         input_shape=self.input_shape,
@@ -331,14 +390,33 @@ class ArchitectureSpace:
         # Fallback: create minimal valid architecture
         return self._create_minimal_architecture()
     
-    def _validate_layer(self, layer: Layer) -> bool:
-        """Validate individual layer."""
+    def _validate_layer(self, layer: Layer, spatial_size: int = 224) -> bool:
+        """Validate individual layer with enhanced checks."""
         try:
+            # Channel validation
             if layer.input_channels <= 0 or layer.output_channels <= 0:
                 return False
             
             if layer.input_channels > 2048 or layer.output_channels > 2048:
                 return False  # Reasonable bounds
+            
+            # Layer-specific validation
+            if layer.layer_type == LayerType.CONV2D:
+                if layer.kernel_size is None:
+                    return False
+                # Kernel size should not exceed spatial dimensions
+                if max(layer.kernel_size) > spatial_size:
+                    return False
+                    
+            elif layer.layer_type == LayerType.DEPTHWISE_CONV:
+                # Depthwise conv should preserve input channels
+                if layer.input_channels != layer.output_channels:
+                    return False
+                    
+            elif layer.layer_type == LayerType.LINEAR:
+                # Linear layers should have reasonable size
+                if layer.input_channels * layer.output_channels > 50_000_000:  # 50M parameters max
+                    return False
             
             return True
             
@@ -346,20 +424,43 @@ class ArchitectureSpace:
             return False
     
     def _validate_architecture(self, arch: Architecture) -> bool:
-        """Validate complete architecture."""
+        """Validate complete architecture with channel flow validation."""
         try:
             if not arch.layers or len(arch.layers) < 3:
                 return False
             
+            # Validate parameter and operation counts
             if arch.total_params <= 0 or arch.total_params > 1e9:  # Reasonable bounds
                 return False
             
             if arch.total_ops <= 0 or arch.total_ops > 1e15:  # Reasonable bounds
                 return False
             
+            # Validate channel flow compatibility
+            expected_channels = self.input_shape[2]  # Start with input channels
+            
+            for i, layer in enumerate(arch.layers):
+                # Check input channel compatibility
+                if layer.input_channels != expected_channels:
+                    # Allow some flexibility for first layer
+                    if i == 0 and layer.layer_type == LayerType.CONV2D:
+                        continue  # First conv can adapt
+                    else:
+                        return False
+                
+                # Update expected channels for next layer
+                if layer.layer_type in [LayerType.CONV2D, LayerType.LINEAR, LayerType.DEPTHWISE_CONV]:
+                    expected_channels = layer.output_channels
+                # Other layers (norm, activation) preserve channel count
+            
+            # Architecture should end with classification output
+            final_layer = arch.layers[-1]
+            if final_layer.layer_type == LayerType.LINEAR and final_layer.output_channels != self.num_classes:
+                return False
+            
             return True
             
-        except:
+        except Exception as e:
             return False
     
     def _create_minimal_architecture(self) -> Architecture:
@@ -398,34 +499,140 @@ class ArchitectureSpace:
             name="minimal_fallback_arch"
         )
     
+    def _repair_channel_flow(self, layers: List[Layer]) -> List[Layer]:
+        """Repair channel flow inconsistencies in layer sequence."""
+        if not layers:
+            return layers
+            
+        try:
+            repaired_layers = []
+            expected_channels = self.input_shape[2]  # Start with input channels
+            
+            for i, layer in enumerate(layers):
+                # Create a corrected layer if needed
+                if layer.input_channels != expected_channels:
+                    # Fix input channels to match expected flow
+                    corrected_layer = Layer(
+                        layer_type=layer.layer_type,
+                        input_channels=expected_channels,
+                        output_channels=layer.output_channels,
+                        kernel_size=layer.kernel_size,
+                        stride=layer.stride,
+                        padding=layer.padding,
+                        activation=layer.activation
+                    )
+                    repaired_layers.append(corrected_layer)
+                else:
+                    repaired_layers.append(layer)
+                
+                # Update expected channels for next layer
+                if layer.layer_type in [LayerType.CONV2D, LayerType.LINEAR, LayerType.DEPTHWISE_CONV]:
+                    expected_channels = layer.output_channels
+                # Other layers preserve channel count
+            
+            return repaired_layers
+            
+        except Exception as e:
+            # If repair fails, return original layers
+            return layers
+    
+    def _create_safe_mutation_fallback(self, architecture: Architecture) -> Architecture:
+        """Create a safe mutation fallback when all mutation attempts fail."""
+        try:
+            # Simple safe mutation: change activation function of a random layer
+            new_layers = architecture.layers.copy()
+            
+            # Find a layer that can have its activation changed
+            mutable_indices = [
+                i for i, layer in enumerate(new_layers)
+                if layer.layer_type in [LayerType.CONV2D, LayerType.LINEAR] and i < len(new_layers) - 1
+            ]
+            
+            if mutable_indices:
+                idx = random.choice(mutable_indices)
+                new_activation = random.choice(self.activations)
+                
+                new_layers[idx] = Layer(
+                    layer_type=new_layers[idx].layer_type,
+                    input_channels=new_layers[idx].input_channels,
+                    output_channels=new_layers[idx].output_channels,
+                    kernel_size=new_layers[idx].kernel_size,
+                    stride=new_layers[idx].stride,
+                    padding=new_layers[idx].padding,
+                    activation=new_activation
+                )
+            
+            return Architecture(
+                layers=new_layers,
+                input_shape=architecture.input_shape,
+                num_classes=architecture.num_classes,
+                name=f"safe_mutated_{architecture.name}"
+            )
+            
+        except:
+            # Ultimate fallback: return copy with different name
+            return Architecture(
+                layers=architecture.layers.copy(),
+                input_shape=architecture.input_shape,
+                num_classes=architecture.num_classes,
+                name=f"fallback_mutated_{architecture.name}"
+            )
+    
     def mutate(self, architecture: Architecture) -> Architecture:
-        """Mutate an existing architecture."""
-        max_attempts = 5
+        """Mutate an existing architecture with enhanced channel flow validation."""
+        max_attempts = 10  # Increased attempts for better success rate
         
         for attempt in range(max_attempts):
             try:
                 new_layers = architecture.layers.copy()
                 
-                mutation_ops = [
-                    self._mutate_channels,
-                    self._mutate_kernel_size,
-                    self._mutate_activation,
-                    self._add_layer,
-                    self._remove_layer,
-                ]
+                # Choose mutation strategy based on architecture characteristics
+                if len(new_layers) < 5:
+                    # Small architectures: prefer adding layers
+                    mutation_ops = [self._add_layer, self._mutate_channels, self._mutate_activation]
+                elif len(new_layers) > 15:
+                    # Large architectures: prefer removing layers or changing existing
+                    mutation_ops = [self._remove_layer, self._mutate_channels, self._mutate_kernel_size]
+                else:
+                    # Medium architectures: balanced mutations
+                    mutation_ops = [
+                        self._mutate_channels,
+                        self._mutate_kernel_size,
+                        self._mutate_activation,
+                        self._add_layer,
+                        self._remove_layer,
+                    ]
                 
-                # Try multiple mutations for more diversity
-                num_mutations = random.randint(1, min(3, len(mutation_ops)))
+                # Single mutation per attempt for better control
+                mutation_op = random.choice(mutation_ops)
                 
-                for _ in range(num_mutations):
-                    mutation_op = random.choice(mutation_ops)
-                    try:
-                        new_layers = mutation_op(new_layers)
-                    except:
-                        continue  # Skip failed mutations
+                try:
+                    new_layers = mutation_op(new_layers)
+                    
+                    # Repair channel flow after mutation
+                    new_layers = self._repair_channel_flow(new_layers)
+                    
+                except Exception as e:
+                    continue  # Skip failed mutations
                 
                 if len(new_layers) < 3:  # Ensure minimum viable architecture
                     continue
+                
+                # Ensure final layer outputs correct number of classes
+                if new_layers and new_layers[-1].layer_type != LayerType.LINEAR:
+                    new_layers.append(Layer(
+                        layer_type=LayerType.LINEAR,
+                        input_channels=new_layers[-1].output_channels,
+                        output_channels=self.num_classes,
+                        activation=None
+                    ))
+                elif new_layers and new_layers[-1].output_channels != self.num_classes:
+                    new_layers[-1] = Layer(
+                        layer_type=LayerType.LINEAR,
+                        input_channels=new_layers[-1].input_channels,
+                        output_channels=self.num_classes,
+                        activation=None
+                    )
                 
                 mutated_arch = Architecture(
                     layers=new_layers,
@@ -440,13 +647,8 @@ class ArchitectureSpace:
             except Exception as e:
                 continue  # Try again
         
-        # Fallback: return original architecture with name change
-        return Architecture(
-            layers=architecture.layers.copy(),
-            input_shape=architecture.input_shape,
-            num_classes=architecture.num_classes,
-            name=f"mutated_{architecture.name}_fallback"
-        )
+        # Enhanced fallback: create a slightly modified version
+        return self._create_safe_mutation_fallback(architecture)
     
     def crossover(self, parent1: Architecture, parent2: Architecture) -> Architecture:
         """Crossover two parent architectures."""

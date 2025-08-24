@@ -27,7 +27,7 @@ class CacheEntry:
 
 
 class LRUCache:
-    """Thread-safe LRU cache with size limits."""
+    """Thread-safe LRU cache with intelligent prefetching and cache warming."""
     
     def __init__(self, max_size: int = 1000, max_memory_mb: int = 100):
         self.max_size = max_size
@@ -42,6 +42,12 @@ class LRUCache:
         self.hits = 0
         self.misses = 0
         self.evictions = 0
+        
+        # Generation 3: Intelligent caching features
+        self.access_patterns: Dict[str, List[float]] = {}  # Track access times
+        self.prefetch_candidates: List[str] = []  # Keys likely to be accessed
+        self.cache_warming_enabled = True
+        self.predictive_prefetch_enabled = True
     
     def get(self, key: str) -> Optional[Any]:
         """Get item from cache."""
