@@ -20,112 +20,101 @@
   },
   "search_history": [
     [
-      "random_arch_8621",
-      {
-        "latency_ms": 0.35469417984,
-        "energy_mj": 1.408006215,
-        "accuracy": 0.827056,
-        "tops_per_watt": 8.0,
-        "memory_mb": 1.10224,
-        "flops": 1000000
-      }
-    ],
-    [
-      "random_arch_5735",
+      "random_arch_9718",
       {
         "latency_ms": 0.35609613312,
-        "energy_mj": 1.4217664230000002,
-        "accuracy": 0.9535232000000001,
+        "energy_mj": 0.8897364630000001,
+        "accuracy": 0.8674592,
         "tops_per_watt": 8.0,
-        "memory_mb": 1.120928,
+        "memory_mb": 0.398368,
         "flops": 1000000
       }
     ],
     [
-      "random_arch_2122",
-      {
-        "latency_ms": 0.35259124991999996,
-        "energy_mj": 0.700957719,
-        "accuracy": 0.906988,
-        "tops_per_watt": 8.0,
-        "memory_mb": 0.141984,
-        "flops": 1000000
-      }
-    ],
-    [
-      "random_arch_7048",
-      {
-        "latency_ms": 0.35539515648,
-        "energy_mj": 1.704887415,
-        "accuracy": 0.844136,
-        "tops_per_watt": 8.0,
-        "memory_mb": 1.50544,
-        "flops": 1000000
-      }
-    ],
-    [
-      "random_arch_9840",
-      {
-        "latency_ms": 0.35539515648,
-        "energy_mj": 1.396696455,
-        "accuracy": 0.822672,
-        "tops_per_watt": 8.0,
-        "memory_mb": 1.08688,
-        "flops": 1000000
-      }
-    ],
-    [
-      "random_arch_5735",
+      "random_arch_8528",
       {
         "latency_ms": 0.35609613312,
-        "energy_mj": 1.4217664230000002,
-        "accuracy": 0.9535232000000001,
+        "energy_mj": 0.647990343,
+        "accuracy": 0.863036,
         "tops_per_watt": 8.0,
-        "memory_mb": 1.120928,
+        "memory_mb": 0.070048,
         "flops": 1000000
       }
     ],
     [
-      "random_arch_5735",
+      "random_arch_5843",
       {
         "latency_ms": 0.35609613312,
-        "energy_mj": 1.4217664230000002,
-        "accuracy": 0.9535232000000001,
+        "energy_mj": 0.853639479,
+        "accuracy": 0.8822336000000001,
         "tops_per_watt": 8.0,
-        "memory_mb": 1.120928,
+        "memory_mb": 0.349344,
         "flops": 1000000
       }
     ],
     [
-      "random_arch_5735",
+      "random_arch_6764",
+      {
+        "latency_ms": 0.35329222656000003,
+        "energy_mj": 0.6478018469999999,
+        "accuracy": 0.8308439999999999,
+        "tops_per_watt": 8.0,
+        "memory_mb": 0.069792,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_5843",
       {
         "latency_ms": 0.35609613312,
-        "energy_mj": 1.4217664230000002,
-        "accuracy": 0.9535232000000001,
+        "energy_mj": 0.853639479,
+        "accuracy": 0.8822336000000001,
         "tops_per_watt": 8.0,
-        "memory_mb": 1.120928,
+        "memory_mb": 0.349344,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_5843",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 0.853639479,
+        "accuracy": 0.8822336000000001,
+        "tops_per_watt": 8.0,
+        "memory_mb": 0.349344,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_5843",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 0.853639479,
+        "accuracy": 0.8822336000000001,
+        "tops_per_watt": 8.0,
+        "memory_mb": 0.349344,
         "flops": 1000000
       }
     ]
   ],
-  "best_architecture": "random_arch_5735",
+  "best_architecture": "random_arch_1301",
   "best_metrics": {
     "latency_ms": 0.35609613312,
-    "energy_mj": 1.4217664230000002,
-    "accuracy": 0.9535232000000001,
+    "energy_mj": 0.647990343,
+    "accuracy": 0.9280360000000001,
     "tops_per_watt": 8.0,
-    "memory_mb": 1.120928,
+    "memory_mb": 0.070048,
     "flops": 1000000
   },
   "statistics": {
     "search_completed": true,
-    "total_evaluations": 8,
+    "total_evaluations": 7,
     "best_metrics": {
       "latency_ms": 0.35609613312,
-      "energy_mj": 1.4217664230000002,
-      "accuracy": 0.9535232000000001,
+      "energy_mj": 0.647990343,
+      "accuracy": 0.9280360000000001,
       "tops_per_watt": 8.0,
-      "memory_mb": 1.120928,
+      "memory_mb": 0.070048,
       "flops": 1000000
     },
     "convergence_metrics": {
