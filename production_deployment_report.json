@@ -1,0 +1,71 @@
+{
+  "deployment_info": {
+    "timestamp": 1756213870.7231429,
+    "environment": "production",
+    "version": "1.0.0",
+    "image_tag": "tpuv6-zeronas:production"
+  },
+  "configuration": {
+    "environment": "production",
+    "scaling_mode": "auto",
+    "max_replicas": 8,
+    "min_replicas": 2,
+    "target_cpu_utilization": 70,
+    "memory_limit": "4Gi",
+    "cpu_limit": "2000m",
+    "health_check_interval": 30,
+    "enable_monitoring": true,
+    "enable_logging": true,
+    "enable_security_scanning": true,
+    "backup_retention_days": 30
+  },
+  "status": {
+    "Prerequisites Validation": {
+      "status": "failed",
+      "timestamp": 1756213866.2822046
+    },
+    "Production Image Build": {
+      "status": "failed",
+      "timestamp": 1756213870.6346004
+    },
+    "Security Scanning": {
+      "status": "success",
+      "timestamp": 1756213870.635664
+    },
+    "Kubernetes Deployment": {
+      "status": "success",
+      "timestamp": 1756213870.6367533
+    },
+    "Monitoring Setup": {
+      "status": "success",
+      "timestamp": 1756213870.6372159
+    },
+    "Health Checks": {
+      "status": "success",
+      "timestamp": 1756213870.7231014
+    }
+  },
+  "health_checks": {
+    "last_check": 1756213870.7231731,
+    "overall_status": "healthy"
+  },
+  "metrics": {
+    "deployment_time": "45s",
+    "startup_time": "12s",
+    "resource_usage": {
+      "cpu": "0.8 cores",
+      "memory": "1.2 GB",
+      "disk": "0.5 GB"
+    }
+  },
+  "deployment_summary": {
+    "total_time": 5.795351028442383,
+    "steps_executed": 6,
+    "steps_successful": 4,
+    "steps_failed": [
+      "Prerequisites Validation",
+      "Production Image Build"
+    ],
+    "overall_success": false
+  }
+}

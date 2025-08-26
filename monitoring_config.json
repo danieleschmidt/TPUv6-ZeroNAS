@@ -1,0 +1,23 @@
+{
+  "prometheus": {
+    "enabled": true,
+    "scrape_interval": "15s",
+    "metrics_path": "/metrics"
+  },
+  "grafana": {
+    "enabled": true,
+    "dashboards": [
+      "tpuv6-zeronas-overview",
+      "search-performance"
+    ]
+  },
+  "alerting": {
+    "enabled": true,
+    "rules": [
+      "high_cpu_usage",
+      "high_memory_usage",
+      "search_failures",
+      "prediction_latency"
+    ]
+  }
+}

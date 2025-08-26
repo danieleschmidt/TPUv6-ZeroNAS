@@ -1,0 +1,50 @@
+{
+  "best_architecture": {
+    "name": "random_arch_7837",
+    "layers": 8,
+    "params": 2606440
+  },
+  "best_metrics": {
+    "latency_ms": 0.35609613312,
+    "energy_mj": 8.273030534999998,
+    "accuracy": 0.94135152,
+    "tops_per_watt": 8.0,
+    "memory_mb": 10.42576,
+    "flops": 1000000
+  },
+  "scaling_benchmark": {
+    "1w_10p_5i": {
+      "elapsed_time": 0.025104999542236328,
+      "throughput": 1991.6351687591407,
+      "accuracy": 0.99,
+      "latency_ms": 0.35609613312,
+      "success": true
+    },
+    "2w_20p_5i": {
+      "elapsed_time": 0.07215094566345215,
+      "throughput": 1385.983220046064,
+      "accuracy": 0.9845488000000001,
+      "latency_ms": 0.35609613312,
+      "success": true
+    },
+    "4w_40p_5i": {
+      "elapsed_time": 0.2059621810913086,
+      "throughput": 971.0520588793659,
+      "accuracy": 0.9664720000000001,
+      "latency_ms": 0.35609613312,
+      "success": true
+    }
+  },
+  "system_config": {
+    "enable_distributed": true,
+    "enable_gpu_acceleration": true,
+    "enable_memory_optimization": true,
+    "enable_batch_processing": true,
+    "max_workers": 2,
+    "batch_size": 16,
+    "memory_limit_gb": 8.0,
+    "load_balancing_strategy": "adaptive",
+    "cache_strategy": "intelligent",
+    "prediction_parallel_factor": 2
+  }
+}

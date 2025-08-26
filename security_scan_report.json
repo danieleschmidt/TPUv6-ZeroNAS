@@ -1,0 +1,11 @@
+{
+  "scan_time": 1756213870.63505,
+  "vulnerabilities": {
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "low": 5
+  },
+  "total_packages": 45,
+  "scan_status": "passed"
+}

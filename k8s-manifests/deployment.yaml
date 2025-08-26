@@ -1,0 +1,47 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tpuv6-zeronas
+  labels:
+    app: tpuv6-zeronas
+    environment: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tpuv6-zeronas
+  template:
+    metadata:
+      labels:
+        app: tpuv6-zeronas
+    spec:
+      containers:
+      - name: tpuv6-zeronas
+        image: tpuv6-zeronas:production
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: LOG_LEVEL
+          value: "INFO"
