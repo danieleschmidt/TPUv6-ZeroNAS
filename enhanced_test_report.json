@@ -1,0 +1,14 @@
+{
+  "tests_run": 12,
+  "failures": 1,
+  "errors": 1,
+  "success_rate": 0.8333333333333334,
+  "details": {
+    "failure_details": [
+      "(<__main__.TestTPUv6ZeroNASReliability testMethod=test_error_handling>, 'Traceback (most recent call last):\\n  File \"/root/repo/enhanced_test_suite.py\", line 153, in test_error_handling\\n    arch = large_arch_space.random_architecture()\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nAttributeError: \\'ArchitectureSpace\\' object has no attribute \\'random_architecture\\'. Did you mean: \\'_validate_architecture\\'?\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \"/root/repo/enhanced_test_suite.py\", line 157, in test_error_handling\\n    self.fail(f\"Should handle extreme architectures gracefully: {e}\")\\nAssertionError: Should handle extreme architectures gracefully: \\'ArchitectureSpace\\' object has no attribute \\'random_architecture\\'\\n')"
+    ],
+    "error_details": [
+      "(<__main__.TestTPUv6ZeroNASCore testMethod=test_metrics_aggregation>, 'Traceback (most recent call last):\\n  File \"/root/repo/enhanced_test_suite.py\", line 83, in test_metrics_aggregation\\n    aggregator.add_metrics(arch.name, metrics)\\nTypeError: MetricsAggregator.add_metrics() takes 2 positional arguments but 3 were given\\n')"
+    ]
+  }
+}

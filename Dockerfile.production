@@ -1,0 +1,48 @@
+
+# Multi-stage production Dockerfile for TPUv6-ZeroNAS
+FROM python:3.11-slim as base
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONPATH="/app"
+
+# Create non-root user
+RUN groupadd -r app && useradd -r -g app app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Development stage
+FROM base as development
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+RUN pip install -e .
+
+# Production stage  
+FROM base as production
+
+# Copy only necessary files
+COPY requirements-minimal.txt .
+RUN pip install --no-cache-dir -r requirements-minimal.txt
+
+# Copy application code
+COPY tpuv6_zeronas/ ./tpuv6_zeronas/
+COPY setup.py .
+RUN pip install --no-cache-dir -e .
+
+# Switch to non-root user
+USER app
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD python -c "import tpuv6_zeronas; print('healthy')" || exit 1
+
+# Default command
+CMD ["python", "-m", "tpuv6_zeronas.cli", "serve", "--host", "0.0.0.0", "--port", "8000"]

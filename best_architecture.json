@@ -1,122 +1,36 @@
 {
   "architecture": {
-    "name": "random_arch_3478_tpuv6_optimized",
+    "name": "random_arch_5801",
     "layers": [
       {
-        "type": "batch_norm",
-        "input_channels": 3,
-        "output_channels": 3,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
-        "type": "batch_norm",
-        "input_channels": 3,
-        "output_channels": 3,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
-        "type": "batch_norm",
-        "input_channels": 3,
-        "output_channels": 3,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
-        "type": "depthwise_conv",
-        "input_channels": 3,
-        "output_channels": 3,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
         "type": "conv2d",
         "input_channels": 3,
-        "output_channels": 64,
+        "output_channels": 16,
         "kernel_size": [
-          7,
-          7
-        ],
-        "stride": [
-          2,
-          2
-        ],
-        "activation": "gelu"
-      },
-      {
-        "type": "depthwise_conv",
-        "input_channels": 32,
-        "output_channels": 32,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
-        "type": "gelu",
-        "input_channels": 32,
-        "output_channels": 32,
-        "kernel_size": null,
-        "stride": null,
-        "activation": "gelu"
-      },
-      {
-        "type": "linear",
-        "input_channels": 32,
-        "output_channels": 1024,
-        "kernel_size": null,
-        "stride": null,
-        "activation": "gelu"
-      },
-      {
-        "type": "batch_norm",
-        "input_channels": 1024,
-        "output_channels": 1024,
-        "kernel_size": null,
-        "stride": null,
-        "activation": null
-      },
-      {
-        "type": "linear",
-        "input_channels": 1024,
-        "output_channels": 128,
-        "kernel_size": null,
-        "stride": null,
-        "activation": "gelu"
-      },
-      {
-        "type": "conv2d",
-        "input_channels": 128,
-        "output_channels": 512,
-        "kernel_size": [
-          7,
-          7
+          5,
+          5
         ],
         "stride": [
           1,
           1
         ],
-        "activation": "gelu"
+        "activation": "relu"
       },
       {
-        "type": "relu",
-        "input_channels": 512,
-        "output_channels": 512,
+        "type": "batch_norm",
+        "input_channels": 16,
+        "output_channels": 16,
         "kernel_size": null,
         "stride": null,
-        "activation": "gelu"
+        "activation": null
       },
       {
-        "type": "gelu",
-        "input_channels": 512,
-        "output_channels": 512,
+        "type": "linear",
+        "input_channels": 16,
+        "output_channels": 1000,
         "kernel_size": null,
         "stride": null,
-        "activation": "gelu"
+        "activation": null
       }
     ],
     "input_shape": [
@@ -125,22 +39,22 @@
       3
     ],
     "num_classes": 1000,
-    "total_ops": 3386636,
-    "total_params": 3389374,
-    "memory_mb": 186.62109375
+    "total_ops": 17216,
+    "total_params": 18248,
+    "memory_mb": 198.10546875
   },
   "metrics": {
-    "latency_ms": 2.6808748000000002,
-    "energy_mj": 16.09259968,
-    "accuracy": 0.95,
-    "tops_per_watt": 67.5,
-    "memory_mb": 13.557496,
+    "latency_ms": 0.35329222656000003,
+    "energy_mj": 0.721409535,
+    "accuracy": 0.95382,
+    "tops_per_watt": 8.0,
+    "memory_mb": 0.16976,
     "flops": 1000000,
-    "efficiency_score": 0.8749926189728864
+    "efficiency_score": 0.7548001453671007
   },
   "search_config": {
-    "max_iterations": 10,
-    "population_size": 8,
+    "max_iterations": 20,
+    "population_size": 14,
     "target_tops_w": 75.0
   }
 }
