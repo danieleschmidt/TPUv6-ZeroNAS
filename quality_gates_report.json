@@ -1,6 +1,6 @@
 {
-  "timestamp": 1756213612.1986363,
-  "execution_time_seconds": 0.4321022033691406,
+  "timestamp": 1756337318.4652748,
+  "execution_time_seconds": 0.3893148899078369,
   "overall_summary": {
     "gates_passed": 6,
     "gates_total": 8,
@@ -39,12 +39,12 @@
         "performance_score": 0.0
       },
       "benchmarks": {
-        "single_prediction_ms": 0.18358230590820312,
+        "single_prediction_ms": 0.2472400665283203,
         "prediction_target_ms": 100,
         "prediction_performance": "PASS",
-        "batch_prediction_ms": 0.3123283386230469,
-        "avg_per_prediction_ms": 0.031232833862304688,
-        "search_time_seconds": 0.015940189361572266,
+        "batch_prediction_ms": 0.3037452697753906,
+        "avg_per_prediction_ms": 0.030374526977539062,
+        "search_time_seconds": 0.0053217411041259766,
         "search_target_seconds": 30,
         "search_performance": "PASS",
         "error": "No module named 'psutil'"
@@ -108,12 +108,12 @@
     }
   },
   "performance_benchmarks": {
-    "single_prediction_ms": 0.18358230590820312,
+    "single_prediction_ms": 0.2472400665283203,
     "prediction_target_ms": 100,
     "prediction_performance": "PASS",
-    "batch_prediction_ms": 0.3123283386230469,
-    "avg_per_prediction_ms": 0.031232833862304688,
-    "search_time_seconds": 0.015940189361572266,
+    "batch_prediction_ms": 0.3037452697753906,
+    "avg_per_prediction_ms": 0.030374526977539062,
+    "search_time_seconds": 0.0053217411041259766,
     "search_target_seconds": 30,
     "search_performance": "PASS",
     "error": "No module named 'psutil'"

@@ -1,13 +1,13 @@
 {
   "config": {
-    "max_iterations": 1,
-    "population_size": 10,
+    "max_iterations": 10,
+    "population_size": 8,
     "mutation_rate": 0.1,
     "crossover_rate": 0.7,
     "early_stop_threshold": 1e-06,
     "target_tops_w": 75.0,
-    "max_latency_ms": 10.0,
-    "min_accuracy": 0.95,
+    "max_latency_ms": 5.0,
+    "min_accuracy": 0.92,
     "enable_parallel": true,
     "enable_caching": true,
     "enable_adaptive": true,
@@ -20,73 +20,172 @@
   },
   "search_history": [
     [
-      "random_arch_1615",
-      {
-        "latency_ms": 0.35539515648,
-        "energy_mj": 0.841104495,
-        "accuracy": 0.824808,
-        "tops_per_watt": 8.0,
-        "memory_mb": 0.33232,
-        "flops": 1000000
-      }
-    ],
-    [
-      "random_arch_8572",
+      "random_arch_9813",
       {
         "latency_ms": 0.35469417984,
-        "energy_mj": 0.7011462150000001,
-        "accuracy": 0.87918,
+        "energy_mj": 2.404773063,
+        "accuracy": 0.8568992,
         "tops_per_watt": 8.0,
-        "memory_mb": 0.14224,
+        "memory_mb": 2.455968,
         "flops": 1000000
       }
     ],
     [
-      "random_arch_6051",
+      "random_arch_8698",
       {
-        "latency_ms": 0.35259124991999996,
-        "energy_mj": 0.991430055,
-        "accuracy": 0.867912,
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
         "tops_per_watt": 8.0,
-        "memory_mb": 0.53648,
+        "memory_mb": 2.785248,
         "flops": 1000000
       }
     ],
     [
-      "random_arch_8945",
+      "random_arch_4287",
       {
-        "latency_ms": 0.35259124991999996,
-        "energy_mj": 0.6501580469999999,
-        "accuracy": 0.868244,
+        "latency_ms": 0.35609613312,
+        "energy_mj": 1.082662119,
+        "accuracy": 0.8900096000000001,
         "tops_per_watt": 8.0,
-        "memory_mb": 0.072992,
+        "memory_mb": 0.660384,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_3584",
+      {
+        "latency_ms": 0.35469417984,
+        "energy_mj": 1.3164914069999998,
+        "accuracy": 0.8579488000000001,
+        "tops_per_watt": 8.0,
+        "memory_mb": 0.977952,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
+        "flops": 1000000
+      }
+    ],
+    [
+      "random_arch_8698",
+      {
+        "latency_ms": 0.35609613312,
+        "energy_mj": 2.6472260430000003,
+        "accuracy": 0.9381312,
+        "tops_per_watt": 8.0,
+        "memory_mb": 2.785248,
         "flops": 1000000
       }
     ]
   ],
-  "best_architecture": "random_arch_9062",
+  "best_architecture": "random_arch_8698",
   "best_metrics": {
-    "latency_ms": 0.3539932032,
-    "energy_mj": 23.451859431,
-    "accuracy": 0.961580832,
+    "latency_ms": 0.35609613312,
+    "energy_mj": 2.6472260430000003,
+    "accuracy": 0.9381312,
     "tops_per_watt": 8.0,
-    "memory_mb": 31.040416,
+    "memory_mb": 2.785248,
     "flops": 1000000
   },
   "statistics": {
     "search_completed": true,
-    "total_evaluations": 4,
+    "total_evaluations": 13,
     "best_metrics": {
-      "latency_ms": 0.3539932032,
-      "energy_mj": 23.451859431,
-      "accuracy": 0.961580832,
+      "latency_ms": 0.35609613312,
+      "energy_mj": 2.6472260430000003,
+      "accuracy": 0.9381312,
       "tops_per_watt": 8.0,
-      "memory_mb": 31.040416,
+      "memory_mb": 2.785248,
       "flops": 1000000
     },
     "convergence_metrics": {
       "convergence_rate": 0.0,
-      "improvement_trend": 0.0
+      "improvement_trend": 0.3099849821169626
     },
     "resource_usage": {
       "memory_mb": 0,

@@ -1,6 +1,6 @@
 {
   "deployment_info": {
-    "timestamp": 1756213870.7231429,
+    "timestamp": 1756337376.350791,
     "environment": "production",
     "version": "1.0.0",
     "image_tag": "tpuv6-zeronas:production"
@@ -22,31 +22,31 @@
   "status": {
     "Prerequisites Validation": {
       "status": "failed",
-      "timestamp": 1756213866.2822046
+      "timestamp": 1756337373.0856237
     },
     "Production Image Build": {
       "status": "failed",
-      "timestamp": 1756213870.6346004
+      "timestamp": 1756337376.2662039
     },
     "Security Scanning": {
       "status": "success",
-      "timestamp": 1756213870.635664
+      "timestamp": 1756337376.2669353
     },
     "Kubernetes Deployment": {
       "status": "success",
-      "timestamp": 1756213870.6367533
+      "timestamp": 1756337376.2684662
     },
     "Monitoring Setup": {
       "status": "success",
-      "timestamp": 1756213870.6372159
+      "timestamp": 1756337376.2691786
     },
     "Health Checks": {
       "status": "success",
-      "timestamp": 1756213870.7231014
+      "timestamp": 1756337376.3507357
     }
   },
   "health_checks": {
-    "last_check": 1756213870.7231731,
+    "last_check": 1756337376.3508177,
     "overall_status": "healthy"
   },
   "metrics": {
@@ -59,7 +59,7 @@
     }
   },
   "deployment_summary": {
-    "total_time": 5.795351028442383,
+    "total_time": 4.854796648025513,
     "steps_executed": 6,
     "steps_successful": 4,
     "steps_failed": [

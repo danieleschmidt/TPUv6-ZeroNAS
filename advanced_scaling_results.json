@@ -1,36 +1,36 @@
 {
   "best_architecture": {
-    "name": "random_arch_7837",
-    "layers": 8,
-    "params": 2606440
+    "name": "random_arch_3799",
+    "layers": 3,
+    "params": 11824
   },
   "best_metrics": {
-    "latency_ms": 0.35609613312,
-    "energy_mj": 8.273030534999998,
-    "accuracy": 0.94135152,
+    "latency_ms": 0.35259124991999996,
+    "energy_mj": 0.699355503,
+    "accuracy": 0.925356,
     "tops_per_watt": 8.0,
-    "memory_mb": 10.42576,
+    "memory_mb": 0.139808,
     "flops": 1000000
   },
   "scaling_benchmark": {
     "1w_10p_5i": {
-      "elapsed_time": 0.025104999542236328,
-      "throughput": 1991.6351687591407,
-      "accuracy": 0.99,
+      "elapsed_time": 0.024463653564453125,
+      "throughput": 2043.8484328707314,
+      "accuracy": 0.952394656,
       "latency_ms": 0.35609613312,
       "success": true
     },
     "2w_20p_5i": {
-      "elapsed_time": 0.07215094566345215,
-      "throughput": 1385.983220046064,
-      "accuracy": 0.9845488000000001,
-      "latency_ms": 0.35609613312,
+      "elapsed_time": 0.08416438102722168,
+      "throughput": 1188.1510774451788,
+      "accuracy": 0.952628,
+      "latency_ms": 0.35259124991999996,
       "success": true
     },
     "4w_40p_5i": {
-      "elapsed_time": 0.2059621810913086,
-      "throughput": 971.0520588793659,
-      "accuracy": 0.9664720000000001,
+      "elapsed_time": 0.11579442024230957,
+      "throughput": 1727.198940859872,
+      "accuracy": 0.99,
       "latency_ms": 0.35609613312,
       "success": true
     }
