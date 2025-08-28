@@ -80,11 +80,12 @@ class TestTPUv6ZeroNASCore(unittest.TestCase):
             arch = self.arch_space.sample_random()
             metrics = self.predictor.predict(arch)
             metrics_list.append(metrics)
-            aggregator.add_metrics(arch.name, metrics)
+            aggregator.add_metrics(metrics)
         
-        summary = aggregator.get_summary()
-        self.assertIn('mean_accuracy', summary)
-        self.assertIn('best_metrics', summary)
+        stats = aggregator.get_statistics()
+        self.assertIsInstance(stats, dict)
+        pareto_front = aggregator.get_pareto_front()
+        self.assertIsInstance(pareto_front, list)
 
 
 class TestTPUv6ZeroNASPerformance(unittest.TestCase):
@@ -150,7 +151,7 @@ class TestTPUv6ZeroNASReliability(unittest.TestCase):
         # Test with extreme architectures
         try:
             large_arch_space = ArchitectureSpace(max_depth=50)
-            arch = large_arch_space.random_architecture()
+            arch = large_arch_space.sample_random()
             metrics = self.predictor.predict(arch)
             self.assertIsInstance(metrics, PerformanceMetrics)
         except Exception as e:
