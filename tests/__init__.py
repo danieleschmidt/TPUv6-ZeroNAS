@@ -1,1 +1,0 @@
-# Test package for TPUv6-ZeroNAS
